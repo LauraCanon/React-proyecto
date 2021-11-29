@@ -1,6 +1,5 @@
 import React from "react";
 
-
 export default function SearchPage() {
   return (
     <main class="flex-shrink-0 container mt-5">
