@@ -20,7 +20,7 @@ function App() {
         <Route path="/regperfil" element={<RegistrationPerfil />} />
         <Route path="/home">
           <Route path="user" element={<HomeStandarUser />} />
-          <Route path="collabolator" element={<HomeCollabolator />} />
+          <Route path="collaborator" element={<HomeCollabolator />} />
         </Route>
       </Routes>
     </Router>
