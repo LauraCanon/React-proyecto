@@ -1,16 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+//import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Navbar from "./navbar";
 import Footer from "./Footer";
+//import SessionLogin from "./views/SessionLogin"
+import Payment from "./views/Payment"
+//import AdditionalInfo from "./views/AdditionalInfo";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(
   <React.StrictMode>
     <Navbar />
-    <App />
+    <Payment />
     <Footer />
   </React.StrictMode>,
   document.getElementById("root")
