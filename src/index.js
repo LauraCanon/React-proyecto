@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+import RequestService from "./views/RequestService";
 import reportWebVitals from "./reportWebVitals";
 import Navbar from "./navbar";
 import Footer from "./Footer";
@@ -10,7 +10,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 ReactDOM.render(
   <React.StrictMode>
     <Navbar />
-    <App />
+    <RequestService />
     <Footer />
   </React.StrictMode>,
   document.getElementById("root")
