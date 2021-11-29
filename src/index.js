@@ -9,6 +9,7 @@ import Footer from "./Footer";
 //import Payment from "./views/Payment"
 import AdditionalInfo from "./views/AdditionalInfo";
 import "bootstrap/dist/css/bootstrap.min.css";
+import App from "./App";
 
 ReactDOM.render(
   <React.StrictMode>
