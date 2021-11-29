@@ -1,9 +1,9 @@
+import "./allViews.css";
 import React from "react";
-
 
 export default function HomeStandardUser() {
   return (
-    <main className="container mt-5">
+    <main className="container mt-5 py-5">
       <div className="row mt-5">
         <div className="col-md-4 col-lg-3 d-flex justify-content-center ">
           <div
