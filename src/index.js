@@ -6,14 +6,14 @@ import reportWebVitals from "./reportWebVitals";
 import Navbar from "./navbar";
 import Footer from "./Footer";
 //import SessionLogin from "./views/SessionLogin"
-import Payment from "./views/Payment"
-//import AdditionalInfo from "./views/AdditionalInfo";
+//import Payment from "./views/Payment"
+import AdditionalInfo from "./views/AdditionalInfo";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(
   <React.StrictMode>
     <Navbar />
-    <Payment />
+    <AdditionalInfo />
     <Footer />
   </React.StrictMode>,
   document.getElementById("root")

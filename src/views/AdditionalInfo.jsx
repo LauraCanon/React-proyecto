@@ -30,7 +30,7 @@ export default function AdditionalInfo() {
             <div className="form-group">
                 <input
                 type="text"
-                id="fechaExp"
+                id="fechaInicio"
                 placeholder="Fecha de Expedición"
                 className="form-control"
                 />
