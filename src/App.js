@@ -6,6 +6,8 @@ import SearchPage from "./views/SearchPage";
 import LandingPages from "./views/LandingPages";
 import HomeStandarUser from "./views/HomeStandardUser";
 import HomeCollabolator from "./views/HomeCollabolator";
+import Registration from "./views/Registration";
+import RegistrationPerfil from "./views/RegistrationPerfil";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
         <Route path="*" element={<LandingPages />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/request" element={<RequestService />} />
+        <Route path="/registration" element={<Registration />} />
+        <Route path="/regperfil" element={<RegistrationPerfil />} />
         <Route path="/home">
           <Route path="user" element={<HomeStandarUser />} />
           <Route path="collabolator" element={<HomeCollabolator />} />
