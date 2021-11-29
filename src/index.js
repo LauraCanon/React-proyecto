@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import RequestService from "./views/RequestService";
 import reportWebVitals from "./reportWebVitals";
 import Navbar from "./navbar";
 import Footer from "./Footer";
