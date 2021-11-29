@@ -6,11 +6,12 @@ import reportWebVitals from "./reportWebVitals";
 import Navbar from "./navbar";
 import Footer from "./Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
+import App from "./App";
 
 ReactDOM.render(
   <React.StrictMode>
     <Navbar />
-    <RequestService />
+    <App />
     <Footer />
   </React.StrictMode>,
   document.getElementById("root")
