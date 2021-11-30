@@ -8,6 +8,7 @@ import HomeStandarUser from "./views/HomeStandardUser";
 import HomeCollabolator from "./views/HomeCollabolator";
 import Registration from "./views/Registration";
 import RegistrationPerfil from "./views/RegistrationPerfil";
+import AdditionalInfo from "./views/AdditionalInfo";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="user" element={<HomeStandarUser />} />
           <Route path="collaborator" element={<HomeCollabolator />} />
         </Route>
+        <Route path="/addinfo" element={<AdditionalInfo/>} />
       </Routes>
     </Router>
   );
