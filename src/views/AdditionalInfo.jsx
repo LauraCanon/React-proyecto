@@ -29,9 +29,8 @@ export default function AdditionalInfo() {
             </div>
             <div className="form-group">
                 <input
-                type="text"
-                id="fechaInicio"
-                placeholder="Fecha de Expedición"
+                type="date"
+                id="seleccionarFecha"
                 className="form-control"
                 />
             </div>

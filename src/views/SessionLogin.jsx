@@ -99,8 +99,8 @@ export default function SessionLogin() {
             <a href="#">términos y condiciones </a>y la{" "}
             <a href="#">política de privacidad</a> de datos de <span className="fw-bold">FIXHOGAR</span>
           </span>
-        </div>
       </div>
+    </div>
       </>
     );
   }
