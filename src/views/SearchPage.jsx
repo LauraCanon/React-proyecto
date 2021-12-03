@@ -1,6 +1,8 @@
 import React from "react";
 
-export default function SearchPage() {
+export default function SearchPage({ result }) {
+  const colaborators = result.filter((colaborator, index) => index % 2 === 0);
+
   return (
     <main class="flex-shrink-0 container mt-5">
       <div class="row my-5">
@@ -55,369 +57,43 @@ export default function SearchPage() {
         </div>
       </div>
       <div class="row">
-        <div class="col-md-3 col-lg-2">
-          <div class="card">
-            <img
-              src="https://randomuser.me/api/portraits/men/18.jpg"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body d-flex justify-content-between">
-              <span class="fs-6">user </span>
-              <div>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
+        {colaborators.map((col) => {
+          return (
+            <>
+              <div class="col-md-3 col-lg-2">
+                <div class="card">
+                  <img src={col.picture.large} class="card-img-top" alt="..." />
+                  <div class="card-body d-flex justify-content-between">
+                    <span class="fs-6">
+                      {col.name.first} {col.name.last}
+                    </span>
+                    <div>
+                      <span>
+                        <i class="bi bi-star-fill "></i>
+                      </span>
+                      <span>
+                        <i class="bi bi-star-fill "></i>
+                      </span>
+                      <span>
+                        <i class="bi bi-star-fill "></i>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="row pb-3">
+                    <div class="col-6 ">
+                      <span class="fs-6 mx-3">$ </span>
+                    </div>
+                    <div class="col-6">
+                      <a href="/" class="btn-sm btn-primary">
+                        <small>Agendar</small>
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="row pb-3">
-              <div class="col-6 ">
-                <span class="fs-6 mx-3">$ </span>
-              </div>
-              <div class="col-6">
-                <a href="#" class="btn-sm btn-primary">
-                  <small>Agendar</small>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-lg-2">
-          <div class="card">
-            <img
-              src="https://randomuser.me/api/portraits/men/24.jpg"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body d-flex justify-content-between">
-              <span class="fs-6">user </span>
-              <div>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-              </div>
-            </div>
-            <div class="row pb-3">
-              <div class="col-6 ">
-                <span class="fs-6 mx-3">$ </span>
-              </div>
-              <div class="col-6">
-                <a href="#" class="btn-sm btn-primary">
-                  <small>Agendar</small>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-lg-2">
-          <div class="card">
-            <img
-              src="https://randomuser.me/api/portraits/men/34.jpg"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body d-flex justify-content-between">
-              <span class="fs-6">user </span>
-              <div>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-              </div>
-            </div>
-            <div class="row pb-3">
-              <div class="col-6 ">
-                <span class="fs-6 mx-3">$ </span>
-              </div>
-              <div class="col-6">
-                <a href="#" class="btn-sm btn-primary">
-                  <small>Agendar</small>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-lg-2">
-          <div class="card">
-            <img
-              src="https://randomuser.me/api/portraits/men/56.jpg"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body d-flex justify-content-between">
-              <span class="fs-6">user </span>
-              <div>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-              </div>
-            </div>
-            <div class="row pb-3">
-              <div class="col-6 ">
-                <span class="fs-6 mx-3">$ </span>
-              </div>
-              <div class="col-6">
-                <a href="#" class="btn-sm btn-primary">
-                  <small>Agendar</small>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-lg-2">
-          <div class="card">
-            <img
-              src="https://randomuser.me/api/portraits/men/19.jpg"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body d-flex justify-content-between">
-              <span class="fs-6">user </span>
-              <div>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-              </div>
-            </div>
-            <div class="row pb-3">
-              <div class="col-6 ">
-                <span class="fs-6 mx-3">$ </span>
-              </div>
-              <div class="col-6">
-                <a href="#" class="btn-sm btn-primary">
-                  <small>Agendar</small>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-lg-2">
-          <div class="card">
-            <img
-              src="https://randomuser.me/api/portraits/men/15.jpg"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body d-flex justify-content-between">
-              <span class="fs-6">user </span>
-              <div>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-              </div>
-            </div>
-            <div class="row pb-3">
-              <div class="col-6 ">
-                <span class="fs-6 mx-3">$ </span>
-              </div>
-              <div class="col-6">
-                <a href="#" class="btn-sm btn-primary">
-                  <small>Agendar</small>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-lg-2">
-          <div class="card">
-            <img
-              src="https://randomuser.me/api/portraits/men/16.jpg"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body d-flex justify-content-between">
-              <span class="fs-6">user </span>
-              <div>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-              </div>
-            </div>
-            <div class="row pb-3">
-              <div class="col-6 ">
-                <span class="fs-6 mx-3">$ </span>
-              </div>
-              <div class="col-6">
-                <a href="#" class="btn-sm btn-primary">
-                  <small>Agendar</small>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-lg-2">
-          <div class="card">
-            <img
-              src="https://randomuser.me/api/portraits/men/34.jpg"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body d-flex justify-content-between">
-              <span class="fs-6">user </span>
-              <div>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-              </div>
-            </div>
-            <div class="row pb-3">
-              <div class="col-6 ">
-                <span class="fs-6 mx-3">$ </span>
-              </div>
-              <div class="col-6">
-                <a href="#" class="btn-sm btn-primary">
-                  <small>Agendar</small>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-lg-2">
-          <div class="card">
-            <img
-              src="https://randomuser.me/api/portraits/men/74.jpg"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body d-flex justify-content-between">
-              <span class="fs-6">user </span>
-              <div>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-              </div>
-            </div>
-            <div class="row pb-3">
-              <div class="col-6 ">
-                <span class="fs-6 mx-3">$ </span>
-              </div>
-              <div class="col-6">
-                <a href="#" class="btn-sm btn-primary">
-                  <small>Agendar</small>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-lg-2">
-          <div class="card">
-            <img
-              src="https://randomuser.me/api/portraits/men/67.jpg"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body d-flex justify-content-between">
-              <span class="fs-6">user </span>
-              <div>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-              </div>
-            </div>
-            <div class="row pb-3">
-              <div class="col-6 ">
-                <span class="fs-6 mx-3">$ </span>
-              </div>
-              <div class="col-6">
-                <a href="#" class="btn-sm btn-primary">
-                  <small>Agendar</small>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-lg-2">
-          <div class="card">
-            <img
-              src="https://randomuser.me/api/portraits/men/90.jpg"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body d-flex justify-content-between">
-              <span class="fs-6">user </span>
-              <div>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-              </div>
-            </div>
-            <div class="row pb-3">
-              <div class="col-6 ">
-                <span class="fs-6 mx-3">$ </span>
-              </div>
-              <div class="col-6">
-                <a href="#" class="btn-sm btn-primary">
-                  <small>Agendar</small>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-lg-2">
-          <div class="card">
-            <img
-              src="https://randomuser.me/api/portraits/men/36.jpg"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body d-flex justify-content-between">
-              <span class="fs-6">user </span>
-              <div>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-                <span>
-                  <i class="bi bi-star-fill "></i>
-                </span>
-              </div>
-            </div>
-            <div class="row pb-3">
-              <div class="col-6 ">
-                <span class="fs-6 mx-3">$ </span>
-              </div>
-              <div class="col-6">
-                <a href="#" class="btn-sm btn-primary">
-                  <small>Agendar</small>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+            </>
+          );
+        })}
       </div>
     </main>
   );
