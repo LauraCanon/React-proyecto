@@ -1,4 +1,7 @@
 import React from "react";
+import {BrowserRouter, Link} from "react-router-dom";
+
+
 
 export default function Navbar() {
   return (
@@ -20,12 +23,14 @@ export default function Navbar() {
             <div className="collapse navbar-collapse" id="navbarCollapse">
               <ul className="navbar-nav ms-auto mb-2 mb-md-0">
                 <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="#">
+                  <BrowserRouter>
+                  <Link className="nav-link active" to="/sessionlogin">
                     Acceder
-                  </a>
+                  </Link>
+                  </BrowserRouter>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link active" href="#">
+                  <a className="nav-link active" href="/">
                     Registrate
                   </a>
                 </li>

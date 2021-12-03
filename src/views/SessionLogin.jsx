@@ -3,16 +3,16 @@ import React from "react";
 export default function SessionLogin() {
     return (
       <>
-      <div classNameName="container text-center py-5">
+      <div className="container text-center py-5">
         <h1 className="display-6 pt-4 fw-bold">Inicia Sesión</h1>
       </div>
-      <div classNameName="container">
-        <div classNameName="row">
-          <div classNameName="col">
+      <div className="container">
+        <div className="row">
+          <div className="col">
             <div>
               <form action="#"></form>
-              <div classNameName="mb-4 mt-2 col-8 mx-auto">
-                <label for="email" classNameName="form-label">
+              <div className="mb-4 mt-2 col-8 mx-auto">
+                <label for="email" className="form-label">
                   Correo electrónico
                 </label>
                 <input
@@ -22,8 +22,8 @@ export default function SessionLogin() {
                   placeholder="Email"
                 />
               </div>
-              <div classNameName="mb-4 col-8 mx-auto">
-                <label for="password" classNameName="form-label">
+              <div className="mb-4 col-8 mx-auto">
+                <label for="password" className="form-label">
                   Contraseña
                 </label>
                 <span>
@@ -36,7 +36,7 @@ export default function SessionLogin() {
                   placeholder="Contraseña"
                 />
               </div>
-              <div classNameName="mb-4 form-check col-8 mx-auto">
+              <div className="mb-4 form-check col-8 mx-auto">
                 <input
                   type="checkbox"
                   name="connected"
@@ -46,24 +46,24 @@ export default function SessionLogin() {
                   Mantener sesión iniciada
                 </label>
               </div>
-              <div classNameName="d-grid col-8 mx-auto">
+              <div className="d-grid col-8 mx-auto">
                 <button type="submit" className="btn btn-primary col-12">
                   Iniciar Sesión
                 </button>
               </div>
-              <div classNameName="my-3 col-8 mx-auto">
+              <div className="my-3 col-8 mx-auto">
                 <span>
                   No tienes cuenta? <a href="#"> Regístrate</a>
                 </span>
               </div>
             </div>
           </div>
-          <div classNameName="col">
-            <div classNameName="d-grid gap-2 col-8 mx-auto py-2">
-              <label for="redes" classNameName="form-label mb-2">
+          <div className="col">
+            <div className="d-grid gap-2 col-8 mx-auto py-2">
+              <label for="redes" className="form-label mb-2">
                 O ingresa con tus redes sociales
               </label>
-              <button type="button" classNameName="btn btn-outline-danger mb-3">
+              <button type="button" className="btn btn-outline-danger mb-3">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -77,7 +77,7 @@ export default function SessionLogin() {
                 Regístrate con Google
               </button>
               <img src="" alt="" />
-              <button type="button" classNameName="btn btn-outline-primary">
+              <button type="button" className="btn btn-outline-primary">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -97,10 +97,10 @@ export default function SessionLogin() {
           <span>
             Al iniciar sesión estás aceptando los{" "}
             <a href="#">términos y condiciones </a>y la{" "}
-            <a href="#">política de privacidad</a> de datos de <span classNameName="fw-bold">FIXHOGAR</span>
+            <a href="#">política de privacidad</a> de datos de <span className="fw-bold">FIXHOGAR</span>
           </span>
-        </div>
       </div>
+    </div>
       </>
     );
   }
