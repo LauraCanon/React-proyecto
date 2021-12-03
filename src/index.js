@@ -11,7 +11,7 @@ import SessionLogin from "./views/SessionLogin";
 ReactDOM.render(
   <React.StrictMode>
     <Navbar />
-    <SessionLogin />
+    <App />
     <Footer />
   </React.StrictMode>,
   document.getElementById("root")
