@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter, Link} from "react-router-dom";
+
 
 
 
@@ -23,14 +23,12 @@ export default function Navbar() {
             <div className="collapse navbar-collapse" id="navbarCollapse">
               <ul className="navbar-nav ms-auto mb-2 mb-md-0">
                 <li className="nav-item">
-                  <BrowserRouter>
-                  <Link className="nav-link active" to="/sessionlogin">
+                  <a className="nav-link active" href="/sessionlogin">
                     Acceder
-                  </Link>
-                  </BrowserRouter>
+                  </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link active" href="/">
+                  <a className="nav-link active" href="/registration">
                     Registrate
                   </a>
                 </li>

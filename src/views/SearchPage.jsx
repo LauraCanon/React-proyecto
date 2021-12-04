@@ -1,7 +1,10 @@
 import React from "react";
+import{FaStar} from 'react-icons/fa'
 
-export default function SearchPage({ result }) {
-  const colaborators = result.filter((colaborator, index) => index % 2 === 0);
+export default function SearchPage( {people} ) {
+  
+  const collaborators = people.filter((colaborator, index)=>index%2===0)
+  
 
   return (
     <main className="flex-shrink-0 container mt-5">
@@ -57,25 +60,29 @@ export default function SearchPage({ result }) {
         </div>
       </div>
       <div className="row">
-        {colaborators.map((col) => {
+        {collaborators.map((colab,index)=>{
           return (
             <>
-              <div className="col-md-3 col-lg-2">
+              <div key={index} className="col-md-4 col-lg-4 col-xl-2 mb-4">
                 <div className="card">
-                  <img src={col.picture.large} className="card-img-top" alt="..." />
+                  <img
+                    src={colab.picture.large}
+                    className="card-img-top"
+                    alt={colab.id.value}
+                  />
                   <div className="card-body d-flex justify-content-between">
                     <span className="fs-6">
-                      {col.name.first} {col.name.last}
+                      {colab.name.first} {colab.name.last}
                     </span>
                     <div>
                       <span>
-                        <i className="bi bi-star-fill "></i>
+                        <FaStar />
                       </span>
                       <span>
-                        <i className="bi bi-star-fill "></i>
+                        <FaStar />
                       </span>
                       <span>
-                        <i className="bi bi-star-fill "></i>
+                        <FaStar />
                       </span>
                     </div>
                   </div>
@@ -92,8 +99,8 @@ export default function SearchPage({ result }) {
                 </div>
               </div>
             </>
-          );
-        })}
+          );  
+        })}    
       </div>
     </main>
   );
