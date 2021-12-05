@@ -1,11 +1,8 @@
 import React from "react";
-import{FaStar} from 'react-icons/fa'
+import { FaStar } from "react-icons/fa";
+import { collaborators } from "../component/People";
 
-export default function SearchPage( {people} ) {
-  
-  const collaborators = people.filter((colaborator, index)=>index%2===0)
-  
-
+export default function SearchPage() {
   return (
     <main className="flex-shrink-0 container mt-5">
       <div className="row my-5">
@@ -60,7 +57,7 @@ export default function SearchPage( {people} ) {
         </div>
       </div>
       <div className="row">
-        {collaborators.map((colab,index)=>{
+        {collaborators.map((colab, index) => {
           return (
             <>
               <div key={index} className="col-md-4 col-lg-4 col-xl-2 mb-4">
@@ -99,8 +96,8 @@ export default function SearchPage( {people} ) {
                 </div>
               </div>
             </>
-          );  
-        })}    
+          );
+        })}
       </div>
     </main>
   );
