@@ -1,7 +1,7 @@
 import "./allViews.css";
-import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { collaborators } from "../component/People";
+import React, { useState, useEffect } from "react";
 
 export default function HomeCollaborator() {
   const { id } = useParams();
@@ -17,7 +17,7 @@ export default function HomeCollaborator() {
     };
     loadCollaborator();
   }, []);
-  console.log(colas);
+
   return (
     <main className="container mt-5 py-5">
       <div className="row mt-5">
