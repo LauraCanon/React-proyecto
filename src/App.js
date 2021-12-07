@@ -1,17 +1,17 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import React, { useState } from "react";
+import AdditionalInfo from "./views/AdditionalInfo";
+import Footer from "./Footer";
+import HomeCollabolator from "./views/HomeCollabolator";
+import HomeStandarUser from "./views/HomeStandardUser";
+import LandingPages from "./views/LandingPages";
+import Navbar from "./navbar";
+import Payment from "./views/Payment";
 import RequestService from "./views/RequestService";
 import SearchPage from "./views/SearchPage";
-import LandingPages from "./views/LandingPages";
-import HomeStandarUser from "./views/HomeStandardUser";
-import HomeCollabolator from "./views/HomeCollabolator";
-import Payment from "./views/Payment";
 import Registration from "./views/Registration";
 import RegistrationPerfil from "./views/RegistrationPerfil";
 import SessionLogin from "./views/SessionLogin";
-import AdditionalInfo from "./views/AdditionalInfo";
-import Navbar from "./navbar";
-import Footer from "./Footer";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
 function App() {
   return (

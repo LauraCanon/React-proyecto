@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
 import HomeCollaborator from "./HomeCollabolator";
 import { collaborators } from "../component/People";
+import { useNavigate } from "react-router";
 import { users } from "../component/People";
+import React, { useState, useEffect } from "react";
 
 export default function SessionLogin({ people }) {
   const [email, SetEmail] = useState("");
@@ -29,16 +29,14 @@ export default function SessionLogin({ people }) {
   };
 
   const validationHandler = (e) => {
-    // e.preventDefault();
     for (let i = 0; i < emailUp.length; i++) {
       if (emailUp[i] === email && pass[i] === password) {
         return navigate(`/home/collaborator/${collaborators[i].iduser}`);
       } else {
-        alert(`Usuario no registrado`);
+        return alert(`Usuario no registrado`);
       }
     }
   };
-  console.log(collaborators);
 
   return (
     <>
