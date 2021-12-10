@@ -42,7 +42,7 @@ export default function SessionLogin({ isAuth }) {
       }
     }
   };
-  console.log(isAuth);
+
   return (
     <Fragment>
       {isAuth ? (
