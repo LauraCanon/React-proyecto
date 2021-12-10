@@ -31,7 +31,7 @@ export default function HomeCollaborator(isAuth) {
                       className="card-img-top w-75"
                       alt="..."
                     />
-                    <div className="card-body">
+                    <div key={collaborator.iduser} className="card-body">
                       <p className="card-text">
                         {`Name: ${collaborator.name.first} ${collaborator.name.last}\n
                        Email: ${collaborator.email}\n
