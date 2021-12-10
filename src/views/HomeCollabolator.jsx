@@ -1,12 +1,11 @@
 import "./allViews.css";
-import { useParams } from "react-router";
+import { useParams, Navigate } from "react-router";
 import { collaborators } from "../component/People";
 import React, { useState, useEffect } from "react";
 
-export default function HomeCollaborator() {
+export default function HomeCollaborator(isAuth) {
   const { id } = useParams();
   const [colas, setColas] = useState();
-
   useEffect(() => {
     const loadCollaborator = () => {
       collaborators.map((collaborator) => {
@@ -35,8 +34,8 @@ export default function HomeCollaborator() {
                     <div className="card-body">
                       <p className="card-text">
                         {`Name: ${collaborator.name.first} ${collaborator.name.last}\n
-                        Email: ${collaborator.email}\n
-                        Phone: ${collaborator.cell}`}
+                       Email: ${collaborator.email}\n
+                       Phone: ${collaborator.cell}`}
                       </p>
 
                       <p>
@@ -189,13 +188,13 @@ export default function HomeCollaborator() {
               >
                 <div
                   className="
-                    container
-                    p-2
-                    border-2
-                    bg-black bg-opacity-25
-                    rounded
-                    mb-3
-                  "
+                   container
+                   p-2
+                   border-2
+                   bg-black bg-opacity-25
+                   rounded
+                   mb-3
+                 "
                 >
                   <form className="d-flex">
                     <select
@@ -282,10 +281,10 @@ export default function HomeCollaborator() {
                         <td>
                           <div
                             className="
-                              d-flex
-                              form-check form-switch
-                              justify-content-center
-                            "
+                             d-flex
+                             form-check form-switch
+                             justify-content-center
+                           "
                           >
                             <input
                               className="form-check-input"
@@ -323,10 +322,10 @@ export default function HomeCollaborator() {
                         <td>
                           <div
                             className="
-                              d-flex
-                              form-check form-switch
-                              justify-content-center
-                            "
+                             d-flex
+                             form-check form-switch
+                             justify-content-center
+                           "
                           >
                             <input
                               className="form-check-input"
@@ -363,51 +362,10 @@ export default function HomeCollaborator() {
                         <td>
                           <div
                             className="
-                              d-flex
-                              form-check form-switch
-                              justify-content-center
-                            "
-                          >
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              role="switch"
-                              id="flexSwitchCheckChecked"
-                              checked
-                            />
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Instalar</td>
-                        <td>Base TV</td>
-                        <td>$ 45.000</td>
-                        <td>
-                          <div className="d-flex justify-content-center">
-                            <a className="link-dark" href="#">
-                              <i className="bi bi-pencil-fill"></i>
-                            </a>
-                          </div>
-                        </td>
-                        <td>
-                          <div className="d-flex justify-content-center">
-                            <a
-                              className="link-danger"
-                              href="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#staticBackdrop"
-                            >
-                              <i className="bi bi-trash-fill"></i>
-                            </a>
-                          </div>
-                        </td>
-                        <td>
-                          <div
-                            className="
-                              d-flex
-                              form-check form-switch
-                              justify-content-center
-                            "
+                             d-flex
+                             form-check form-switch
+                             justify-content-center
+                           "
                           >
                             <input
                               className="form-check-input"
@@ -445,10 +403,10 @@ export default function HomeCollaborator() {
                         <td>
                           <div
                             className="
-                              d-flex
-                              form-check form-switch
-                              justify-content-center
-                            "
+                             d-flex
+                             form-check form-switch
+                             justify-content-center
+                           "
                           >
                             <input
                               className="form-check-input"
@@ -486,10 +444,10 @@ export default function HomeCollaborator() {
                         <td>
                           <div
                             className="
-                              d-flex
-                              form-check form-switch
-                              justify-content-center
-                            "
+                             d-flex
+                             form-check form-switch
+                             justify-content-center
+                           "
                           >
                             <input
                               className="form-check-input"
@@ -527,10 +485,10 @@ export default function HomeCollaborator() {
                         <td>
                           <div
                             className="
-                              d-flex
-                              form-check form-switch
-                              justify-content-center
-                            "
+                             d-flex
+                             form-check form-switch
+                             justify-content-center
+                           "
                           >
                             <input
                               className="form-check-input"
@@ -568,10 +526,51 @@ export default function HomeCollaborator() {
                         <td>
                           <div
                             className="
-                              d-flex
-                              form-check form-switch
-                              justify-content-center
-                            "
+                             d-flex
+                             form-check form-switch
+                             justify-content-center
+                           "
+                          >
+                            <input
+                              className="form-check-input"
+                              type="checkbox"
+                              role="switch"
+                              id="flexSwitchCheckChecked"
+                              checked
+                            />
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Instalar</td>
+                        <td>Base TV</td>
+                        <td>$ 45.000</td>
+                        <td>
+                          <div className="d-flex justify-content-center">
+                            <a className="link-dark" href="#">
+                              <i className="bi bi-pencil-fill"></i>
+                            </a>
+                          </div>
+                        </td>
+                        <td>
+                          <div className="d-flex justify-content-center">
+                            <a
+                              className="link-danger"
+                              href="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#staticBackdrop"
+                            >
+                              <i className="bi bi-trash-fill"></i>
+                            </a>
+                          </div>
+                        </td>
+                        <td>
+                          <div
+                            className="
+                             d-flex
+                             form-check form-switch
+                             justify-content-center
+                           "
                           >
                             <input
                               className="form-check-input"
@@ -608,10 +607,10 @@ export default function HomeCollaborator() {
                         <td>
                           <div
                             className="
-                              d-flex
-                              form-check form-switch
-                              justify-content-center
-                            "
+                             d-flex
+                             form-check form-switch
+                             justify-content-center
+                           "
                           >
                             <input
                               className="form-check-input"
