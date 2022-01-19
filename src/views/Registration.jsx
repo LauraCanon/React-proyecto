@@ -11,7 +11,6 @@ export default function HomeCollaborator() {
   const handleChange = (e) => {
     const {name, value} = e.target;
     setFormValues({...formValues, [name]: value});
-    console.log(formValues);
   }
 
   const handleSubmit = (e) => {
@@ -20,9 +19,7 @@ export default function HomeCollaborator() {
     setIsSubmit(true);
   }
   useEffect(() => {
-    console.log(formErrors)
     if(Object.keys(formErrors).length === 0 && isSubmit){
-      console.log(formValues);
     }
   }, [formErrors])
   const validate = (values) => {
