@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 
 export default function LandingPages() {
   return (
@@ -55,7 +56,7 @@ export default function LandingPages() {
           </button>
         </div>
         <div className="container-fluid p-2 border-2 bg-black bg-opacity-25 mt-2">
-          <form className="d-flex">
+          <form className="d-flex" >
             <select
               className="form-select m-1 shadow-sm"
               aria-label="Default select example"
@@ -63,18 +64,14 @@ export default function LandingPages() {
               <option selected disabled>
                 Selecciona un servicio:
               </option>
-              <option value="1">Instalar</option>
-              <option value="2">Reparar</option>
-              <option value="3">Mantenimiento</option>
-              <option value="4">Pintar</option>
-            </select>
-            <select
-              className="form-select m-1"
-              aria-label="Default select example"
-            >
-              <option selected disabled>
-                Primero selecciona un servicio
-              </option>
+              <option value="1">Instalación TV</option>
+              <option value="2">Instalación Nevera</option>
+              <option value="3">Carpintería</option>
+              <option value="4">Plomería</option>
+              <option value="5">Pintura de Interiores</option>
+              <option value="6">Mantenimiento Lavadora</option>
+              <option value="7">Jardinería</option>
+              <option value="8">Reparación de Tuberías</option>
             </select>
             <select
               name="ciudades"
@@ -92,13 +89,15 @@ export default function LandingPages() {
               <option selected disabled>
                 Rango de Precios:
               </option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              <option value="1">$50.000 - $100.000</option>
+              <option value="2">$100.001 - $200.000</option>
+              <option value="3">$200.001 - $300.000</option>
             </select>
-            <button className="btn btn-dark m-1" type="submit">
-              Search
-            </button>
+            <Link to='/search' >
+              <button className="btn btn-dark m-1" type="submit">
+                Search
+              </button>
+            </Link>
           </form>
         </div>
       </main>

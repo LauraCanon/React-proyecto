@@ -63,7 +63,7 @@ export default function Navbar({ isAuth }) {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link active" to="/registration">
+                    <Link className="nav-link active" to="/regperfil">
                       Regístrate
                     </Link>
                   </li>

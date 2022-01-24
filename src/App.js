@@ -7,7 +7,8 @@ import Navbar from "./navbar";
 import Payment from "./views/Payment";
 import RequestService from "./views/RequestService";
 import SearchPage from "./views/SearchPage";
-import Registration from "./views/Registration";
+import RegistrationUser from "./views/Registration";
+import RegistrationCollab from './views/RegisCollab'
 import RegistrationPerfil from "./views/RegistrationPerfil";
 import SessionLogin from "./views/SessionLogin";
 import React from "react";
@@ -25,8 +26,12 @@ function App() {
         <Route path="/search" element={<SearchPage isAuth={isAuth} />} />
         <Route path="/request" element={<RequestService isAuth={isAuth} />} />
         <Route
-          path="/registration"
-          element={<Registration isAuth={isAuth} />}
+          path="/registration-user"
+          element={<RegistrationUser isAuth={isAuth} />}
+        />
+        <Route
+          path="/registration-collab"
+          element={<RegistrationCollab isAuth={isAuth} />}
         />
         <Route
           path="/regperfil"

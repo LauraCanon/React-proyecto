@@ -1,8 +1,9 @@
 import "./allViews.css";
 import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom'
 import React from "react";
 
-export default function RegistrationUser() {
+export default function RegistrationCollab() {
   const initialValues = {name:"", lastName:"", email:"", password:""}
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
@@ -60,7 +61,7 @@ export default function RegistrationUser() {
             </div>
           </div>
         <div className="col-md-6 col-sm-11 col-lg-5">
-          <h2 className="mb-5 text-center">Regístrate como Usuario</h2>
+          <h2 className="mb-5 text-center">Regístrate como Colaborador</h2>
           <form onSubmit={handleSubmit}>
             <div className="input-group mb-3">
               <input
@@ -114,33 +115,13 @@ export default function RegistrationUser() {
             </div>
             <p className="mt-1 text-danger">{formErrors.password}</p>
 
-            <div className="form-check mt-3">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                value=""
-                id="CheckTerminos"
-              />
-              <label className="form-check-label" for="CheckTerminos">
-                He leído y acepto los términos y condiciones
-              </label>
-            </div>
-            <div className="form-check mt-2">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                value=""
-                id="CheckDatos"
-              />
-              <label className="form-check-label" for="CheckDatos">
-                He leído y acepto la política de privacidad de datos
-              </label>
-            </div>
-            <div className="mt-3 text-center">
-              <button type="submit" className="btn btn-outline-primary">
-                Registrarse
-              </button>
-            </div>
+            <Link to='/addinfo'>
+              <div className="mt-3 text-center">
+                <button type="submit" className="btn btn-outline-primary">
+                  Continúa aquí
+                </button>
+              </div>
+            </Link>
           </form>
           <div className="mt-4">
             <p className="text-center">Ya tienes una cuenta?</p>

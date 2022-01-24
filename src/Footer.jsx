@@ -1,17 +1,41 @@
 import React from "react";
+import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa'
 
 export default function Footer() {
   return (
     <footer className="footer fixed-bottom b-1-primary mt-auto py-3 bg-light">
       <div className="container d-flex justify-content-between align-items-center">
-        <div>
-          <span className="px-1">Siguenos</span>
-          <i className="bi-github px-1" role="img" aria-label="GitHub"></i>
-          <i className="bi bi-twitter"></i>
-          <i className="bi bi-meta px-1"></i>
-          <i className="bi bi-whatsapp"></i>
+        <div className="col-md-6 d-inline-flex">
+          <span className="me-4">Siguenos</span>
+          <div className="me-4">
+              <a
+                href="https://www.facebook.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaFacebookF size="1.4em" color="black" />
+              </a>
+            </div>
+            <div className="me-4">
+              <a
+                href="https://www.instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaInstagram size="1.4em" color="black" />
+              </a>
+            </div>
+            <div>
+              <a
+                href="https://www.twitter.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaTwitter size="1.4em" color="black" />
+              </a>
+            </div>
         </div>
-        <span className="text-muted">2021 &copy; </span>
+        <span className="text-muted">2022 &copy; </span>
       </div>
     </footer>
   );

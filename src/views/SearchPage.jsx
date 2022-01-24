@@ -4,7 +4,7 @@ import { FaStar } from "react-icons/fa";
 
 export default function SearchPage() {
   return (
-    <main className="flex-shrink-0 container mt-5">
+    <main className="flex-shrink-0 container mt-4 mb-4">
       <div className="row my-5">
         <div className="col-12">
           <div className="container-fluid p-2 border-2 bg-black bg-opacity-25 mt-2">
@@ -16,21 +16,16 @@ export default function SearchPage() {
                 <option selected disabled>
                   Selecciona un servicio:
                 </option>
-                <option value="1">Instalar</option>
-                <option value="2">Reparar</option>
-                <option value="3">Mantenimiento</option>
-                <option value="4">Pintar</option>
+                <option value="1">Instalación TV</option>
+              <option value="2">Instalación Nevera</option>
+              <option value="3">Carpintería</option>
+              <option value="4">Plomería</option>
+              <option value="5">Pintura de Interiores</option>
+              <option value="6">Mantenimiento Lavadora</option>
+              <option value="7">Jardinería</option>
+              <option value="8">Reparación de Tuberías</option>
               </select>
               <select
-                className="form-select m-1"
-                aria-label="Default select example"
-              >
-                <option selected disabled>
-                  Primero selecciona un servicio
-                </option>
-              </select>
-              <select
-                name="ciudades"
                 className="form-select m-1"
                 aria-label="Default select example"
               >
@@ -45,9 +40,9 @@ export default function SearchPage() {
                 <option selected disabled>
                   Rango de Precios:
                 </option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+              <option value="1">$50.000 - $100.000</option>
+              <option value="2">$100.001 - $200.000</option>
+              <option value="3">$200.001 - $300.000</option>
               </select>
               <button className="btn btn-dark m-1" type="submit">
                 Search
@@ -60,7 +55,7 @@ export default function SearchPage() {
         {collaborators.map((colab, index) => {
           return (
             <>
-              <div key={index} className="col-md-4 col-lg-4 col-xl-2 mb-4">
+              <div key={index} className="col-md-4 col-lg-4 col-xl-2 mb-5">
                 <div className="card">
                   <img
                     src={colab.picture.large}
