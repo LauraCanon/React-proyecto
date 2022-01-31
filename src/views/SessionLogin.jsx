@@ -1,46 +1,35 @@
-import HomeCollaborator from "./HomeCollabolator";
 import { authActions } from "../store";
-import { collaborators } from "../component/People";
 import { useDispatch } from "react-redux";
 import { useNavigate, Navigate } from "react-router";
-import { users } from "../component/People";
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment, useContext } from "react";
+import { GlobalContext } from "../context/GlobalState";
 
 export default function SessionLogin({ isAuth }) {
+  const { sessionLogin } = useContext(GlobalContext);
+  const initialValues = { email: "", password: "" };
+  const [formValues, setFormValues] = useState(initialValues);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
   const dispatch = useDispatch();
-  const [email, SetEmail] = useState("");
-  const [password, SetPassword] = useState("");
-  const [emailUp, setEmailUp] = useState([]);
-  const [pass, setPass] = useState([]);
-  const navigate = useNavigate();
-  useEffect(() => {
-    const emailDb = [];
-    const passDb = [];
-    collaborators.map((colab) => {
-      emailDb.push(colab.email);
-      passDb.push(colab.login.password);
-    });
-    setEmailUp(emailDb);
-    setPass(passDb);
-  }, []);
 
-  const handleEmail = (e) => {
-    SetEmail(e.target.value);
-  };
+  // const handleEmail = (e) => {
+  //   SetEmail(e.target.value);
+  // };
 
-  const handlePassword = (e) => {
-    SetPassword(e.target.value);
-  };
+  // const handlePassword = (e) => {
+  //   SetPassword(e.target.value);
+  // };
 
   const validationHandler = (e) => {
-    for (let i = 0; i < emailUp.length; i++) {
-      if (emailUp[i] === email && pass[i] === password) {
-        dispatch(authActions.login());
-        return navigate(`/home/collaborator/${collaborators[i].iduser}`);
-      } else {
-        return alert(`Usuario no registrado`);
-      }
-    }
+    e.preventDefault();
+    const { email, password } = formValues;
+    const login = { email, password };
+    sessionLogin(login);
+    dispatch(authActions.login());
   };
 
   return (
@@ -68,8 +57,8 @@ export default function SessionLogin({ isAuth }) {
                         className="form-control"
                         name="email"
                         placeholder="Email"
-                        onChange={handleEmail}
-                        value={email}
+                        onChange={handleChange}
+                        value={formValues.email}
                       />
                     </div>
                     <div className="mb-4 col-8 mx-auto">
@@ -84,8 +73,8 @@ export default function SessionLogin({ isAuth }) {
                         className="form-control"
                         name="password"
                         placeholder="Contraseña"
-                        onChange={handlePassword}
-                        value={password}
+                        onChange={handleChange}
+                        value={formValues.password}
                       />
                     </div>
                     <div className="mb-4 form-check col-8 mx-auto">
