@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { authActions } from "./store";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { authActions } from './store';
 
 export default function Navbar({ isAuth }) {
   const dispatch = useDispatch();
