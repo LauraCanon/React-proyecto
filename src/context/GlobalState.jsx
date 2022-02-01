@@ -9,7 +9,7 @@ const initialState = {
   services: [],
   error: null,
   loading: true,
-  login: null,
+  login: { name: null },
 };
 
 export const GlobalContext = createContext(initialState);
