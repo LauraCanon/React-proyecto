@@ -9,7 +9,7 @@ const initialState = {
   services: [],
   error: null,
   loading: true,
-  login: { name: null },
+  login: JSON.parse(window.localStorage.getItem("login")) || null,
 };
 
 export const GlobalContext = createContext(initialState);
@@ -41,8 +41,13 @@ export const GlobalProvider = ({ children }) => {
       const response = await axios.post("/sessionlogin", login, config);
       dispatch({
         type: "SESSION_LOGIN",
-        payload: response.data.collaborator,
+        payload: response.data,
       });
+      window.localStorage.setItem(
+        "login",
+        JSON.stringify(response.data.collaborator)
+      );
+      window.localStorage.setItem("token", JSON.stringify(response.data.token));
     } catch (error) {
       console.log("Respuesta", error);
     }

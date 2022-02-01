@@ -1,18 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { authActions } from "./store";
-import { GlobalContext } from "./context/GlobalState";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, selectUser } from "./store/userSlicer/userSlice";
 
 export default function Navbar({ isAuth }) {
-  const { login } = useContext(GlobalContext);
-  console.log(isAuth);
-  console.log(login);
-
   const dispatch = useDispatch();
-
+  const user = useSelector(selectUser);
   const logoutHandler = () => {
-    dispatch(authActions.logout());
+    dispatch(logout());
   };
 
   return (
@@ -36,7 +31,7 @@ export default function Navbar({ isAuth }) {
                 <ul className="navbar-nav ms-auto mb-2 mb-md-0">
                   <li className="nav-item">
                     <Link className="nav-link active" to="/sessionlogin">
-                      {`Hola ${login.name}`}
+                      {`Hola ${user.name}`}
                     </Link>
                   </li>
                   <li className="nav-item">

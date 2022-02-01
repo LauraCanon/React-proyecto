@@ -1,11 +1,12 @@
-import { authActions } from "../store";
-import { useDispatch } from "react-redux";
-import { useNavigate, Navigate } from "react-router";
-import React, { useState, useEffect, Fragment, useContext } from "react";
-import { GlobalContext } from "../context/GlobalState";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser, selectUser } from "../store/userSlicer/userSlice";
+import { Navigate, useNavigate } from "react-router";
+import React, { useState, useEffect, Fragment } from "react";
 
-export default function SessionLogin({ isAuth }) {
-  const { sessionLogin } = useContext(GlobalContext);
+export default function SessionLogin() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector(selectUser);
   const initialValues = { email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
 
@@ -13,8 +14,6 @@ export default function SessionLogin({ isAuth }) {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
-
-  const dispatch = useDispatch();
 
   // const handleEmail = (e) => {
   //   SetEmail(e.target.value);
@@ -27,14 +26,14 @@ export default function SessionLogin({ isAuth }) {
   const validationHandler = (e) => {
     e.preventDefault();
     const { email, password } = formValues;
-    const login = { email, password };
-    sessionLogin(login);
-    dispatch(authActions.login());
+    const user = { email, password };
+    dispatch(loginUser(user));
+    navigate(`/`);
   };
 
   return (
     <Fragment>
-      {isAuth ? (
+      {user ? (
         <>
           <Navigate to={`/`} />
         </>
