@@ -9,6 +9,7 @@ export const loginUser = createAsyncThunk("user/loginUser", (user) =>
 //userSlice definition
 const initialState = {
   user: JSON.parse(window.localStorage.getItem("user")) || null,
+  collabs: [],
 };
 const userSlicer = createSlice({
   name: "user",
@@ -37,7 +38,7 @@ const userSlicer = createSlice({
   },
 });
 
-export const { login, logout } = userSlicer.actions;
+export const { logout } = userSlicer.actions;
 
 export const selectUser = (state) => state.user.user;
 

@@ -1,64 +1,70 @@
 import "./allViews.css";
 import { useState, useEffect } from "react";
 import React from "react";
+import { userRegister } from "../store/userSlicer/userRegisterSlicer";
+import { useDispatch } from "react-redux";
 
 export default function RegistrationUser() {
-  const initialValues = {name:"", lastName:"", email:"", password:""}
+  const dispatch = useDispatch();
+  const initialValues = { name: "", lastName: "", email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
 
   const handleChange = (e) => {
-    const {name, value} = e.target;
-    setFormValues({...formValues, [name]: value});
-    console.log(formValues);
-  }
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+    // console.log(formValues);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
-  }
+    const { name, lastName, email, password } = formValues;
+    const newUser = { name, lastName, email, password };
+    dispatch(userRegister(newUser));
+  };
   useEffect(() => {
-    console.log(formErrors)
-    if(Object.keys(formErrors).length === 0 && isSubmit){
+    console.log(formErrors);
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
       console.log(formValues);
     }
-  }, [formErrors])
+  }, [formErrors]);
   const validate = (values) => {
-    const errors = {}
+    const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    if(!values.name) {
-      errors.name = "El nombre es requerido!"
+    if (!values.name) {
+      errors.name = "El nombre es requerido!";
     }
-    if(!values.lastName) {
-      errors.lastName = "El apellido es requerido!"
-    } 
-    if(!values.email) {
-      errors.email = "El email es requerido!"
+    if (!values.lastName) {
+      errors.lastName = "El apellido es requerido!";
+    }
+    if (!values.email) {
+      errors.email = "El email es requerido!";
     } else if (!regex.test(values.email)) {
-      errors.email = "Introduce una dirección de correo electrónico válida"
+      errors.email = "Introduce una dirección de correo electrónico válida";
     }
-    if(!values.password) {
-      errors.password = "La contraseña es requerida!"
-    } else if(values.password.length < 4) {
-      errors.password = "La contrasena debe tener más de 4 caracteres"
+    if (!values.password) {
+      errors.password = "La contraseña es requerida!";
+    } else if (values.password.length < 4) {
+      errors.password = "La contrasena debe tener más de 4 caracteres";
     }
     return errors;
-  }
+  };
   return (
     <main className="mt-5 container py-5">
       <div className="row display-flex mt-3 justify-content-center">
         <div className="col-md-6 col-lg-7">
-            <h2 className="text-center mb-3">Unete a la comunidad FIXHOGAR!</h2>
-            <div className="text-center mb-3">
-              <img
-                src="https://image.freepik.com/vector-gratis/herramientas-mejora-hogar_24640-74868.jpg"
-                style={{width:"80%"}}
-                alt="home-work"
-              />
-            </div>
+          <h2 className="text-center mb-3">Unete a la comunidad FIXHOGAR!</h2>
+          <div className="text-center mb-3">
+            <img
+              src="https://image.freepik.com/vector-gratis/herramientas-mejora-hogar_24640-74868.jpg"
+              style={{ width: "80%" }}
+              alt="home-work"
+            />
           </div>
+        </div>
         <div className="col-md-6 col-sm-11 col-lg-5">
           <h2 className="mb-5 text-center">Regístrate como Usuario</h2>
           <form onSubmit={handleSubmit}>
@@ -69,8 +75,8 @@ export default function RegistrationUser() {
                 name="name"
                 id="InputNombre"
                 placeholder="Nombre"
-                value= {formValues.name}
-                onChange= {handleChange}
+                value={formValues.name}
+                onChange={handleChange}
               />
             </div>
             <p className="text-danger">{formErrors.name}</p>
@@ -82,8 +88,8 @@ export default function RegistrationUser() {
                 name="lastName"
                 id="InputApellido"
                 placeholder="Apellido"
-                value= {formValues.lastName}
-                onChange= {handleChange}
+                value={formValues.lastName}
+                onChange={handleChange}
               />
             </div>
             <p className="text-danger">{formErrors.lastName}</p>
@@ -95,8 +101,8 @@ export default function RegistrationUser() {
                 name="email"
                 id="InputCorreo"
                 placeholder="Correo electronico"
-                value= {formValues.email}
-                onChange= {handleChange}
+                value={formValues.email}
+                onChange={handleChange}
               />
             </div>
             <p className="mt-1 text-danger">{formErrors.email}</p>
@@ -108,8 +114,8 @@ export default function RegistrationUser() {
                 name="password"
                 id="InputContrasena"
                 placeholder="Contrasena"
-                value= {formValues.password}
-                onChange= {handleChange}
+                value={formValues.password}
+                onChange={handleChange}
               />
             </div>
             <p className="mt-1 text-danger">{formErrors.password}</p>
@@ -145,11 +151,11 @@ export default function RegistrationUser() {
           <div className="mt-4">
             <p className="text-center">Ya tienes una cuenta?</p>
             <div className="text-center mb-3">
-            <a href="/sessionlogin">Inicia Sesión</a>
+              <a href="/sessionlogin">Inicia Sesión</a>
+            </div>
           </div>
-        </div>     
-      </div>
+        </div>
       </div>
     </main>
   );
-  }
+}

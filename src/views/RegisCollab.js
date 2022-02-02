@@ -1,11 +1,11 @@
 import "./allViews.css";
 import { Link } from "react-router-dom";
-import React, { useState, useEffect, useContext } from "react";
-import { GlobalContext } from "../context/GlobalState";
+import React, { useState, useEffect } from "react";
+import { collabRegister } from "../store/userSlicer/collabSlicer";
+import { useDispatch } from "react-redux";
 
 export default function RegistrationCollab() {
-  const { collabRegister } = useContext(GlobalContext);
-
+  const dispatch = useDispatch();
   const initialValues = { name: "", lastName: "", email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
@@ -22,9 +22,7 @@ export default function RegistrationCollab() {
     setIsSubmit(true);
     const { name, lastName, email, password } = formValues;
     const newCollab = { name, lastName, email, password };
-    console.log(newCollab);
-    collabRegister(newCollab);
-    console.log(formValues);
+    dispatch(collabRegister(newCollab));
   };
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
