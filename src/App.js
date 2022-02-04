@@ -7,51 +7,56 @@ import Navbar from "./navbar";
 import Payment from "./views/Payment";
 import RequestService from "./views/RequestService";
 import SearchPage from "./views/SearchPage";
-import Registration from "./views/Registration";
+import RegistrationUser from "./views/Registration";
+import RegistrationCollab from "./views/RegisCollab";
 import RegistrationPerfil from "./views/RegistrationPerfil";
 import SessionLogin from "./views/SessionLogin";
+import VerifiedEmail from "./views/VerifiedEmail";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RequireAuth } from "./component/PrivateRoute";
+import { selectUser } from "./store/userSlicer/userSlice";
 
 function App() {
-  const isAuth = useSelector((state) => state.auth.isAuthenticated);
+  const user = useSelector(selectUser);
   return (
     <Router>
-      <Navbar isAuth={isAuth} />
+      <Navbar isAuth={user} />
       <Routes>
-        <Route path="*" element={<LandingPages isAuth={isAuth} />} />
-        <Route path="/search" element={<SearchPage isAuth={isAuth} />} />
-        <Route path="/request" element={<RequestService isAuth={isAuth} />} />
+        <Route path="*" element={<LandingPages isAuth={user} />} />
+        <Route path="/search" element={<SearchPage isAuth={user} />} />
+        <Route path="/request" element={<RequestService isAuth={user} />} />
         <Route
-          path="/registration"
-          element={<Registration isAuth={isAuth} />}
+          path="/registration-user"
+          element={<RegistrationUser isAuth={user} />}
+        />
+        <Route
+          path="/registration-collab"
+          element={<RegistrationCollab isAuth={user} />}
         />
         <Route
           path="/regperfil"
-          element={<RegistrationPerfil isAuth={isAuth} />}
+          element={<RegistrationPerfil isAuth={user} />}
         />
-        <Route path="/payment" element={<Payment isAuth={isAuth} />} />
-        <Route
-          path="/sessionlogin"
-          element={<SessionLogin isAuth={isAuth} />}
-        />
+        <Route path="/activate/:hash/:id" element={<VerifiedEmail />}></Route>
+        <Route path="/payment" element={<Payment isAuth={user} />} />
+        <Route path="/sessionlogin" element={<SessionLogin isAuth={user} />} />
         <Route path="/home">
-          <Route path="user" element={<HomeStandarUser isAuth={isAuth} />} />
+          <Route path="user" element={<HomeStandarUser isAuth={user} />} />
           <Route path="collaborator">
             <Route
               path=":id"
-              isAuth={isAuth}
+              isAuth={user}
               element={
                 <RequireAuth>
-                  <HomeCollabolator isAuth={isAuth} />
+                  <HomeCollabolator isAuth={user} />
                 </RequireAuth>
               }
             />
           </Route>
         </Route>
-        <Route path="/addinfo" element={<AdditionalInfo isAuth={isAuth} />} />
+        <Route path="/addinfo" element={<AdditionalInfo isAuth={user} />} />
       </Routes>
       <Footer />
     </Router>

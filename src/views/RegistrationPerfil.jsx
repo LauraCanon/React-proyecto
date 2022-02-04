@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function RegistrationPerfil() {
   return (
@@ -18,20 +19,22 @@ export default function RegistrationPerfil() {
               <div className="card text-dark my-4 border-0">
                 <img
                   className="img-fluid rounded-circle px-5 py-3 card-img-top"
-                  src="https://randomuser.me/api/portraits/men/14.jpg"
+                  src="https://image.flaticon.com/icons/png/512/1226/1226084.png"
                   alt="..."
                 />
                 <div className="card-body">
-                  <h5 className="card-title">Colaborador</h5>
+                  <h4 className="card-title">Colaborador</h4>
                   <p className="card-text">
-                    Ofrece tus servicios. Hay gente que necesita de tu Ayuda en
+                    Ofrece tus servicios. Hay gente que necesita de tu ayuda en
                     este momento!
                   </p>
-                  <div className="d-grid gap-2">
-                    <button className="btn btn-success" type="button">
-                      Registrate Aqui
-                    </button>
-                  </div>
+                  <Link to='/registration-collab'>
+                    <div className="d-grid gap-2">
+                      <button className="btn btn-success" type="button">
+                        Registrate aquí
+                      </button>
+                    </div>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -39,20 +42,22 @@ export default function RegistrationPerfil() {
               <div className="card text-dark my-4 border-0">
                 <img
                   className="img-fluid rounded-circle px-5 py-3 card-img-top"
-                  src="https://randomuser.me/api/portraits/men/29.jpg"
+                  src="https://image.flaticon.com/icons/png/512/1226/1226123.png"
                   alt="..."
                 />
                 <div className="card-body">
-                  <h5 className="card-title">Solicitante</h5>
+                  <h4 className="card-title">Solicitante</h4>
                   <p className="card-text">
-                    Cotiza,Selecciona y Agenda tu Servicio. Miles de
+                    Cotiza, selecciona y agenda tu servicio. Miles de
                     Colaboradores a un solo click!
                   </p>
-                  <div className="d-grid gap-2">
-                    <button className="btn btn-success" type="button">
-                      Registrate Aqui
-                    </button>
-                  </div>
+                  <Link to='/registration-user'>
+                    <div className="d-grid gap-2">
+                      <button className="btn btn-success" type="button">
+                        Registrate aquí
+                      </button>
+                    </div>
+                  </Link>
                 </div>
               </div>
             </div>

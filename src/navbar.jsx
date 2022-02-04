@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { authActions } from "./store";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, selectUser } from "./store/userSlicer/userSlice";
 
 export default function Navbar({ isAuth }) {
   const dispatch = useDispatch();
-
+  const user = useSelector(selectUser);
   const logoutHandler = () => {
-    dispatch(authActions.logout());
+    dispatch(logout());
   };
 
   return (
@@ -31,12 +31,20 @@ export default function Navbar({ isAuth }) {
                 <ul className="navbar-nav ms-auto mb-2 mb-md-0">
                   <li className="nav-item">
                     <Link className="nav-link active" to="/sessionlogin">
-                      Usuario x logueado
+                      {`Hola ${user.name}`}
                     </Link>
                   </li>
-                  <li className="nav-item">
-                    <button onClick={logoutHandler}>Logout</button>
-                  </li>
+                  <Link to="/">
+                    <li className="nav-item">
+                      <a
+                        class="nav-link active"
+                        href="#"
+                        onClick={logoutHandler}
+                      >
+                        Salir
+                      </a>
+                    </li>
+                  </Link>
                 </ul>
               </div>
             </div>
@@ -63,7 +71,7 @@ export default function Navbar({ isAuth }) {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link active" to="/registration">
+                    <Link className="nav-link active" to="/regperfil">
                       Regístrate
                     </Link>
                   </li>

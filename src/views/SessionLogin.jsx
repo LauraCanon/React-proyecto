@@ -1,55 +1,30 @@
-import HomeCollaborator from "./HomeCollabolator";
-import { authActions } from "../store";
-import { collaborators } from "../component/People";
-import { useDispatch } from "react-redux";
-import { useNavigate, Navigate } from "react-router";
-import { users } from "../component/People";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser, selectUser } from "../store/userSlicer/userSlice";
+import { Navigate } from "react-router";
 import React, { useState, useEffect, Fragment } from "react";
 
-export default function SessionLogin({ isAuth }) {
+export default function SessionLogin() {
   const dispatch = useDispatch();
-  const [email, SetEmail] = useState("");
-  const [password, SetPassword] = useState("");
-  const [emailUp, setEmailUp] = useState([]);
-  const [pass, setPass] = useState([]);
-  const navigate = useNavigate();
-  useEffect(() => {
-    const emailDb = [];
-    const passDb = [];
-    collaborators.map((colab) => {
-      emailDb.push(colab.email);
-      passDb.push(colab.login.password);
-    });
-    setEmailUp(emailDb);
-    setPass(passDb);
-  }, []);
+  const user = useSelector(selectUser);
+  const initialValues = { email: "", password: "" };
+  const [formValues, setFormValues] = useState(initialValues);
 
-  const handleEmail = (e) => {
-    SetEmail(e.target.value);
-  };
-
-  const handlePassword = (e) => {
-    SetPassword(e.target.value);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
   };
 
   const validationHandler = (e) => {
-    for (let i = 0; i < emailUp.length; i++) {
-      if (emailUp[i] === email && pass[i] === password) {
-        dispatch(authActions.login());
-        return navigate(`/home/collaborator/${collaborators[i].iduser}`);
-      } else {
-        return alert(`Usuario no registrado`);
-      }
-    }
+    e.preventDefault();
+    const { email, password } = formValues;
+    const user = { email, password };
+    dispatch(loginUser(user));
+    console.log(user);
   };
 
   return (
     <Fragment>
-      {isAuth ? (
-        <>
-          <Navigate to={`/`} />
-        </>
-      ) : (
+      {user === null ? (
         <Fragment>
           <div className="container text-center py-5">
             <h1 className="display-6 pt-4 fw-bold">Inicia Sesión</h1>
@@ -68,8 +43,8 @@ export default function SessionLogin({ isAuth }) {
                         className="form-control"
                         name="email"
                         placeholder="Email"
-                        onChange={handleEmail}
-                        value={email}
+                        onChange={handleChange}
+                        value={formValues.email}
                       />
                     </div>
                     <div className="mb-4 col-8 mx-auto">
@@ -84,8 +59,8 @@ export default function SessionLogin({ isAuth }) {
                         className="form-control"
                         name="password"
                         placeholder="Contraseña"
-                        onChange={handlePassword}
-                        value={password}
+                        onChange={handleChange}
+                        value={formValues.password}
                       />
                     </div>
                     <div className="mb-4 form-check col-8 mx-auto">
@@ -156,6 +131,14 @@ export default function SessionLogin({ isAuth }) {
             </div>
           </div>
         </Fragment>
+      ) : user.hasOwnProperty("collaborator") ? (
+        <>
+          <Navigate to={`/home/collaborator`} />
+        </>
+      ) : (
+        <>
+          <Navigate to={`/home/user`} />
+        </>
       )}
     </Fragment>
   );

@@ -1,51 +1,21 @@
 import "./allViews.css";
 import { useParams, Navigate } from "react-router";
-import { collaborators } from "../component/People";
 import React, { useState, useEffect } from "react";
 
-export default function HomeCollaborator(isAuth) {
-  const { id } = useParams();
-  const [colas, setColas] = useState();
-  useEffect(() => {
-    const loadCollaborator = () => {
-      collaborators.map((collaborator) => {
-        if (collaborator.iduser === Number(id)) {
-          setColas(collaborator.picture.large);
-        }
-      });
-    };
-    loadCollaborator();
-  }, []);
-
+export default function HomeCollaborator() {
+  const collaborator = JSON.parse(window.localStorage.getItem("collaborator"));
+  console.log(collaborator);
   return (
     <main className="container mt-5 py-5">
       <div className="row mt-5">
         <div className="col-md-4 d-flex justify-content-center">
           <div className="card align-items-center" style={{ width: "18rem" }}>
-            {collaborators.map((collaborator) => {
-              if (collaborator.iduser === Number(id)) {
-                return (
-                  <>
-                    <img
-                      src={collaborator.picture.large}
-                      className="card-img-top w-75"
-                      alt="..."
-                    />
-                    <div key={collaborator.iduser} className="card-body">
-                      <p className="card-text">
-                        {`Name: ${collaborator.name.first} ${collaborator.name.last}\n
-                       Email: ${collaborator.email}\n
-                       Phone: ${collaborator.cell}`}
-                      </p>
-
-                      <p>
-                        {`Address: ${collaborator.location.city} ${collaborator.location.street.number} ${collaborator.location.street.name}`}
-                      </p>
-                    </div>
-                  </>
-                );
-              }
-            })}
+            <img src="" className="card-img-top w-75" alt="..." />
+            <div className="card-body">
+              <p className="card-text"></p>
+              {collaborator.name}
+              <p></p>
+            </div>
           </div>
         </div>
         <div className="col-md-8 p-2">
