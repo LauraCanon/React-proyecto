@@ -34,9 +34,17 @@ export default function Navbar({ isAuth }) {
                       {`Hola ${user.name}`}
                     </Link>
                   </li>
-                  <li className="nav-item">
-                    <button onClick={logoutHandler}>Logout</button>
-                  </li>
+                  <Link to="/">
+                    <li className="nav-item">
+                      <a
+                        class="nav-link active"
+                        href="#"
+                        onClick={logoutHandler}
+                      >
+                        Salir
+                      </a>
+                    </li>
+                  </Link>
                 </ul>
               </div>
             </div>

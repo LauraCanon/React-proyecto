@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const SearchBar = () => {
   const [values, setValues] = useState({
-    service: 'none',
-    city: 'none',
-    price: '0',
+    service: "none",
+    city: "none",
+    price: "0",
   });
 
   const valueHandlerService = (event) => {
@@ -19,7 +19,7 @@ export const SearchBar = () => {
   };
 
   const alertButton = () => {
-    return alert('Seleccione todos los campos para realizar la busqueda');
+    return alert("Seleccione todos los campos para realizar la busqueda");
   };
   return (
     <div className="container-fluid p-2 border-2 bg-black bg-opacity-25 mt-2">
@@ -30,7 +30,7 @@ export const SearchBar = () => {
           value={values.service}
           onChange={valueHandlerService}
         >
-          <option selected defaultValue="none" value={'none'} disabled>
+          <option defaultValue="none" value={"none"} disabled>
             Selecciona un servicio:
           </option>
           <option value="installTV">Instalación TV</option>
@@ -48,7 +48,7 @@ export const SearchBar = () => {
           value={values.city}
           onChange={valueHandlerCity}
         >
-          <option selected defaultValue="none" value="none" disabled>
+          <option defaultValue="none" value="none" disabled>
             Selecciona tu ciudad
           </option>
         </select>
@@ -58,26 +58,26 @@ export const SearchBar = () => {
           value={values.price}
           onChange={valueHandlerPrice}
         >
-          <option selected defaultValue="0" value="0" disabled>
+          <option defaultValue="0" value="0" disabled>
             Rango de Precios:
           </option>
           <option value="1">$50.000 - $100.000</option>
           <option value="2">$100.001 - $200.000</option>
           <option value="3">$200.001 - $300.000</option>
         </select>
-        {values.service === 'none' ? (
+        {values.service === "none" ? (
           <>
             <button className="btn btn-dark m-1" onClick={alertButton}>
               Search
             </button>
           </>
-        ) : values.city === 'none' ? (
+        ) : values.city === "none" ? (
           <>
             <button className="btn btn-dark m-1" onClick={alertButton}>
               Search
             </button>
           </>
-        ) : values.price === '0' ? (
+        ) : values.price === "0" ? (
           <>
             <button className="btn btn-dark m-1" onClick={alertButton}>
               Search

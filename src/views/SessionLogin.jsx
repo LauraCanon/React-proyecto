@@ -1,11 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser, selectUser } from "../store/userSlicer/userSlice";
-import { Navigate, useNavigate } from "react-router";
+import { Navigate } from "react-router";
 import React, { useState, useEffect, Fragment } from "react";
 
 export default function SessionLogin() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const user = useSelector(selectUser);
   const initialValues = { email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
@@ -15,29 +14,17 @@ export default function SessionLogin() {
     setFormValues({ ...formValues, [name]: value });
   };
 
-  // const handleEmail = (e) => {
-  //   SetEmail(e.target.value);
-  // };
-
-  // const handlePassword = (e) => {
-  //   SetPassword(e.target.value);
-  // };
-
   const validationHandler = (e) => {
     e.preventDefault();
     const { email, password } = formValues;
     const user = { email, password };
     dispatch(loginUser(user));
-    navigate(`/`);
+    console.log(user);
   };
 
   return (
     <Fragment>
-      {user ? (
-        <>
-          <Navigate to={`/`} />
-        </>
-      ) : (
+      {user === null ? (
         <Fragment>
           <div className="container text-center py-5">
             <h1 className="display-6 pt-4 fw-bold">Inicia Sesión</h1>
@@ -144,6 +131,14 @@ export default function SessionLogin() {
             </div>
           </div>
         </Fragment>
+      ) : user.hasOwnProperty("collaborator") ? (
+        <>
+          <Navigate to={`/home/collaborator`} />
+        </>
+      ) : (
+        <>
+          <Navigate to={`/home/user`} />
+        </>
       )}
     </Fragment>
   );

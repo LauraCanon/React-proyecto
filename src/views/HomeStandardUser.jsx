@@ -2,6 +2,8 @@ import "./allViews.css";
 import React from "react";
 
 export default function HomeStandardUser() {
+  const user = JSON.parse(window.localStorage.getItem("user"));
+  console.log(user);
   return (
     <main className="container mt-5 py-5">
       <div className="row mt-5">
@@ -15,6 +17,8 @@ export default function HomeStandardUser() {
               className="card-img-top w-75"
               alt="..."
             />
+            <p className="pt-3 mb-1 fw-bold">{`${user.name} ${user.lastName}`}</p>
+            <p>{user.email}</p>
           </div>
         </div>
         <div className="col-md-8 col-lg-9 ">
