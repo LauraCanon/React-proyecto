@@ -16,8 +16,10 @@ const userSlicer = createSlice({
     builder
       .addCase(userRegister.pending, (state) => {})
       .addCase(userRegister.fulfilled, (state, action) => {
-        state.users = true;
+        state.users = action.payload;
       })
       .addCase(userRegister.rejected, (state) => {});
   },
 });
+
+export const selectUserRegis = (state) => state.users;

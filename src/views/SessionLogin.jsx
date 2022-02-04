@@ -7,6 +7,7 @@ export default function SessionLogin() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector(selectUser);
+  console.log(user)
   const initialValues = { email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
 

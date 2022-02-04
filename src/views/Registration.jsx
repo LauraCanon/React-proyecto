@@ -1,11 +1,12 @@
 import "./allViews.css";
 import { useState, useEffect } from "react";
 import React from "react";
-import { userRegister } from "../store/userSlicer/userRegisterSlicer";
-import { useDispatch } from "react-redux";
+import { selectUserRegis, userRegister } from "../store/userSlicer/userRegisterSlicer";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function RegistrationUser() {
   const dispatch = useDispatch();
+  const regis = useSelector(selectUserRegis)
   const initialValues = { name: "", lastName: "", email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
@@ -26,9 +27,9 @@ export default function RegistrationUser() {
     dispatch(userRegister(newUser));
   };
   useEffect(() => {
-    console.log(formErrors);
+    // console.log(formErrors);
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
+      // console.log(formValues);
     }
   }, [formErrors]);
   const validate = (values) => {
