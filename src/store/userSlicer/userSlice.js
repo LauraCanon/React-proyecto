@@ -24,28 +24,15 @@ const userSlicer = createSlice({
     builder
       .addCase(loginUser.pending, (state) => {})
       .addCase(loginUser.fulfilled, (state, action) => {
-        console.log(action.payload);
-        if (action.payload.hasOwnProperty("user")) {
-          window.localStorage.setItem(
-            "user",
-            JSON.stringify(action.payload.user)
-          );
-          window.localStorage.setItem(
-            "token",
-            JSON.stringify(action.payload.token)
-          );
-          state.user = action.payload.user;
-        } else {
-          window.localStorage.setItem(
-            "user",
-            JSON.stringify(action.payload.collaborator)
-          );
-          window.localStorage.setItem(
-            "token",
-            JSON.stringify(action.payload.token)
-          );
-          state.user = action.payload.collaborator;
-        }
+        window.localStorage.setItem(
+          "user",
+          JSON.stringify(action.payload.collaborator)
+        );
+        window.localStorage.setItem(
+          "token",
+          JSON.stringify(action.payload.token)
+        );
+        state.user = action.payload.collaborator;
       })
       .addCase(loginUser.rejected, (state) => {});
   },

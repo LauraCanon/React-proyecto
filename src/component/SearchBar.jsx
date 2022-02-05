@@ -1,23 +1,40 @@
-import React, { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { serviceListLoad } from './../store/userSlicer/serviceListSlicer';
+import { selectService } from '../store/userSlicer/serviceListSlicer.js';
+import { selectCity } from '../store/userSlicer/cityListSlicer.js';
+import { cityListLoad } from '../store/userSlicer/cityListSlicer';
+import { useLayoutEffect } from 'react';
 import { Link } from "react-router-dom";
 
 export const SearchBar = () => {
+  const optionService = useSelector(selectService);
+  const optionCity = useSelector(selectCity);
   const [values, setValues] = useState({
     service: "none",
     city: "none",
     price: "0",
   });
+  const dispatch = useDispatch();
+  useEffect(() => {}, []);
+
+  useLayoutEffect(() => {
+    dispatch(serviceListLoad());
+    dispatch(cityListLoad(values.service));
+  }, [values.service]);
 
   const valueHandlerService = (event) => {
     setValues((prevValues) => ({ ...prevValues, service: event.target.value }));
+    setValues((prevValues) => ({ ...prevValues, city: 'none' }));
   };
   const valueHandlerCity = (event) => {
     setValues((prevValues) => ({ ...prevValues, city: event.target.value }));
   };
-  const valueHandlerPrice = (event) => {
-    setValues((prevValues) => ({ ...prevValues, price: event.target.value }));
-  };
 
+  const handleSubmit = () => {
+    window.location.href = `/search?service=${values.service}&city=${values.city}`;
+  };
   const alertButton = () => {
     return alert("Seleccione todos los campos para realizar la busqueda");
   };
@@ -30,16 +47,14 @@ export const SearchBar = () => {
           value={values.service}
           onChange={valueHandlerService}
         >
-          <option defaultValue="none" value={"none"} disabled>
+          <option defaultValue="none" value={'none'} disabled>
             Selecciona un servicio:
           </option>
-          <option value="installTV">Instalación TV</option>
-          <option value="installFrezzer">Instalación Nevera</option>
-          <option value="carpenter">Carpintería</option>
-          <option value="plomery">Plomería</option>
-          <option value="interiorPaint">Pintura de Interiores</option>
-          <option value="washinMachineMaint">Mantenimiento Lavadora</option>
-          <option value="gardening">Jardinería</option>
+          {optionService.map((service, index) => (
+            <option key={index} value={service}>
+              {service}
+            </option>
+          ))}
         </select>
         <select
           name="ciudades"
@@ -51,6 +66,13 @@ export const SearchBar = () => {
           <option defaultValue="none" value="none" disabled>
             Selecciona tu ciudad
           </option>
+          {optionCity
+            ? optionCity.map((city, index) => (
+                <option key={index} value={city}>
+                  {city}
+                </option>
+              ))
+            : null}
         </select>
         <select
           className="form-select m-1"
@@ -84,14 +106,9 @@ export const SearchBar = () => {
             </button>
           </>
         ) : (
-          <>
-            <Link
-              className="btn btn-dark m-1"
-              to={`/search?service=${values.service}&?city=${values.city}&?price=${values.price}`}
-            >
-              Search
-            </Link>
-          </>
+          <button className="btn btn-dark m-1" onClick={handleSubmit}>
+            Search
+          </button>
         )}
       </form>
     </div>
