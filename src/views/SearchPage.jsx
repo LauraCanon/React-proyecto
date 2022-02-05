@@ -19,6 +19,7 @@ export default function SearchPage() {
   }, []);
   const serviceCollabs = useSelector(selectServiceCollab);
   console.log(serviceCollabs);
+
   return (
     <main className="flex-shrink-0 container mt-4 mb-4">
       <div className="row my-5">

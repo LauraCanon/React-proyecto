@@ -1,4 +1,7 @@
-import axios from 'axios';
+import axios from "axios";
+import { collabRegister } from "../../store/userSlicer/userSlice";
+import { verifiedEmail } from "../../store/userSlicer/verfyEmail";
+axios.defaults.baseURL = "http://localhost:3000";
 
 // const token = localStorage.getItem("token") || null;
 
@@ -24,6 +27,17 @@ export const fixHogarApi = {
       return response.data;
     } catch (error) {
       console.log(error.request);
+    }
+  },
+   async verifiedEmail(id, hash) {
+    console.log(hash);
+    try {
+      const config = { header: { "Content-type": "application/json" } };
+      const response = await axios.post(`/activate/${hash}/${id}`, config);
+      console.log(response);
+      // return response.data;
+    } catch (error) {
+      console.log(error.response);
     }
   },
   async servicesCollabs() {

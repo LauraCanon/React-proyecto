@@ -11,6 +11,7 @@ import RegistrationUser from "./views/Registration";
 import RegistrationCollab from "./views/RegisCollab";
 import RegistrationPerfil from "./views/RegistrationPerfil";
 import SessionLogin from "./views/SessionLogin";
+import VerifiedEmail from "./views/VerifiedEmail";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -38,6 +39,7 @@ function App() {
           path="/regperfil"
           element={<RegistrationPerfil isAuth={user} />}
         />
+        <Route path="/activate/:hash/:id" element={<VerifiedEmail />}></Route>
         <Route path="/payment" element={<Payment isAuth={user} />} />
         <Route path="/sessionlogin" element={<SessionLogin isAuth={user} />} />
         <Route path="/home">
