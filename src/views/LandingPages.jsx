@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { SearchBar } from '../component/SearchBar';
+import { CompLanding } from '../component/CompLanding';
 
 export default function LandingPages() {
   return (
@@ -56,6 +57,8 @@ export default function LandingPages() {
           </button>
         </div>
         <SearchBar />
+        <CompLanding/>
+        
       </main>
     </div>
   );

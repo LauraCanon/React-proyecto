@@ -1,3 +1,5 @@
+
+
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
@@ -42,5 +44,10 @@
 @media (max-width: 600px) {
   .carousel-item {
     height: 200px;
+  }
+}
+@media (min-width: 768px) {
+  .news-input {
+    width: 50%;
   }
 }
