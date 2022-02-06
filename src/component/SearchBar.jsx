@@ -6,7 +6,7 @@ import { selectService } from '../store/userSlicer/serviceListSlicer.js';
 import { selectCity } from '../store/userSlicer/cityListSlicer.js';
 import { cityListLoad } from '../store/userSlicer/cityListSlicer';
 import { useLayoutEffect } from 'react';
-import { Link } from "react-router-dom";
+
 
 export const SearchBar = () => {
   const optionService = useSelector(selectService);
@@ -78,7 +78,7 @@ export const SearchBar = () => {
           className="form-select m-1"
           aria-label="Default select example"
           value={values.price}
-          onChange={valueHandlerPrice}
+          //onChange={valueHandlerPrice}
         >
           <option defaultValue="0" value="0" disabled>
             Rango de Precios:
