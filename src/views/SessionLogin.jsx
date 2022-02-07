@@ -6,7 +6,7 @@ import React, { useState, useEffect, Fragment } from "react";
 export default function SessionLogin() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  console.log(user)
+  console.log(user);
   const initialValues = { email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
 
@@ -28,7 +28,7 @@ export default function SessionLogin() {
       {user === null ? (
         <Fragment>
           <div className="container text-center py-5">
-            <h1 className="display-6 pt-4 fw-bold">Inicia Sesión</h1>
+            <h1 className="display-6 pt-5 fw-bold">Inicia Sesión</h1>
           </div>
           <div className="container">
             <div className="row">
@@ -53,7 +53,10 @@ export default function SessionLogin() {
                         Contraseña
                       </label>
                       <span>
-                        <a href="#"> Olvidaste tu contraseña?</a>
+                        <a href="#" className="link-success">
+                          {" "}
+                          Olvidaste tu contraseña?
+                        </a>
                       </span>
                       <input
                         type="password"
@@ -64,25 +67,23 @@ export default function SessionLogin() {
                         value={formValues.password}
                       />
                     </div>
-                    <div className="mb-4 form-check col-8 mx-auto">
-                      <input
-                        type="checkbox"
-                        name="connected"
-                        className="form-check-input"
-                      />
-                      <label hrmlfor="connected" className="form-check-label">
-                        Mantener sesión iniciada
-                      </label>
-                    </div>
+
                     <div className="d-grid col-8 mx-auto">
-                      <button type="submit" className="btn btn-primary col-12">
+                      <button
+                        type="submit"
+                        className="btn btn-outline-success col-12"
+                      >
                         Iniciar Sesión
                       </button>
                     </div>
                   </form>
                   <div className="my-3 col-8 mx-auto">
                     <span>
-                      No tienes cuenta? <a href="/registration"> Regístrate</a>
+                      No tienes cuenta?{" "}
+                      <a href="/registration" className="link-success">
+                        {" "}
+                        Regístrate
+                      </a>
                     </span>
                   </div>
                 </div>
@@ -125,9 +126,14 @@ export default function SessionLogin() {
             <div className="my-3 col-10 mx-auto text-center">
               <span>
                 Al iniciar sesión estás aceptando los{" "}
-                <a href="#">términos y condiciones </a>y la{" "}
-                <a href="#">política de privacidad</a> de datos de{" "}
-                <span className="fw-bold">FIXHOGAR</span>
+                <a href="#" className="link-success">
+                  términos y condiciones{" "}
+                </a>
+                y la{" "}
+                <a href="#" className="link-success">
+                  política de privacidad
+                </a>{" "}
+                de datos de <span className="fw-bold">FIXHOGAR</span>
               </span>
             </div>
           </div>

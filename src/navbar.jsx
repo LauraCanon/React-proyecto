@@ -16,6 +16,16 @@ export default function Navbar({ isAuth }) {
         {isAuth ? (
           <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div className="container">
+              <a className="navbar-brand link-light" href="/">
+                <img
+                  src="https://image.flaticon.com/icons/png/512/1207/1207155.png"
+                  alt="fixhogar"
+                  width="40"
+                  height="40"
+                  style={{ marginRight: "8px" }}
+                ></img>
+                FixHogar
+              </a>
               <button
                 className="navbar-toggler"
                 type="button"
@@ -52,6 +62,16 @@ export default function Navbar({ isAuth }) {
         ) : (
           <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div className="container">
+              <a className="navbar-brand link-light" href="/">
+                <img
+                  src="https://image.flaticon.com/icons/png/512/1207/1207155.png"
+                  alt="fixhogar"
+                  width="40"
+                  height="40"
+                  style={{ marginRight: "8px" }}
+                ></img>
+                FixHogar
+              </a>
               <button
                 className="navbar-toggler"
                 type="button"

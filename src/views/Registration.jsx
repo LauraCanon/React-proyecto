@@ -1,12 +1,15 @@
 import "./allViews.css";
 import { useState, useEffect } from "react";
 import React from "react";
-import { selectUserRegis, userRegister } from "../store/userSlicer/userRegisterSlicer";
+import {
+  selectUserRegis,
+  userRegister,
+} from "../store/userSlicer/userRegisterSlicer";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function RegistrationUser() {
   const dispatch = useDispatch();
-  const regis = useSelector(selectUserRegis)
+  const regis = useSelector(selectUserRegis);
   const initialValues = { name: "", lastName: "", email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
@@ -54,20 +57,20 @@ export default function RegistrationUser() {
     return errors;
   };
   return (
-    <main className="mt-5 container py-5">
+    <main className="mt-5 container pt-5">
       <div className="row display-flex mt-3 justify-content-center">
         <div className="col-md-6 col-lg-7">
-          <h2 className="text-center mb-3">Unete a la comunidad FIXHOGAR!</h2>
+          <h2 className="text-center mb-3">Únete a la comunidad FIXHOGAR!</h2>
           <div className="text-center mb-3">
             <img
-              src="https://image.freepik.com/vector-gratis/herramientas-mejora-hogar_24640-74868.jpg"
+              src="../img/Usuario-register.jpeg"
               style={{ width: "80%" }}
               alt="home-work"
             />
           </div>
         </div>
         <div className="col-md-6 col-sm-11 col-lg-5">
-          <h2 className="mb-5 text-center">Regístrate como Usuario</h2>
+          <h2 className="mb-5 text-center">Solicitante</h2>
           <form onSubmit={handleSubmit}>
             <div className="input-group mb-3">
               <input
@@ -101,7 +104,7 @@ export default function RegistrationUser() {
                 className="form-control mb-2"
                 name="email"
                 id="InputCorreo"
-                placeholder="Correo electronico"
+                placeholder="Correo electrónico"
                 value={formValues.email}
                 onChange={handleChange}
               />
@@ -114,45 +117,25 @@ export default function RegistrationUser() {
                 className="form-control mb-2"
                 name="password"
                 id="InputContrasena"
-                placeholder="Contrasena"
+                placeholder="Contraseña"
                 value={formValues.password}
                 onChange={handleChange}
               />
             </div>
             <p className="mt-1 text-danger">{formErrors.password}</p>
 
-            <div className="form-check mt-3">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                value=""
-                id="CheckTerminos"
-              />
-              <label className="form-check-label" for="CheckTerminos">
-                He leído y acepto los términos y condiciones
-              </label>
-            </div>
-            <div className="form-check mt-2">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                value=""
-                id="CheckDatos"
-              />
-              <label className="form-check-label" for="CheckDatos">
-                He leído y acepto la política de privacidad de datos
-              </label>
-            </div>
             <div className="mt-3 text-center">
-              <button type="submit" className="btn btn-outline-primary">
+              <button type="submit" className="btn btn-outline-success">
                 Registrarse
               </button>
             </div>
           </form>
-          <div className="mt-4">
+          <div className="mt-3">
             <p className="text-center">Ya tienes una cuenta?</p>
-            <div className="text-center mb-3">
-              <a href="/sessionlogin">Inicia Sesión</a>
+            <div className="text-center mb-2">
+              <a href="/sessionlogin" className="link-success">
+                Inicia Sesión
+              </a>
             </div>
           </div>
         </div>
