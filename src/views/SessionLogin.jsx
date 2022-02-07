@@ -6,7 +6,7 @@ import React, { useState, useEffect, Fragment } from "react";
 export default function SessionLogin() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  console.log(user);
+
   const initialValues = { email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
 
@@ -19,8 +19,8 @@ export default function SessionLogin() {
     e.preventDefault();
     const { email, password } = formValues;
     const user = { email, password };
-    dispatch(loginUser(user));
     console.log(user);
+    dispatch(loginUser(user));
   };
 
   return (
@@ -138,7 +138,7 @@ export default function SessionLogin() {
             </div>
           </div>
         </Fragment>
-      ) : user.hasOwnProperty("collaborator") ? (
+      ) : user.hasOwnProperty("user") ? (
         <>
           <Navigate to={`/home/collaborator`} />
         </>
