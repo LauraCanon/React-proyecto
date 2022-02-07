@@ -3,8 +3,8 @@ import { useParams, Navigate } from "react-router";
 import React, { useState, useEffect } from "react";
 
 export default function HomeCollaborator() {
-  const collaborator = JSON.parse(window.localStorage.getItem("collaborator"));
-  console.log(collaborator);
+  // const collaborator = JSON.parse(window.localStorage.getItem("collaborator"));
+  // console.log(collaborator);
   return (
     <main className="container mt-5 py-5">
       <div className="row mt-5">
@@ -13,7 +13,7 @@ export default function HomeCollaborator() {
             <img src="" className="card-img-top w-75" alt="..." />
             <div className="card-body">
               <p className="card-text"></p>
-              {collaborator.name}
+              {/* {collaborator.name} */}
               <p></p>
             </div>
           </div>
@@ -686,6 +686,17 @@ export default function HomeCollaborator() {
           </div>
         </div>
       </div>
+      <svg
+        className="image"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1440 320"
+      >
+        <path
+          fill="#273036"
+          fill-opacity="1"
+          d="M0,160L48,181.3C96,203,192,245,288,245.3C384,245,480,203,576,208C672,213,768,267,864,282.7C960,299,1056,277,1152,229.3C1248,181,1344,107,1392,69.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+        ></path>
+      </svg>
     </main>
   );
 }
