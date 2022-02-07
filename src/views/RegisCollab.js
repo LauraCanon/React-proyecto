@@ -50,20 +50,20 @@ export default function RegistrationCollab() {
     return errors;
   };
   return (
-    <main className="mt-5 container py-5">
+    <main className="mt-5 container pt-5">
       <div className="row display-flex mt-3 justify-content-center">
         <div className="col-md-6 col-lg-7">
-          <h2 className="text-center mb-3">Unete a la comunidad FIXHOGAR!</h2>
-          <div className="text-center mb-3">
+          <h2 className="text-center mb-3">Únete a la comunidad FIXHOGAR!</h2>
+          <div className="text-center mb-2">
             <img
-              src="https://image.freepik.com/vector-gratis/herramientas-mejora-hogar_24640-74868.jpg"
+              src="../img/Collab-register.jpeg"
               style={{ width: "80%" }}
               alt="home-work"
             />
           </div>
         </div>
         <div className="col-md-6 col-sm-11 col-lg-5">
-          <h2 className="mb-5 text-center">Regístrate como Colaborador</h2>
+          <h2 className="mb-5 text-center">Colaborador</h2>
           <form onSubmit={handleSubmit}>
             <div className="input-group mb-3">
               <input
@@ -97,7 +97,7 @@ export default function RegistrationCollab() {
                 className="form-control mb-2"
                 name="email"
                 id="InputCorreo"
-                placeholder="Correo electronico"
+                placeholder="Correo electrónico"
                 value={formValues.email}
                 onChange={handleChange}
               />
@@ -110,23 +110,25 @@ export default function RegistrationCollab() {
                 className="form-control mb-2"
                 name="password"
                 id="InputContrasena"
-                placeholder="Contrasena"
+                placeholder="Contraseña"
                 value={formValues.password}
                 onChange={handleChange}
               />
             </div>
             <p className="mt-1 text-danger">{formErrors.password}</p>
 
-            <div className="mt-3 text-center">
-              <button type="submit" className="btn btn-outline-primary">
+            <div className="mt-2 text-center">
+              <button type="submit" className="btn btn-outline-success">
                 Continúa aquí
               </button>
             </div>
           </form>
-          <div className="mt-4">
+          <div className="mt-3">
             <p className="text-center">Ya tienes una cuenta?</p>
             <div className="text-center mb-3">
-              <a href="/sessionlogin">Inicia Sesión</a>
+              <a href="/sessionlogin" class="link-success">
+                Inicia Sesión
+              </a>
             </div>
           </div>
         </div>

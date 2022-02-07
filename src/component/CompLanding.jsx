@@ -1,14 +1,12 @@
-import React from 'react';
-
-
+import React from "react";
 
 export const CompLanding = () => {
   return (
     <>
-      <section class="bg-primary text-light p-5 mt-4">
+      <section class="bg-success text-light p-4 mt-4">
         <div class="container">
           <div class="d-md-flex justify-content-between align-items-center">
-            <h3 class="mb-3 mb-md-0">Recibir Noticias</h3>
+            <h3 class="mb-3 mb-md-0 text-center">Recibir noticias</h3>
 
             <div class="input-group news-input">
               <input
@@ -16,14 +14,14 @@ export const CompLanding = () => {
                 class="form-control"
                 placeholder="Enter Email"
               />
-              <button class="btn btn-dark btn-lg" type="button">
+              <button class="btn btn-dark" type="button">
                 Enviar
               </button>
             </div>
           </div>
         </div>
       </section>
-      <section class="p-5">
+      <section class="pt-5">
         <div class="container">
           <div class="row text-center g-4">
             <div class="col-md">
@@ -34,23 +32,23 @@ export const CompLanding = () => {
                   </div>
                   <h3 class="card-title mb-3">Hogar</h3>
                   <p class="card-text">
-                    Servicios de Instalacion y Mantenimineto en tu hogar a un
-                    solo click. Encuentra esa persona de confianza para que
-                    ayude.
+                    Servicios de instalacion y mantenimineto en tu hogar a un
+                    solo click. Encuentra esa persona de confianza que te
+                    colabore
                   </p>
                 </div>
               </div>
             </div>
             <div class="col-md">
-              <div class="card bg-secondary text-light">
+              <div class="card bg-black bg-opacity-25 text-light">
                 <div class="card-body text-center">
                   <div class="h1 mb-3">
                     <i class="bi bi-person-square"></i>
                   </div>
                   <h3 class="card-title mb-3">Oficina</h3>
                   <p class="card-text">
-                    Todo lo que necesitas para poder establecer una red y lograr
-                    ofrecer tus servicios desde tu nueva sede.
+                    Todo lo que necesitas para poder establecer una red de
+                    trabajo y lograr ofrecer tus servicios desde tu nueva sede
                   </p>
                 </div>
               </div>
@@ -63,8 +61,8 @@ export const CompLanding = () => {
                   </div>
                   <h3 class="card-title mb-3">Negocio</h3>
                   <p class="card-text">
-                    Ayudamos a crecer su negocio, ofrezca servicios
-                    profesionales como las grnades empresas
+                    Ayudamos a crecer tu negocio, para que puedas ofrecer
+                    servicios profesionales como las grandes empresas
                   </p>
                 </div>
               </div>
@@ -76,23 +74,23 @@ export const CompLanding = () => {
         <div class="container">
           <div class="row align-items-center justify-content-between">
             <div class="col-md">
-              <img src="../img/20943863.jpg" class="img-fluid" alt="" />
+              <img src="../img/worker.jpg" class="img-fluid" alt="" />
             </div>
             <div class="col-md p-5">
-              <h2>
-                TENEMOS LOS COLABORADORES PROFESIONALES EN SERVICIOS QUE
-                NECESITAS:
+              <h2 className="text-center">
+                TENEMOS COLABORADORES PROFESIONALES EN LOS SERVICIOS QUE
+                NECESITES:
               </h2>
-              <p class="lead">
-                Cotiza fácil con uno o varios aliados, elige tu experto y recibe
-                un servicio con el sello FIXHOGAR.
+              <p className="lead mt-4">
+                Cotiza fácil con uno o varios colaboradores, elige tu experto y
+                recibe un servicio con el sello FIXHOGAR.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="questions" class="p-2 mb-5">
+      <section id="questions" class="p-3 mb-5">
         <div class="container">
           <h2 class="text-center mb-4">Preguntas Frecuentes</h2>
           <div class="accordion accordion-flush" id="questions">
@@ -104,7 +102,7 @@ export const CompLanding = () => {
                   data-bs-toggle="collapse"
                   data-bs-target="#question-one"
                 >
-                  Que Es FixHogar?
+                  Que es FixHogar?
                 </button>
               </h2>
               <div
@@ -176,7 +174,7 @@ export const CompLanding = () => {
                   data-bs-toggle="collapse"
                   data-bs-target="#question-four"
                 >
-                  ¿Quién puede ser parte de Mis Aliados?
+                  ¿Quién puede ser parte de la comunidad Fix Hogar?
                 </button>
               </h2>
               <div
@@ -188,10 +186,7 @@ export const CompLanding = () => {
                   Al unirte a nuestra comunidad encontrarás una gran variedad de
                   alternativas para contratar el servicio que buscas con un
                   experto, que ha sido validado bajo altos criterios de calidad.
-                  Además podrás contar con la garantía de las pólizas
-                  respaldadas por SURA, que han sido creadas para proteger la
-                  realización del servicio, su cumplimiento, al trabajador y a
-                  terceros. ¡Tranquilidad para ti!
+                  ¡Tranquilidad para ti!
                 </div>
               </div>
             </div>
@@ -213,9 +208,9 @@ export const CompLanding = () => {
               >
                 <div class="accordion-body">
                   Para registrarte en la plataforma deberás ingresar a
-                  www.misaliados.com.co y dirigirte al menú superior en la
-                  sección: Ingresa. Allí podrás crear tu cuenta o ingresar a
-                  través de tu cuenta de Facebook o Gmail. ¡Es muy sencillo!
+                  www.fixhogar.com y dirigirte al menú superior en la sección:
+                  Acceder. Allí podrás crear tu cuenta o ingresar a través de tu
+                  cuenta de Facebook o Gmail. ¡Es muy sencillo!
                 </div>
               </div>
             </div>
