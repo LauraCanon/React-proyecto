@@ -44,17 +44,7 @@ function App() {
         <Route path="/sessionlogin" element={<SessionLogin isAuth={user} />} />
         <Route path="/home">
           <Route path="user" element={<HomeStandarUser isAuth={user} />} />
-          <Route path="collaborator">
-            <Route
-              path=":id"
-              isAuth={user}
-              element={
-                <RequireAuth>
-                  <HomeCollabolator isAuth={user} />
-                </RequireAuth>
-              }
-            />
-          </Route>
+          <Route path="collaborator" element={<HomeCollabolator />} />
         </Route>
         <Route path="/addinfo" element={<AdditionalInfo isAuth={user} />} />
       </Routes>

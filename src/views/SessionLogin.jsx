@@ -138,7 +138,7 @@ export default function SessionLogin() {
             </div>
           </div>
         </Fragment>
-      ) : user.hasOwnProperty("user") ? (
+      ) : window.localStorage.getItem("collaborator") ? (
         <>
           <Navigate to={`/home/collaborator`} />
         </>

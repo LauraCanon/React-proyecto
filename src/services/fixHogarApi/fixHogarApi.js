@@ -70,9 +70,10 @@ export const fixHogarApi = {
       console.log(error.response);
     }
   },
-  async fileUser() {
+  async fileUser(file) {
     try {
-      const response = await axios.get("/file/user");
+      const response = await axios.post("/file/user", file);
+      // const response = await axios.post("https://httpbin.org/anything", file);
       console.log(response);
       return response.data;
     } catch (error) {
