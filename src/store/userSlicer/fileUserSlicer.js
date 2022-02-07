@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fixHogarApi } from "../../services/fixHogarApi/fixHogarApi";
 
-i; //Thunk actions
+//Thunk actions
 export const fileUser = createAsyncThunk("user/fileUser", (user) =>
   fixHogarApi.fileUser(user)
 );

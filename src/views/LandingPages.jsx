@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { SearchBar } from '../component/SearchBar';
-import { CompLanding } from '../component/CompLanding';
+import React, { useState } from "react";
+import { SearchBar } from "../component/SearchBar";
+import { CompLanding } from "../component/CompLanding";
+import "../App.css";
 
 export default function LandingPages() {
   return (
@@ -14,20 +15,20 @@ export default function LandingPages() {
           <div className="carousel-inner">
             <div
               className="carousel-item image-cover active"
-              style={{ backgroundImage: 'url(../img/232641266.jpg)' }}
+              style={{ backgroundImage: "url(../img/232641266.jpg)" }}
             ></div>
             <div
               className="carousel-item image-cover"
               style={{
                 backgroundImage:
-                  'url(../img/funny-electrician-installing-plug-with-screwdriver-carrying-mouth.jpg)',
+                  "url(../img/funny-electrician-installing-plug-with-screwdriver-carrying-mouth.jpg)",
               }}
             ></div>
             <div
               className="carousel-item image-cover"
               style={{
                 backgroundImage:
-                  'url(../img/repairman-doing-air-conditioner-service.jpg)',
+                  "url(../img/repairman-doing-air-conditioner-service.jpg)",
               }}
             ></div>
           </div>
@@ -57,8 +58,7 @@ export default function LandingPages() {
           </button>
         </div>
         <SearchBar />
-        <CompLanding/>
-        
+        <CompLanding />
       </main>
     </div>
   );

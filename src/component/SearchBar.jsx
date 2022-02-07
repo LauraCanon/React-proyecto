@@ -1,12 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux';
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { serviceListLoad } from './../store/userSlicer/serviceListSlicer';
-import { selectService } from '../store/userSlicer/serviceListSlicer.js';
-import { selectCity } from '../store/userSlicer/cityListSlicer.js';
-import { cityListLoad } from '../store/userSlicer/cityListSlicer';
-import { useLayoutEffect } from 'react';
-
+import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { serviceListLoad } from "./../store/userSlicer/serviceListSlicer";
+import { selectService } from "../store/userSlicer/serviceListSlicer.js";
+import { selectCity } from "../store/userSlicer/cityListSlicer.js";
+import { cityListLoad } from "../store/userSlicer/cityListSlicer";
+import { useLayoutEffect } from "react";
 
 export const SearchBar = () => {
   const optionService = useSelector(selectService);
@@ -26,7 +25,7 @@ export const SearchBar = () => {
 
   const valueHandlerService = (event) => {
     setValues((prevValues) => ({ ...prevValues, service: event.target.value }));
-    setValues((prevValues) => ({ ...prevValues, city: 'none' }));
+    setValues((prevValues) => ({ ...prevValues, city: "none" }));
   };
   const valueHandlerCity = (event) => {
     setValues((prevValues) => ({ ...prevValues, city: event.target.value }));
@@ -47,7 +46,7 @@ export const SearchBar = () => {
           value={values.service}
           onChange={valueHandlerService}
         >
-          <option defaultValue="none" value={'none'} disabled>
+          <option defaultValue="none" value={"none"} disabled>
             Selecciona un servicio:
           </option>
           {optionService.map((service, index) => (
@@ -74,29 +73,16 @@ export const SearchBar = () => {
               ))
             : null}
         </select>
-        <select
-          className="form-select m-1"
-          aria-label="Default select example"
-          value={values.price}
-          //onChange={valueHandlerPrice}
-        >
-          <option defaultValue="0" value="0" disabled>
-            Rango de Precios:
-          </option>
-          <option value="1">$50.000 - $100.000</option>
-          <option value="2">$100.001 - $200.000</option>
-          <option value="3">$200.001 - $300.000</option>
-        </select>
         {values.service === "none" ? (
           <>
             <button className="btn btn-dark m-1" onClick={alertButton}>
-              Search
+              Buscar
             </button>
           </>
         ) : values.city === "none" ? (
           <>
             <button className="btn btn-dark m-1" onClick={alertButton}>
-              Search
+              Buscar
             </button>
           </>
         ) : values.price === "0" ? (
