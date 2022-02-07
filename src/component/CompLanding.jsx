@@ -13,7 +13,7 @@ export const CompLanding = () => {
               <input
                 type="text"
                 className="col-form-label col-8 rounded border border-white"
-                placeholder="email"
+                placeholder=" Email"
               />
               <button className="btn btn-dark ms-4 mb-2" type="button">
                 Enviar
@@ -31,11 +31,9 @@ export const CompLanding = () => {
                   <div className="h1 mb-3">
                     <i className="bi bi-laptop"></i>
                   </div>
-                  <h3 className="card-title mb-3">Hogar</h3>
+                  <h3 className="card-title mb-3">1. Busca</h3>
                   <p className="card-text">
-                    Servicios de instalacion y mantenimineto en tu hogar a un
-                    solo click. Encuentra esa persona de confianza que te
-                    colabore
+                    El servicio que requieras para tu hogar, a un solo click
                   </p>
                 </div>
               </div>
@@ -46,10 +44,9 @@ export const CompLanding = () => {
                   <div className="h1 mb-3">
                     <i className="bi bi-person-square"></i>
                   </div>
-                  <h3 className="card-title mb-3">Oficina</h3>
+                  <h3 className="card-title mb-3">2. Cotiza</h3>
                   <p className="card-text">
-                    Todo lo que necesitas para poder establecer una red de
-                    trabajo y lograr ofrecer tus servicios desde tu nueva sede
+                    Encuentra esa persona de confianza que preste el servicio
                   </p>
                 </div>
               </div>
@@ -60,10 +57,10 @@ export const CompLanding = () => {
                   <div className="h1 mb-3">
                     <i className="bi bi-people"></i>
                   </div>
-                  <h3 className="card-title mb-3">Negocio</h3>
+                  <h3 className="card-title mb-3">3. Agenda</h3>
                   <p className="card-text">
-                    Ayudamos a crecer tu negocio, para que puedas ofrecer
-                    servicios profesionales como las grandes empresas
+                    Disfruta de un servicio de calidad de la mano de uno de
+                    nuestros colaboradores
                   </p>
                 </div>
               </div>
@@ -78,11 +75,11 @@ export const CompLanding = () => {
               <img src="../img/worker.jpg" className="img-fluid" alt="" />
             </div>
             <div className="col-md p-5">
-              <h2 classNameName="text-center">
+              <h2 className="text-center">
                 TENEMOS COLABORADORES PROFESIONALES EN LOS SERVICIOS QUE
                 NECESITES:
               </h2>
-              <p classNameName="lead mt-4">
+              <p className="lead mt-4">
                 Cotiza fácil con uno o varios colaboradores, elige tu experto y
                 recibe un servicio con el sello FIXHOGAR.
               </p>
@@ -103,7 +100,7 @@ export const CompLanding = () => {
                   data-bs-toggle="collapse"
                   data-bs-target="#question-one"
                 >
-                  Que es FixHogar?
+                  ¿Qué es FixHogar?
                 </button>
               </h2>
               <div
@@ -135,10 +132,9 @@ export const CompLanding = () => {
                 data-bs-parent="#questions"
               >
                 <div className="accordion-body">
-                  Podrás encontrar independientes que prestan servicios en las
-                  categorías de hogar, personas, negocio y mascotas, contando
-                  con un sinnúmero de servicios especializados dentro de cada
-                  una de ellas.
+                  Podrás encontrar colaboradores que prestan excelentes
+                  servicios en la categoría hogar: 'Instalación, Reparación,
+                  Mantenimiento, entre otros'.
                 </div>
               </div>
             </div>
