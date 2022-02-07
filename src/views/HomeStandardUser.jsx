@@ -1,9 +1,29 @@
 import "../App.css";
-import React from "react";
+import React, { useState } from "react";
+import { Button, Form, Modal } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { fileUser } from "../store/userSlicer/fileUserSlicer";
 
 export default function HomeStandardUser() {
+  const dispatch = useDispatch();
   const user = JSON.parse(window.localStorage.getItem("user"));
-  console.log(user);
+  const initialValue = { img: [] };
+  const [show, setShow] = useState(false);
+  const [upload, setUpload] = useState(initialValue);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleUpload = (e) => {
+    const data = new FormData();
+    data.append("file", upload);
+    for (let value of data.values()) {
+      console.log(value);
+    }
+    dispatch(fileUser(data));
+    // const { name, value } = e.target;
+    // setUpload({ ...upload, [name]: value });
+  };
+
   return (
     <>
       <main className="container mt-5 pt-3">
@@ -14,10 +34,40 @@ export default function HomeStandardUser() {
               style={{ width: "15rem" }}
             >
               <img
-                src="/img/Insert-Photo-Here.png"
-                className="card-img-top w-75"
+                src={user.image}
+                className="card-img-top w-75 position-relative"
                 alt="..."
-              />
+              ></img>
+              <button
+                type="button"
+                className="btn btn-light"
+                onClick={handleShow}
+              >
+                Subir imágen
+              </button>
+              <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Sube tu imágen</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Form.Group controlId="formFileSm" className="mb-3">
+                    <input
+                      className="form-control form-control-sm"
+                      id="formFileSm"
+                      type="file"
+                      name="file"
+                      accept="image/*"
+                      onChange={(e) => setUpload(e.target.files[0])}
+                    />
+                  </Form.Group>
+                  {/* Logica fotossss */}
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="success" onClick={handleUpload}>
+                    Guardar
+                  </Button>
+                </Modal.Footer>
+              </Modal>
               <p className="pt-3 mb-1 fw-bold">{`${user.name} ${user.lastName}`}</p>
               <p>{user.email}</p>
             </div>
