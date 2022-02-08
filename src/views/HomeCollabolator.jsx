@@ -1,10 +1,32 @@
 import "../App.css";
 import { useParams, Navigate } from "react-router";
+import { Button, Form, Modal } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fileUser } from "../store/userSlicer/fileUserSlicer";
 
 export default function HomeCollaborator() {
   const collaborator = JSON.parse(window.localStorage.getItem("collaborator"));
-  console.log(collaborator);
+  const dispatch = useDispatch();
+  const initialValue = { img: [] };
+  const [show, setShow] = useState(false);
+  const [upload, setUpload] = useState(initialValue);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleUpload = (e) => {
+    const data = new FormData();
+    data.append("file", upload);
+    for (let value of data.values()) {
+      console.log(value);
+    }
+    dispatch(fileUser(data));
+    console.log(dispatch(fileUser(data)));
+    setShow(false);
+    // const { name, value } = e.target;
+    // setUpload({ ...upload, [name]: value });
+  };
+
   return (
     <>
       <main className="container mt-5 py-5">
@@ -12,17 +34,46 @@ export default function HomeCollaborator() {
           <div className="col-md-4 d-flex justify-content-center">
             <div
               className="card align-items-center border-0"
-              style={{ width: "15rem" }}
+              style={{ width: "18rem" }}
             >
               <img
                 src={collaborator.image}
                 className="card-img-top w-75"
                 alt="..."
               />
-              <div className="card-body">
-                <p className="card-text"></p>
-                {collaborator.name}
-                <p></p>
+              <button
+                type="button"
+                className="btn btn-light"
+                onClick={handleShow}
+              >
+                Subir imágen
+              </button>
+              <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Sube tu imágen</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Form.Group controlId="formFileSm" className="mb-3">
+                    <input
+                      className="form-control form-control-sm"
+                      id="formFileSm"
+                      type="file"
+                      name="file"
+                      accept="image/*"
+                      onChange={(e) => setUpload(e.target.files[0])}
+                    />
+                  </Form.Group>
+                  {/* Logica fotossss */}
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="success" onClick={handleUpload}>
+                    Guardar
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+              <div className="card-body text-center">
+                <p className="pt-3 mb-1 fw-bold">{`${collaborator.name} ${collaborator.lastName}`}</p>
+                <p>{collaborator.email}</p>
               </div>
             </div>
           </div>
@@ -31,7 +82,7 @@ export default function HomeCollaborator() {
               <ul className="nav nav-tabs" id="myTab" role="tablist">
                 <li className="nav-item" role="presentation">
                   <button
-                    className="nav-link active link-succcess"
+                    className="nav-link active link-success"
                     id="home-tab"
                     data-bs-toggle="tab"
                     data-bs-target="#home"
@@ -93,9 +144,9 @@ export default function HomeCollaborator() {
                   role="tabpanel"
                   aria-labelledby="home-tab"
                 >
-                  <div className="row">
+                  <div className="row g-2">
                     <div className="col-md-6 mt-1 mr-3 ml-2 p-3">
-                      <div className="mb-3">
+                      <div className="mb-3 text-center">
                         <input
                           type="text"
                           className="form-control"
@@ -111,7 +162,7 @@ export default function HomeCollaborator() {
                           rows="3"
                         ></textarea>
                       </div>
-                      <div className="mb-5 mt-3">
+                      <div className="mb-3 mt-3">
                         <label for="formFile" className="form-label">
                           Adjunta certificados de experiencia
                         </label>
@@ -127,37 +178,12 @@ export default function HomeCollaborator() {
                         </button>
                       </div>
                     </div>
-                    <div className="col-md-3 mt-1 ">
-                      <h3>Mi Galeria</h3>
-                      <div className="row">
-                        <div className="col-md-6">
-                          <div className="card">
-                            <img
-                              src="https://randomuser.me/api/portraits/lego/7.jpg"
-                              className="card-img-top"
-                              alt="..."
-                            />
-                          </div>
-                        </div>
-                        <div className="col-md-6">
-                          <div className="card">
-                            <img
-                              src="https://randomuser.me/api/portraits/lego/7.jpg"
-                              className="card-img-top"
-                              alt="..."
-                            />
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="mt-3 offset-4">
-                        <button
-                          type="submit"
-                          className="btn btn-outline-primary"
-                        >
-                          Agegar fotos
-                        </button>
-                      </div>
+                    <div className="col-6">
+                      <img
+                        src="https://image.freepik.com/vector-gratis/ilustracion-solicitantes-empleo_335657-4659.jpg?w=740"
+                        className="img-fluid"
+                        alt="..."
+                      />
                     </div>
                   </div>
                 </div>
@@ -615,9 +641,10 @@ export default function HomeCollaborator() {
                 >
                   <div className="row">
                     <div className="col-md-6 col-lg-4 mt-3">
-                      <div className="card">
+                      <div className="card border-light shadow text-dark bg-light">
                         <div className="card-body">
                           <small className="fs-6">Ubicacion:</small>
+                          <br></br>
                           <small className="fs-6">Telefono:</small>
                           <p className="fs-6">Servicio:</p>
                           <p className="fs-6">$:</p>
@@ -626,7 +653,32 @@ export default function HomeCollaborator() {
                               Cancelar
                             </button>
                             <button
-                              className="btn-sm btn-primary"
+                              className="btn-sm btn-success"
+                              data-bs-toggle="modal"
+                              data-bs-target="#staticBackdrop"
+                              type="button"
+                            >
+                              Aceptar
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="col-md-6 col-lg-4 mt-3">
+                      <div className="card border-light shadow text-dark bg-light">
+                        <div className="card-body">
+                          <small className="fs-6">Ubicacion:</small>
+                          <br></br>
+                          <small className="fs-6">Telefono:</small>
+                          <p className="fs-6">Servicio:</p>
+                          <p className="fs-6">$:</p>
+                          <div className="d-flex justify-content-around">
+                            <button className="btn-sm btn-danger" type="submit">
+                              Cancelar
+                            </button>
+                            <button
+                              className="btn-sm btn-success"
                               data-bs-toggle="modal"
                               data-bs-target="#staticBackdrop"
                               type="button"
@@ -638,9 +690,10 @@ export default function HomeCollaborator() {
                       </div>
                     </div>
                     <div className="col-md-6 col-lg-4 mt-3">
-                      <div className="card">
+                      <div className="card border-light shadow text-dark bg-light">
                         <div className="card-body">
                           <small className="fs-6">Ubicacion:</small>
+                          <br></br>
                           <small className="fs-6">Telefono:</small>
                           <p className="fs-6">Servicio:</p>
                           <p className="fs-6">$:</p>
@@ -649,30 +702,7 @@ export default function HomeCollaborator() {
                               Cancelar
                             </button>
                             <button
-                              className="btn-sm btn-primary"
-                              data-bs-toggle="modal"
-                              data-bs-target="#staticBackdrop"
-                              type="button"
-                            >
-                              Aceptar
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-md-6 col-lg-4 mt-3">
-                      <div className="card">
-                        <div className="card-body">
-                          <small className="fs-6">Ubicacion:</small>
-                          <small className="fs-6">Telefono:</small>
-                          <p className="fs-6">Servicio:</p>
-                          <p className="fs-6">$:</p>
-                          <div className="d-flex justify-content-around">
-                            <button className="btn-sm btn-danger" type="submit">
-                              Cancelar
-                            </button>
-                            <button
-                              className="btn-sm btn-primary"
+                              className="btn-sm btn-success"
                               data-bs-toggle="modal"
                               data-bs-target="#staticBackdrop"
                               type="button"
