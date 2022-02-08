@@ -133,12 +133,13 @@ export default function RegistrationUser() {
             </div>
           </form>
           <div className="mt-3">
-            <p className="text-center">Ya tienes una cuenta?</p>
-            <div className="text-center mb-2">
-              <a href="/sessionlogin" className="link-success">
+            <p className="text-center">
+              Ya tienes una cuenta?{" "}
+              <a href="/sessionlogin" class="link-success">
+                {" "}
                 Inicia Sesión
               </a>
-            </div>
+            </p>
           </div>
         </div>
       </div>
