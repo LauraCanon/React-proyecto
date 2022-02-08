@@ -71,8 +71,15 @@ export const fixHogarApi = {
     }
   },
   async fileUser(file) {
+    const token = JSON.parse(window.localStorage.getItem("token"));
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        authorization: `Bearer ${token}`,
+      },
+    };
     try {
-      const response = await axios.post("/file/user", file);
+      const response = await axios.post("/file/user", file, config);
       // const response = await axios.post("https://httpbin.org/anything", file);
       console.log(response);
       return response.data;

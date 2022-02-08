@@ -1,14 +1,15 @@
 import "./allViews.css";
-import { useState, useEffect } from "react";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   selectUserRegis,
   userRegister,
 } from "../store/userSlicer/userRegisterSlicer";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
 export default function RegistrationUser() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const regis = useSelector(selectUserRegis);
   const initialValues = { name: "", lastName: "", email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
@@ -28,6 +29,7 @@ export default function RegistrationUser() {
     const { name, lastName, email, password } = formValues;
     const newUser = { name, lastName, email, password };
     dispatch(userRegister(newUser));
+    navigate("/sessionlogin");
   };
   useEffect(() => {
     // console.log(formErrors);
