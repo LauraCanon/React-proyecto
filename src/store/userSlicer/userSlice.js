@@ -1,8 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fixHogarApi } from "../../services/fixHogarApi/fixHogarApi";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { fixHogarApi } from '../../services/fixHogarApi/fixHogarApi';
 
 //Thunk actions
-export const loginUser = createAsyncThunk("user/loginUser", (user) =>
+export const loginUser = createAsyncThunk('user/loginUser', (user) =>
   fixHogarApi.loginUser(user)
 );
 
@@ -14,7 +14,7 @@ const initialState = {
     null,
 };
 const userSlicer = createSlice({
-  name: "user",
+  name: 'user',
   initialState: initialState,
   reducers: {
     logout(state) {

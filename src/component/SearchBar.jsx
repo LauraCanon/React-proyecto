@@ -8,6 +8,7 @@ import { cityListLoad } from "../store/userSlicer/cityListSlicer";
 import { useLayoutEffect } from "react";
 
 export const SearchBar = () => {
+  const navigate = useNavigate();
   const optionService = useSelector(selectService);
   const optionCity = useSelector(selectCity);
   const [values, setValues] = useState({
@@ -32,7 +33,7 @@ export const SearchBar = () => {
   };
 
   const handleSubmit = () => {
-    window.location.href = `/search?service=${values.service}&city=${values.city}`;
+    navigate(`/search?service=${values.service}&city=${values.city}`);
   };
   const alertButton = () => {
     return alert("Seleccione todos los campos para realizar la busqueda");
@@ -80,12 +81,6 @@ export const SearchBar = () => {
             </button>
           </>
         ) : values.city === "none" ? (
-          <>
-            <button className="btn btn-dark m-1" onClick={alertButton}>
-              Buscar
-            </button>
-          </>
-        ) : values.price === "0" ? (
           <>
             <button className="btn btn-dark m-1" onClick={alertButton}>
               Search
