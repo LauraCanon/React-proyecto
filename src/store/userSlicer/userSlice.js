@@ -9,8 +9,8 @@ export const loginUser = createAsyncThunk('user/loginUser', (user) =>
 //userSlice definition
 const initialState = {
   user:
-    JSON.parse(window.localStorage.getItem('user')) ||
-    JSON.parse(window.localStorage.getItem('collaborator')) ||
+    JSON.parse(window.localStorage.getItem("user")) ||
+    JSON.parse(window.localStorage.getItem("collaborator")) ||
     null,
 };
 const userSlicer = createSlice({
@@ -27,23 +27,23 @@ const userSlicer = createSlice({
       .addCase(loginUser.pending, (state) => {})
       .addCase(loginUser.fulfilled, (state, action) => {
         console.log(action.payload);
-        if (action.payload.hasOwnProperty('user')) {
+        if (action.payload.hasOwnProperty("user")) {
           window.localStorage.setItem(
-            'user',
+            "user",
             JSON.stringify(action.payload.user)
           );
           window.localStorage.setItem(
-            'token',
+            "token",
             JSON.stringify(action.payload.token)
           );
           state.user = action.payload.user;
         } else {
           window.localStorage.setItem(
-            'collaborator',
+            "collaborator",
             JSON.stringify(action.payload.collaborator)
           );
           window.localStorage.setItem(
-            'token',
+            "token",
             JSON.stringify(action.payload.token)
           );
           state.user = action.payload.collaborator;

@@ -1,5 +1,5 @@
-import React from 'react';
-import '../App.css';
+import React from "react";
+import "../App.css";
 
 export default function Payment() {
   return (
@@ -33,7 +33,7 @@ export default function Payment() {
 
                 <div
                   classNameName="card-body"
-                  style={{ height: 'auto', widht: 'auto' }}
+                  style={{ height: "auto", widht: "auto" }}
                 >
                   <div className="form-group m-3 mx-3">
                     <label for="numeric" className="control-label">
@@ -68,7 +68,7 @@ export default function Payment() {
                           id="cc-exp"
                           type="tel"
                           className="input form-control cc-exp mx-3"
-                          style={{ width: '92%' }}
+                          style={{ width: "92%" }}
                           autocomplete="cc-exp"
                           placeholder="MM"
                           required
@@ -84,7 +84,7 @@ export default function Payment() {
                           id="cc-cvc"
                           type="tel"
                           className="input-lg form-control cc-cvc mx-2"
-                          style={{ width: '92%' }}
+                          style={{ width: "92%" }}
                           autocomplete="off"
                           placeholder="YYYY"
                           required
@@ -102,7 +102,7 @@ export default function Payment() {
                           id="cc-exp"
                           type="tel"
                           className="input form-control cc-exp mx-3"
-                          style={{ width: '92%' }}
+                          style={{ width: "92%" }}
                           autocomplete="cc-exp"
                           placeholder="1234"
                           required
@@ -124,7 +124,7 @@ export default function Payment() {
           className="image-pay"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 320"
-          style={{ marginTop: '-240px' }}
+          style={{ marginTop: "-240px" }}
         >
           <path
             fill="#273036"

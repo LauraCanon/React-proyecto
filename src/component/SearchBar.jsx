@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux';
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { serviceListLoad } from './../store/userSlicer/serviceListSlicer';
-import { selectService } from '../store/userSlicer/serviceListSlicer.js';
-import { selectCity } from '../store/userSlicer/cityListSlicer.js';
-import { cityListLoad } from '../store/userSlicer/cityListSlicer';
-import { useLayoutEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { serviceListLoad } from "./../store/userSlicer/serviceListSlicer";
+import { selectService } from "../store/userSlicer/serviceListSlicer.js";
+import { selectCity } from "../store/userSlicer/cityListSlicer.js";
+import { cityListLoad } from "../store/userSlicer/cityListSlicer";
+import { useLayoutEffect } from "react";
 
 export const SearchBar = () => {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ export const SearchBar = () => {
 
   const valueHandlerService = (event) => {
     setValues((prevValues) => ({ ...prevValues, service: event.target.value }));
-    setValues((prevValues) => ({ ...prevValues, city: 'none' }));
+    setValues((prevValues) => ({ ...prevValues, city: "none" }));
   };
   const valueHandlerCity = (event) => {
     setValues((prevValues) => ({ ...prevValues, city: event.target.value }));
@@ -47,7 +47,7 @@ export const SearchBar = () => {
           value={values.service}
           onChange={valueHandlerService}
         >
-          <option defaultValue="none" value={'none'} disabled>
+          <option defaultValue="none" value={"none"} disabled>
             Selecciona un servicio:
           </option>
           {optionService.map((service, index) => (

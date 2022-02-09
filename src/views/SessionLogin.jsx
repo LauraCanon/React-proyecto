@@ -1,14 +1,14 @@
-import '../App.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginUser, selectUser } from '../store/userSlicer/userSlice';
-import { Navigate } from 'react-router';
-import React, { useState, useEffect, Fragment } from 'react';
+import "../App.css";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser, selectUser } from "../store/userSlicer/userSlice";
+import { Navigate } from "react-router";
+import React, { useState, useEffect, Fragment } from "react";
 
 export default function SessionLogin() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
-  const initialValues = { email: '', password: '' };
+  const initialValues = { email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
 
   const handleChange = (e) => {
@@ -52,10 +52,10 @@ export default function SessionLogin() {
                     <div className="mb-4 col-8 col-8 col-sm-10 col-lg-8 mx-auto">
                       <label hrmlfor="password" className="form-label">
                         Contraseña
-                      </label>{' '}
+                      </label>{" "}
                       <span>
                         <a href="#" className="link-success">
-                          {'  '}
+                          {"  "}
                           Olvidaste tu contraseña?
                         </a>
                       </span>
@@ -80,9 +80,9 @@ export default function SessionLogin() {
                   </form>
                   <div className="my-3 col-8 mx-auto">
                     <span>
-                      No tienes cuenta?{' '}
+                      No tienes cuenta?{" "}
                       <a href="/registration" className="link-success">
-                        {' '}
+                        {" "}
                         Regístrate
                       </a>
                     </span>
@@ -93,20 +93,20 @@ export default function SessionLogin() {
                 <img
                   src="../img/login.jpg"
                   className="img-fluid"
-                  style={{ width: '70%' }}
+                  style={{ width: "70%" }}
                 />
               </div>
             </div>
             <div className="my-2 col-10 mx-auto text-center">
               <span>
-                Al iniciar sesión estás aceptando los{' '}
+                Al iniciar sesión estás aceptando los{" "}
                 <a href="#" className="link-success">
-                  términos y condiciones{' '}
+                  términos y condiciones{" "}
                 </a>
-                y la{' '}
+                y la{" "}
                 <a href="#" className="link-success">
                   política de privacidad
-                </a>{' '}
+                </a>{" "}
                 de datos de <span className="fw-bold">FIXHOGAR</span>
               </span>
             </div>
@@ -123,7 +123,7 @@ export default function SessionLogin() {
             ></path>
           </svg>
         </Fragment>
-      ) : window.localStorage.getItem('collaborator') ? (
+      ) : window.localStorage.getItem("collaborator") ? (
         <>
           <Navigate to={`/home/collaborator`} />
         </>
