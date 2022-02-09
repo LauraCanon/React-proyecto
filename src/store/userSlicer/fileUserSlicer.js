@@ -38,4 +38,6 @@ const fileSlicer = createSlice({
 
 export const selectFile = (state) => state.file.file;
 export const selectLoading = (state) => state.file.loading;
+
 export default fileSlicer.reducer;
+

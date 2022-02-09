@@ -12,6 +12,7 @@ import { Loading } from "../component/Loading";
 export default function HomeStandardUser() {
   const dispatch = useDispatch();
   const user = JSON.parse(window.localStorage.getItem("user"));
+  const dispatch = useDispatch();
   const initialValue = { img: [] };
   const [show, setShow] = useState(false);
   const [upload, setUpload] = useState(initialValue);
