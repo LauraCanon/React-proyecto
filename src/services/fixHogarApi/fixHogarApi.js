@@ -82,7 +82,7 @@ export const fixHogarApi = {
       const response = await axios.post("/file/user", file, config);
       // const response = await axios.post("https://httpbin.org/anything", file);
       console.log(response);
-      return response.data;
+      return response.data.result;
     } catch (error) {
       console.log(error.response);
     }

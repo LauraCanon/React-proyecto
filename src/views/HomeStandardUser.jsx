@@ -1,17 +1,27 @@
 import "../App.css";
 import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { fileUser } from "../store/userSlicer/fileUserSlicer";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fileUser,
+  selectFile,
+  selectLoading,
+} from "../store/userSlicer/fileUserSlicer";
+import { Loading } from "../component/Loading";
 
 export default function HomeStandardUser() {
-  const dispatch = useDispatch();
   const user = JSON.parse(window.localStorage.getItem("user"));
+  const dispatch = useDispatch();
   const initialValue = { img: [] };
   const [show, setShow] = useState(false);
   const [upload, setUpload] = useState(initialValue);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const file = useSelector(selectFile);
+  console.log(file);
+
+  const loading = useSelector(selectLoading);
 
   const handleUpload = (e) => {
     const data = new FormData();
@@ -19,26 +29,30 @@ export default function HomeStandardUser() {
     for (let value of data.values()) {
       console.log(value);
     }
+
     dispatch(fileUser(data));
     setShow(false);
-    // const { name, value } = e.target;
-    // setUpload({ ...upload, [name]: value });
   };
 
   return (
     <>
       <main className="container mt-5 pt-3">
-        <div className="row mt-4">
+        <div className="row mt-5">
           <div className="col-md-4 col-lg-3 d-flex justify-content-center rounded">
             <div
               className="card align-items-center border-0 rounded"
               style={{ width: "15rem" }}
             >
-              <img
-                src={user.image}
-                className="card-img-top w-80 position-relative"
-                alt="..."
-              ></img>
+              {loading ? (
+                <Loading />
+              ) : (
+                <img
+                  src={user.image || file}
+                  className="card-img-top w-100"
+                  alt="..."
+                />
+              )}
+
               <button
                 type="button"
                 className="btn btn-light"
@@ -301,20 +315,6 @@ export default function HomeStandardUser() {
           </div>
         </div>
       </main>
-      {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 10 1440 320">
-        <path
-          fill="rgb(63, 106, 64)"
-          fill-opacity="0.7"
-          d="M0,160L48,176C96,192,192,224,288,245.3C384,267,480,277,576,288C672,299,768,309,864,309.3C960,309,1056,299,1152,256C1248,213,1344,139,1392,101.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-        ></path>
-      </svg> */}
-      {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path
-          fill="#273036"
-          fill-opacity="0.7"
-          d="M0,0L48,21.3C96,43,192,85,288,133.3C384,181,480,235,576,256C672,277,768,267,864,224C960,181,1056,107,1152,106.7C1248,107,1344,181,1392,218.7L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-        ></path>
-      </svg> */}
       <svg
         className="image"
         xmlns="http://www.w3.org/2000/svg"

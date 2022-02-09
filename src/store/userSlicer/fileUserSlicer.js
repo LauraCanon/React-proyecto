@@ -6,26 +6,36 @@ export const fileUser = createAsyncThunk("user/fileUser", (upload) =>
   fixHogarApi.fileUser(upload)
 );
 
+const collab = JSON.parse(window.localStorage.getItem("collaborator"));
+const user = JSON.parse(window.localStorage.getItem("user"));
+
 const initialState = {
-  file: [],
+  file: collab?.image || user?.image || null,
+  loading: false,
 };
 const fileSlicer = createSlice({
   name: "file",
   initialState: initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(fileUser.pending, (state) => {})
+      .addCase(fileUser.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(fileUser.fulfilled, (state, action) => {
-        let imageStorage = JSON.parse(
-          window.localStorage.getItem("collaborator")
-        );
-        imageStorage.image = action.payload.result.url;
-        window.localStorage.setItem(
-          "collaborator",
-          JSON.stringify(imageStorage)
-        );
-        state.file = true;
+        state.loading = false;
+        if (collab) {
+          collab.image = action.payload.secure_url;
+          window.localStorage.setItem("collaborator", JSON.stringify(collab));
+          state.file = action.payload.secure_url;
+        }
+        user.image = action.payload.secure_url;
+        window.localStorage.setItem("user", JSON.stringify(user));
+        state.file = action.payload.secure_url;
       })
       .addCase(fileUser.rejected, (state) => {});
   },
 });
+
+export const selectFile = (state) => state.file.file;
+export const selectLoading = (state) => state.file.loading;
+export default fileSlicer.reducer;
