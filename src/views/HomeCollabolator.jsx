@@ -1,11 +1,8 @@
 import "../App.css";
-import { useParams, Navigate } from "react-router";
 import { Button, Form, Modal } from "react-bootstrap";
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { fileUser } from "../store/userSlicer/fileUserSlicer";
-import axios from "axios";
-import { Image } from "cloudinary-react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fileUser, selectFile } from "../store/userSlicer/fileUserSlicer";
 
 export default function HomeCollaborator() {
   const collaborator = JSON.parse(window.localStorage.getItem("collaborator"));
@@ -16,43 +13,35 @@ export default function HomeCollaborator() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const file = useSelector(selectFile);
+  console.log(file);
+
   const handleUpload = (e) => {
     const data = new FormData();
     data.append("file", upload);
-    data.append("upload_preset", "fixhogar");
     for (let value of data.values()) {
       console.log(value);
     }
 
-    axios
-      .post("https://api.cloudinary.com/v1_1/lauracanon/image/upload", data)
-      .then((res) => console.log(res));
     dispatch(fileUser(data));
-    console.log(dispatch(fileUser(data)));
     setShow(false);
-    // const { name, value } = e.target;
-    // setUpload({ ...upload, [name]: value });
   };
 
   return (
     <>
-      <main className="container mt-5 py-5">
-        <div className="row mt-5">
+      <main className="container mt-5 pt-5">
+        <div className="row mt-4">
           <div className="col-md-4 d-flex justify-content-center">
             <div
               className="card align-items-center border-0"
               style={{ width: "18rem" }}
             >
-              {/* <img
-                src={collaborator.image}
+              <img
+                src={collaborator.image || file}
                 className="card-img-top w-80"
                 alt="..."
-              /> */}
-              <Image
-                style={{ width: "50%" }}
-                cloudName="lauracanon"
-                publicId="https://res.cloudinary.com/lauracanon/image/upload/v1644421425/kbefxlraypxioilg5zux.jpg"
               />
+
               <button
                 type="button"
                 className="btn btn-light"

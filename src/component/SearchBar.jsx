@@ -12,9 +12,9 @@ export const SearchBar = () => {
   const optionService = useSelector(selectService);
   const optionCity = useSelector(selectCity);
   const [values, setValues] = useState({
-    service: 'none',
-    city: 'none',
-    price: '0',
+    service: "none",
+    city: "none",
+    price: "0",
   });
   const dispatch = useDispatch();
   useEffect(() => {}, []);
@@ -36,7 +36,7 @@ export const SearchBar = () => {
     navigate(`/search?service=${values.service}&city=${values.city}`);
   };
   const alertButton = () => {
-    return alert('Seleccione todos los campos para realizar la busqueda');
+    return alert("Seleccione todos los campos para realizar la busqueda");
   };
   return (
     <div className="container-fluid p-2 border-2 bg-black bg-opacity-25 mt-2 rounded">
@@ -74,13 +74,13 @@ export const SearchBar = () => {
               ))
             : null}
         </select>
-        {values.service === 'none' ? (
+        {values.service === "none" ? (
           <>
             <button className="btn btn-dark m-1" onClick={alertButton}>
               Buscar
             </button>
           </>
-        ) : values.city === 'none' ? (
+        ) : values.city === "none" ? (
           <>
             <button className="btn btn-dark m-1" onClick={alertButton}>
               Search
