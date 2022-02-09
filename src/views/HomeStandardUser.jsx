@@ -20,6 +20,7 @@ export default function HomeStandardUser() {
       console.log(value);
     }
     dispatch(fileUser(data));
+    setShow(false);
     // const { name, value } = e.target;
     // setUpload({ ...upload, [name]: value });
   };
@@ -28,14 +29,14 @@ export default function HomeStandardUser() {
     <>
       <main className="container mt-5 pt-3">
         <div className="row mt-4">
-          <div className="col-md-4 col-lg-3 d-flex justify-content-center ">
+          <div className="col-md-4 col-lg-3 d-flex justify-content-center rounded">
             <div
-              className="card align-items-center border-0"
+              className="card align-items-center border-0 rounded"
               style={{ width: "15rem" }}
             >
               <img
                 src={user.image}
-                className="card-img-top w-75 position-relative"
+                className="card-img-top w-80 position-relative"
                 alt="..."
               ></img>
               <button
@@ -119,8 +120,8 @@ export default function HomeStandardUser() {
                   >
                     <div className="row">
                       <div className="col-md-6 col-lg-4 mt-3">
-                        <div className="card border-light shadow text-dark bg-light">
-                          <div className="card-body border-success">
+                        <div className="card border-light shadow text-dark bg-light rounded">
+                          <div className="card-body border-success rounded">
                             <small className="fs-6">Ubicacion:</small>
                             <br></br>
                             <small className="fs-6">Telefono:</small>
@@ -218,7 +219,7 @@ export default function HomeStandardUser() {
                   >
                     <div className="row">
                       <div className="col-md-6 col-lg-4 mt-3">
-                        <div className="card border-secondary shadow text-dark bg-light">
+                        <div className="card border-light shadow text-dark bg-light rounded">
                           <div className="card-body">
                             <small className="fs-6">Ubicacion:</small>
                             <br></br>
@@ -229,7 +230,7 @@ export default function HomeStandardUser() {
                         </div>
                       </div>
                       <div className="col-md-6 col-lg-4 mt-3">
-                        <div className="card border-secondary shadow text-dark bg-light">
+                        <div className="card border-light shadow text-dark bg-light rounded">
                           <div className="card-body">
                             <small className="fs-6">Ubicacion:</small>
                             <br></br>
@@ -240,7 +241,7 @@ export default function HomeStandardUser() {
                         </div>
                       </div>
                       <div className="col-md-6 col-lg-4 mt-3">
-                        <div className="card border-secondary shadow text-dark bg-light">
+                        <div className="card border-light shadow text-dark bg-light rounded">
                           <div className="card-body">
                             <small className="fs-6">Ubicacion:</small>
                             <br></br>

@@ -4,6 +4,8 @@ import { Button, Form, Modal } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fileUser } from "../store/userSlicer/fileUserSlicer";
+import axios from "axios";
+import { Image } from "cloudinary-react";
 
 export default function HomeCollaborator() {
   const collaborator = JSON.parse(window.localStorage.getItem("collaborator"));
@@ -17,9 +19,14 @@ export default function HomeCollaborator() {
   const handleUpload = (e) => {
     const data = new FormData();
     data.append("file", upload);
+    data.append("upload_preset", "fixhogar");
     for (let value of data.values()) {
       console.log(value);
     }
+
+    axios
+      .post("https://api.cloudinary.com/v1_1/lauracanon/image/upload", data)
+      .then((res) => console.log(res));
     dispatch(fileUser(data));
     console.log(dispatch(fileUser(data)));
     setShow(false);
@@ -36,10 +43,15 @@ export default function HomeCollaborator() {
               className="card align-items-center border-0"
               style={{ width: "18rem" }}
             >
-              <img
+              {/* <img
                 src={collaborator.image}
-                className="card-img-top w-75"
+                className="card-img-top w-80"
                 alt="..."
+              /> */}
+              <Image
+                style={{ width: "50%" }}
+                cloudName="lauracanon"
+                publicId="https://res.cloudinary.com/lauracanon/image/upload/v1644421425/kbefxlraypxioilg5zux.jpg"
               />
               <button
                 type="button"
@@ -48,29 +60,6 @@ export default function HomeCollaborator() {
               >
                 Subir imágen
               </button>
-              <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Sube tu imágen</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <Form.Group controlId="formFileSm" className="mb-3">
-                    <input
-                      className="form-control form-control-sm"
-                      id="formFileSm"
-                      type="file"
-                      name="file"
-                      accept="image/*"
-                      onChange={(e) => setUpload(e.target.files[0])}
-                    />
-                  </Form.Group>
-                  {/* Logica fotossss */}
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="success" onClick={handleUpload}>
-                    Guardar
-                  </Button>
-                </Modal.Footer>
-              </Modal>
               <div className="card-body text-center">
                 <p className="pt-3 mb-1 fw-bold">{`${collaborator.name} ${collaborator.lastName}`}</p>
                 <p>{collaborator.email}</p>
@@ -154,6 +143,7 @@ export default function HomeCollaborator() {
                           placeholder="Años de experiencia"
                         />
                       </div>
+
                       <div className="mb-3">
                         <textarea
                           className="form-control"
@@ -728,6 +718,29 @@ export default function HomeCollaborator() {
           </div>
         </div>
       </main>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Sube tu imágen</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Group controlId="formFileSm" className="mb-3">
+            <input
+              className="form-control form-control-sm"
+              id="formFileSm"
+              type="file"
+              name="file"
+              accept="image/*"
+              onChange={(e) => setUpload(e.target.files[0])}
+            />
+          </Form.Group>
+          {/* Logica fotossss */}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="success" onClick={handleUpload}>
+            Guardar
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <svg
         className="image-col"
         xmlns="http://www.w3.org/2000/svg"
