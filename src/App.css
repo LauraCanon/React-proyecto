@@ -1,3 +1,5 @@
+
+
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
@@ -30,7 +32,7 @@
 .table-wrapper-scroll-y {
   display: block;
 }
-.custome{
+.custome {
   margin: 80px 15px 0;
 }
 
@@ -42,5 +44,21 @@
 @media (max-width: 600px) {
   .carousel-item {
     height: 200px;
+  }
+}
+@media (min-width: 768px) {
+  .news-input {
+    width: 50%;
+    text-align: center;
+    padding-top: 5px;
+  }
+  .image {
+    margin-top: -40px;
+  }
+  .image-col {
+    margin-top: -140px;
+  }
+  .image-login {
+    margin-top: -150px;
   }
 }

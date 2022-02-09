@@ -12,26 +12,29 @@ export default function RegistrationPerfil() {
         min-vh-100
       "
     >
-      <section className="mt-5 text-light text-center">
+      <section className="mt-4 text-light text-center">
         <div className="container">
           <div className="row">
             <div className="col-md-6 col-lg-4 mx-auto">
-              <div className="card text-dark my-4 border-0">
+              <div className="card text-dark my-2 border-0">
                 <img
-                  className="img-fluid rounded-circle px-5 py-3 card-img-top"
-                  src="https://image.flaticon.com/icons/png/512/1226/1226084.png"
+                  className="img-fluid"
+                  src="https://image.freepik.com/vector-gratis/ilustracion-concepto-sistema-alcantarillado_335657-5412.jpg"
                   alt="..."
                 />
-                <div className="card-body">
+                <div className="card-body mb-4">
                   <h4 className="card-title">Colaborador</h4>
                   <p className="card-text">
                     Ofrece tus servicios. Hay gente que necesita de tu ayuda en
                     este momento!
                   </p>
-                  <Link to='/registration-collab'>
-                    <div className="d-grid gap-2">
-                      <button className="btn btn-success" type="button">
-                        Registrate aquí
+                  <Link
+                    to="/registration-collab"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <div className="d-grid gap-2 mb-2">
+                      <button className="btn btn-outline-success" type="submit">
+                        Regístrate aquí
                       </button>
                     </div>
                   </Link>
@@ -39,10 +42,10 @@ export default function RegistrationPerfil() {
               </div>
             </div>
             <div className="col-md-6 col-lg-4 mx-auto">
-              <div className="card text-dark my-4 border-0">
+              <div className="card text-dark my-2 border-0">
                 <img
-                  className="img-fluid rounded-circle px-5 py-3 card-img-top"
-                  src="https://image.flaticon.com/icons/png/512/1226/1226123.png"
+                  className="img-fluid"
+                  src="https://image.freepik.com/vector-gratis/ilustracion-concepto-aplicacion-mensajeria_335657-5543.jpg"
                   alt="..."
                 />
                 <div className="card-body">
@@ -51,10 +54,13 @@ export default function RegistrationPerfil() {
                     Cotiza, selecciona y agenda tu servicio. Miles de
                     Colaboradores a un solo click!
                   </p>
-                  <Link to='/registration-user'>
-                    <div className="d-grid gap-2">
-                      <button className="btn btn-success" type="button">
-                        Registrate aquí
+                  <Link
+                    to="/registration-user"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <div className="d-grid gap-2 mb-2">
+                      <button className="btn btn-outline-success" type="submit">
+                        Regístrate aquí
                       </button>
                     </div>
                   </Link>
