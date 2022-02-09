@@ -1,4 +1,4 @@
-// import "../App.css";
+import "../App.css";
 import React from "react";
 
 export const CompLanding = () => {
@@ -200,6 +200,13 @@ export const CompLanding = () => {
               </h2>
               <div
                 id="question-five"
+                className="accordion-collapse collapse"
+                data-bs-parent="#questions"
+              >
+                <div className="accordion-body">
+                  className="accordion-collapse collapse" Acceder. Allí podrás
+                  crear tu cuenta o ingresar a través de tu cuenta de Facebook o
+                  Gmail. ¡Es muy sencillo!
                 className="accordion-collapse collapse"
                 data-bs-parent="#questions"
               >

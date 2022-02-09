@@ -35,20 +35,20 @@ export default function RegistrationCollab() {
     const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     if (!values.name) {
-      errors.name = "El nombre es requerido!";
+      errors.name = 'El nombre es requerido!';
     }
     if (!values.lastName) {
-      errors.lastName = "El apellido es requerido!";
+      errors.lastName = 'El apellido es requerido!';
     }
     if (!values.email) {
-      errors.email = "El email es requerido!";
+      errors.email = 'El email es requerido!';
     } else if (!regex.test(values.email)) {
-      errors.email = "Introduce una dirección de correo electrónico válida";
+      errors.email = 'Introduce una dirección de correo electrónico válida';
     }
     if (!values.password) {
-      errors.password = "La contraseña es requerida!";
+      errors.password = 'La contraseña es requerida!';
     } else if (values.password.length < 4) {
-      errors.password = "La contrasena debe tener más de 4 caracteres";
+      errors.password = 'La contrasena debe tener más de 4 caracteres';
     }
     return errors;
   };

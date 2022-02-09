@@ -22,7 +22,6 @@ export default function HomeCollaborator() {
     for (let value of data.values()) {
       console.log(value);
     }
-
     dispatch(fileUser(data));
     setShow(false);
   };
@@ -41,7 +40,6 @@ export default function HomeCollaborator() {
                 className="card-img-top w-80"
                 alt="..."
               />
-
               <button
                 type="button"
                 className="btn btn-light"

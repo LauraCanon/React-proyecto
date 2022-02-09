@@ -10,6 +10,7 @@ import {
 import { Loading } from "../component/Loading";
 
 export default function HomeStandardUser() {
+  const dispatch = useDispatch();
   const user = JSON.parse(window.localStorage.getItem("user"));
   const dispatch = useDispatch();
   const initialValue = { img: [] };
@@ -22,14 +23,13 @@ export default function HomeStandardUser() {
   console.log(file);
 
   const loading = useSelector(selectLoading);
-
+  
   const handleUpload = (e) => {
     const data = new FormData();
     data.append("file", upload);
     for (let value of data.values()) {
       console.log(value);
     }
-
     dispatch(fileUser(data));
     setShow(false);
   };
@@ -52,7 +52,6 @@ export default function HomeStandardUser() {
                   alt="..."
                 />
               )}
-
               <button
                 type="button"
                 className="btn btn-light"
