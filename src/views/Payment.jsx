@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import '../App.css';
 
 export default function Payment() {
   return (
@@ -32,7 +33,7 @@ export default function Payment() {
 
                 <div
                   classNameName="card-body"
-                  style={{ height: "auto", widht: "auto" }}
+                  style={{ height: 'auto', widht: 'auto' }}
                 >
                   <div className="form-group m-3 mx-3">
                     <label for="numeric" className="control-label">
@@ -67,7 +68,7 @@ export default function Payment() {
                           id="cc-exp"
                           type="tel"
                           className="input form-control cc-exp mx-3"
-                          style={{ width: "92%" }}
+                          style={{ width: '92%' }}
                           autocomplete="cc-exp"
                           placeholder="MM"
                           required
@@ -83,7 +84,7 @@ export default function Payment() {
                           id="cc-cvc"
                           type="tel"
                           className="input-lg form-control cc-cvc mx-2"
-                          style={{ width: "92%" }}
+                          style={{ width: '92%' }}
                           autocomplete="off"
                           placeholder="YYYY"
                           required
@@ -101,7 +102,7 @@ export default function Payment() {
                           id="cc-exp"
                           type="tel"
                           className="input form-control cc-exp mx-3"
-                          style={{ width: "92%" }}
+                          style={{ width: '92%' }}
                           autocomplete="cc-exp"
                           placeholder="1234"
                           required
@@ -119,6 +120,18 @@ export default function Payment() {
             </div>
           </div>
         </div>
+        <svg
+          className="image-pay"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 320"
+          style={{ marginTop: '-240px' }}
+        >
+          <path
+            fill="#273036"
+            fill-opacity="1"
+            d="M0,32L48,64C96,96,192,160,288,208C384,256,480,288,576,298.7C672,309,768,299,864,293.3C960,288,1056,288,1152,293.3C1248,299,1344,309,1392,314.7L1440,320L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+          ></path>
+        </svg>
       </div>
     </>
   );

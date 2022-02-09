@@ -39,10 +39,10 @@ export const SearchBar = () => {
     return alert('Seleccione todos los campos para realizar la busqueda');
   };
   return (
-    <div className="container-fluid p-2 border-2 bg-black bg-opacity-25 mt-2">
+    <div className="container-fluid p-2 border-2 bg-black bg-opacity-25 mt-2 rounded">
       <form className="d-flex">
         <select
-          className="form-select m-1 shadow-sm"
+          className="form-select m-1 rounded shadow-sm"
           aria-label="Default select example"
           value={values.service}
           onChange={valueHandlerService}
@@ -77,7 +77,7 @@ export const SearchBar = () => {
         {values.service === 'none' ? (
           <>
             <button className="btn btn-dark m-1" onClick={alertButton}>
-              Search
+              Buscar
             </button>
           </>
         ) : values.city === 'none' ? (

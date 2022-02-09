@@ -1,12 +1,12 @@
-import "./allViews.css";
-import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import { collabRegister } from "../store/userSlicer/collabSlicer";
-import { useDispatch } from "react-redux";
+import './allViews.css';
+import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { collabRegister } from '../store/userSlicer/collabSlicer';
+import { useDispatch } from 'react-redux';
 
 export default function RegistrationCollab() {
   const dispatch = useDispatch();
-  const initialValues = { name: "", lastName: "", email: "", password: "" };
+  const initialValues = { name: '', lastName: '', email: '', password: '' };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
@@ -32,20 +32,20 @@ export default function RegistrationCollab() {
     const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     if (!values.name) {
-      errors.name = "El nombre es requerido!";
+      errors.name = 'El nombre es requerido!';
     }
     if (!values.lastName) {
-      errors.lastName = "El apellido es requerido!";
+      errors.lastName = 'El apellido es requerido!';
     }
     if (!values.email) {
-      errors.email = "El email es requerido!";
+      errors.email = 'El email es requerido!';
     } else if (!regex.test(values.email)) {
-      errors.email = "Introduce una dirección de correo electrónico válida";
+      errors.email = 'Introduce una dirección de correo electrónico válida';
     }
     if (!values.password) {
-      errors.password = "La contraseña es requerida!";
+      errors.password = 'La contraseña es requerida!';
     } else if (values.password.length < 4) {
-      errors.password = "La contrasena debe tener más de 4 caracteres";
+      errors.password = 'La contrasena debe tener más de 4 caracteres';
     }
     return errors;
   };
@@ -57,13 +57,13 @@ export default function RegistrationCollab() {
           <div className="text-center mb-2">
             <img
               src="../img/Collab-register.jpeg"
-              style={{ width: "80%" }}
+              style={{ width: '80%' }}
               alt="home-work"
             />
           </div>
         </div>
         <div className="col-md-6 col-sm-11 col-lg-5">
-          <h2 className="mb-5 text-center">Colaborador</h2>
+          <h2 className="mb-4 text-center">Colaborador</h2>
           <form onSubmit={handleSubmit}>
             <div className="input-group mb-3">
               <input
@@ -123,13 +123,14 @@ export default function RegistrationCollab() {
               </button>
             </div>
           </form>
-          <div className="mt-3">
-            <p className="text-center">Ya tienes una cuenta?</p>
-            <div className="text-center mb-3">
+          <div className="mt-2 text-center">
+            <p className="text-center">
+              Ya tienes una cuenta?{' '}
               <a href="/sessionlogin" class="link-success">
+                {' '}
                 Inicia Sesión
               </a>
-            </div>
+            </p>
           </div>
         </div>
       </div>

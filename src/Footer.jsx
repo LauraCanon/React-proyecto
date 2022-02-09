@@ -1,5 +1,5 @@
 import React from "react";
-import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa'
+import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -8,34 +8,34 @@ export default function Footer() {
         <div className="col-md-6 d-inline-flex">
           <span className="me-4">Siguenos</span>
           <div className="me-4">
-              <a
-                href="https://www.facebook.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaFacebookF size="1.4em" color="black" />
-              </a>
-            </div>
-            <div className="me-4">
-              <a
-                href="https://www.instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaInstagram size="1.4em" color="black" />
-              </a>
-            </div>
-            <div>
-              <a
-                href="https://www.twitter.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaTwitter size="1.4em" color="black" />
-              </a>
-            </div>
+            <a
+              href="https://www.facebook.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaFacebookF size="1.4em" color="black" />
+            </a>
+          </div>
+          <div className="me-4">
+            <a
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaInstagram size="1.4em" color="black" />
+            </a>
+          </div>
+          <div>
+            <a
+              href="https://www.twitter.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaTwitter size="1.4em" color="black" />
+            </a>
+          </div>
         </div>
-        <span className="text-muted">2022 &copy; </span>
+        <span className="text-muted">Fix Hogar - 2022 &copy; </span>
       </div>
     </footer>
   );

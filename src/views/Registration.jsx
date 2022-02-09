@@ -1,14 +1,15 @@
 import "./allViews.css";
-import { useState, useEffect } from "react";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   selectUserRegis,
   userRegister,
 } from "../store/userSlicer/userRegisterSlicer";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
 export default function RegistrationUser() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const regis = useSelector(selectUserRegis);
   const initialValues = { name: "", lastName: "", email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
@@ -28,6 +29,7 @@ export default function RegistrationUser() {
     const { name, lastName, email, password } = formValues;
     const newUser = { name, lastName, email, password };
     dispatch(userRegister(newUser));
+    navigate("/sessionlogin");
   };
   useEffect(() => {
     // console.log(formErrors);
@@ -70,7 +72,7 @@ export default function RegistrationUser() {
           </div>
         </div>
         <div className="col-md-6 col-sm-11 col-lg-5">
-          <h2 className="mb-5 text-center">Solicitante</h2>
+          <h2 className="mb-4 text-center">Solicitante</h2>
           <form onSubmit={handleSubmit}>
             <div className="input-group mb-3">
               <input
@@ -130,13 +132,14 @@ export default function RegistrationUser() {
               </button>
             </div>
           </form>
-          <div className="mt-3">
-            <p className="text-center">Ya tienes una cuenta?</p>
-            <div className="text-center mb-2">
-              <a href="/sessionlogin" className="link-success">
+          <div className="mt-3 text-center">
+            <p className="text-center">
+              Ya tienes una cuenta?{" "}
+              <a href="/sessionlogin" class="link-success">
+                {" "}
                 Inicia Sesión
               </a>
-            </div>
+            </p>
           </div>
         </div>
       </div>
