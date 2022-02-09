@@ -6,26 +6,26 @@ import "../App.css";
 export default function LandingPages() {
   return (
     <div>
-      <main className="flex-shrink-0 container">
+      <main className="flex-shrink-0 container rounded">
         <div
           id="carouselExampleControls"
-          className="carousel slide"
+          className="carousel slide rounded"
           data-bs-ride="carousel"
         >
-          <div className="carousel-inner">
+          <div className="carousel-inner rounded">
             <div
               className="carousel-item image-cover active"
               style={{ backgroundImage: "url(../img/232641266.jpg)" }}
             ></div>
             <div
-              className="carousel-item image-cover"
+              className="carousel-item image-cover rounded"
               style={{
                 backgroundImage:
                   "url(../img/funny-electrician-installing-plug-with-screwdriver-carrying-mouth.jpg)",
               }}
             ></div>
             <div
-              className="carousel-item image-cover"
+              className="carousel-item image-cover rounded"
               style={{
                 backgroundImage:
                   "url(../img/repairman-doing-air-conditioner-service.jpg)",

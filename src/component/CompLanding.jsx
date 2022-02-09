@@ -4,7 +4,7 @@ import React from "react";
 export const CompLanding = () => {
   return (
     <>
-      <section className="bg-success text-light p-3 mt-3">
+      <section className="bg-success text-light p-3 mt-3 rounded">
         <div classNameName="container">
           <div classNameName="d-md-flex justify-content-between">
             <h3 className="mb-3 text-center">Recibir noticias</h3>
@@ -22,7 +22,7 @@ export const CompLanding = () => {
           </div>
         </div>
       </section>
-      <section className="pt-5">
+      <section className="pt-4">
         <div className="container">
           <div className="row text-center g-4">
             <div className="col-md">
@@ -31,7 +31,7 @@ export const CompLanding = () => {
                   <div className="h1 mb-3">
                     <i className="bi bi-laptop"></i>
                   </div>
-                  <h3 className="card-title mb-3">1. Busca</h3>
+                  <h3 className="card-title mb-3 rounded">1. Busca</h3>
                   <p className="card-text">
                     El servicio que requieras para tu hogar, a un solo click
                   </p>
@@ -76,10 +76,10 @@ export const CompLanding = () => {
             </div>
             <div className="col-md p-5">
               <h2 className="text-center">
-                TENEMOS COLABORADORES PROFESIONALES EN LOS SERVICIOS QUE
-                NECESITES:
+                Tenemos colaboradores profesionales en los servicios que
+                necesites
               </h2>
-              <p className="lead mt-4">
+              <p className="lead mt-4 text-center">
                 Cotiza fácil con uno o varios colaboradores, elige tu experto y
                 recibe un servicio con el sello FIXHOGAR.
               </p>
