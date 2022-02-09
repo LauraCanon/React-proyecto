@@ -10,7 +10,7 @@ const collab = JSON.parse(window.localStorage.getItem("collaborator"));
 const user = JSON.parse(window.localStorage.getItem("user"));
 
 const initialState = {
-  file: collab?.image || user?.image || null,
+  file: collab.image || user.image || null,
   loading: false,
 };
 const fileSlicer = createSlice({
@@ -40,4 +40,3 @@ export const selectFile = (state) => state.file.file;
 export const selectLoading = (state) => state.file.loading;
 
 export default fileSlicer.reducer;
-

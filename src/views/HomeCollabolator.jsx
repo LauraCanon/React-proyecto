@@ -2,7 +2,12 @@ import "../App.css";
 import { Button, Form, Modal } from "react-bootstrap";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fileUser, selectFile } from "../store/userSlicer/fileUserSlicer";
+import {
+  fileUser,
+  selectFile,
+  selectLoading,
+} from "../store/userSlicer/fileUserSlicer";
+import { Loading } from "../component/Loading";
 
 export default function HomeCollaborator() {
   const collaborator = JSON.parse(window.localStorage.getItem("collaborator"));
@@ -15,6 +20,8 @@ export default function HomeCollaborator() {
 
   const file = useSelector(selectFile);
   console.log(file);
+
+  const loading = useSelector(selectLoading);
 
   const handleUpload = (e) => {
     const data = new FormData();
@@ -36,11 +43,15 @@ export default function HomeCollaborator() {
               className="card align-items-center border-0"
               style={{ width: "18rem" }}
             >
-              <img
-                src={collaborator.image || file}
-                className="card-img-top w-80"
-                alt="..."
-              />
+              {loading ? (
+                <Loading />
+              ) : (
+                <img
+                  src={collaborator.image || file}
+                  className="card-img-top w-100"
+                  alt="..."
+                />
+              )}
 
               <button
                 type="button"
