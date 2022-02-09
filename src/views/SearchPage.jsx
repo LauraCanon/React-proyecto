@@ -33,13 +33,9 @@ export default function SearchPage() {
             return (
               <div key={index} className="col-md-4 col-lg-4 col-xl-2 mb-5">
                 <div className="card shadow">
-                  <img
-                    src={collab.createdBy.image}
-                    className="card-img-top"
-                    alt={collab.price}
-                  />
+                  <img src={''} className="card-img-top" alt={collab.price} />
                   <div className="card-body d-flex justify-content-between">
-                    <span className="fs-6">{collab.createdBy.name}</span>
+                    <span className="fs-6">{collab.price}</span>
                     <div>
                       <span>
                         <FaStar />
