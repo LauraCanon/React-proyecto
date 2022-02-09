@@ -206,15 +206,14 @@ export const CompLanding = () => {
                 <div className="accordion-body">
                   className="accordion-collapse collapse" Acceder. Allí podrás
                   crear tu cuenta o ingresar a través de tu cuenta de Facebook o
-                  Gmail. ¡Es muy sencillo!
-                className="accordion-collapse collapse"
-                data-bs-parent="#questions"
-              >
-                <div className="accordion-body">
-                  Para registrarte en la plataforma deberás ingresar a
-                  www.fixhogar.com y dirigirte al menú superior en la sección:
-                  Acceder. Allí podrás crear tu cuenta o ingresar a través de tu
-                  cuenta de Facebook o Gmail. ¡Es muy sencillo!
+                  Gmail. ¡Es muy sencillo! className="accordion-collapse
+                  collapse" data-bs-parent="#questions"
+                  <div className="accordion-body">
+                    Para registrarte en la plataforma deberás ingresar a
+                    www.fixhogar.com y dirigirte al menú superior en la sección:
+                    Acceder. Allí podrás crear tu cuenta o ingresar a través de
+                    tu cuenta de Facebook o Gmail. ¡Es muy sencillo!
+                  </div>
                 </div>
               </div>
             </div>
