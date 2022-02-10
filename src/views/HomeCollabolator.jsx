@@ -168,11 +168,12 @@ export default function HomeCollaborator() {
                         </button>
                       </div>
                     </div>
-                    <div className="col-6">
+                    <div className="col-6 mx-auto">
                       <img
-                        src="https://image.freepik.com/vector-gratis/ilustracion-solicitantes-empleo_335657-4659.jpg?w=740"
+                        src="../img/job.jpg"
                         className="img-fluid"
                         alt="..."
+                        style={{ width: "90%" }}
                       />
                     </div>
                   </div>
