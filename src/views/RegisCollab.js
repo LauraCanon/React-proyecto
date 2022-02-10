@@ -105,7 +105,7 @@ export default function RegistrationCollab() {
         <div className="col-md-6 col-sm-11 col-lg-5">
           <h2 className="mb-4 text-center">Colaborador</h2>
           <form onSubmit={handleSubmit}>
-            <div className="input-group mb-3">
+            <div className="input-group mb-1">
               <input
                 type="text"
                 className="form-control mb-2"
@@ -118,7 +118,7 @@ export default function RegistrationCollab() {
             </div>
             <p className="text-danger">{formErrors.name}</p>
 
-            <div className="input-group mb-3">
+            <div className="input-group mb-1">
               <input
                 type="text"
                 className="form-control mb-2"
@@ -131,7 +131,7 @@ export default function RegistrationCollab() {
             </div>
             <p className="text-danger">{formErrors.lastName}</p>
 
-            <div className="input-group mb-3">
+            <div className="input-group mb-1">
               <input
                 type="email"
                 className="form-control mb-2"
@@ -144,7 +144,7 @@ export default function RegistrationCollab() {
             </div>
             <p className="mt-1 text-danger">{formErrors.email}</p>
 
-            <div className="input-group mb-3">
+            <div className="input-group mb-1">
               <input
                 type="password"
                 className="form-control mb-2"
