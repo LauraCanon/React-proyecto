@@ -1,20 +1,20 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fixHogarApi } from '../../services/fixHogarApi/fixHogarApi';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { fixHogarApi } from "../../services/fixHogarApi/fixHogarApi";
 
 //Thunk actions
-export const fileUser = createAsyncThunk('user/fileUser', (upload) =>
+export const fileUser = createAsyncThunk("user/fileUser", (upload) =>
   fixHogarApi.fileUser(upload)
 );
 
-const collab = JSON.parse(window.localStorage.getItem('collaborator'));
-const user = JSON.parse(window.localStorage.getItem('user'));
+const collab = JSON.parse(window.localStorage.getItem("collaborator"));
+const user = JSON.parse(window.localStorage.getItem("user"));
 
 const initialState = {
   file: collab?.image || user?.image || null,
   loading: false,
 };
 const fileSlicer = createSlice({
-  name: 'file',
+  name: "file",
   initialState: initialState,
   extraReducers: (builder) => {
     builder
@@ -23,17 +23,15 @@ const fileSlicer = createSlice({
       })
       .addCase(fileUser.fulfilled, (state, action) => {
         state.loading = false;
-        const collab = JSON.parse(window.localStorage.getItem('collaborator'));
-        const user = JSON.parse(window.localStorage.getItem('user'));
+        const collab = JSON.parse(window.localStorage.getItem("collaborator"));
+        const user = JSON.parse(window.localStorage.getItem("user"));
         if (collab) {
-          console.log('If Collab');
           collab.image = action.payload.secure_url;
-          window.localStorage.setItem('collaborator', JSON.stringify(collab));
+          window.localStorage.setItem("collaborator", JSON.stringify(collab));
           state.file = action.payload.secure_url;
-        } else {
-          console.log('Else User');
+        } else if (user) {
           user.image = action.payload.secure_url;
-          window.localStorage.setItem('user', JSON.stringify(user));
+          window.localStorage.setItem("user", JSON.stringify(user));
           state.file = action.payload.secure_url;
         }
       })
