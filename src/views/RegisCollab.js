@@ -1,10 +1,8 @@
 import './allViews.css';
-import { Link } from 'react-router-dom';
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { collabRegister } from '../store/userSlicer/collabSlicer';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { fixHogarApi } from '../services/fixHogarApi/fixHogarApi';
 import { listOfCity, selectCitys } from '../store/userSlicer/citysSlicer';
 import { useSelector } from 'react-redux';
 
@@ -27,6 +25,20 @@ export default function RegistrationCollab() {
   useLayoutEffect(() => {
     dispatch(listOfCity());
   }, []);
+  const [show, setShow] = useState(false);
+
+  const handleShow = () => {
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      setShow(false);
+    } else if (Object.keys(formErrors).length !== 0 && isSubmit) {
+      setShow(true);
+    }
+  };
+
+  const handleClose = () => {
+    setShow(false);
+    navigate('/sessionlogin');
+  };
 
   const handleChange = (e) => {
     let matches = [];
@@ -51,7 +63,6 @@ export default function RegistrationCollab() {
     const { name, lastName, email, password, city } = formValues;
     const newCollab = { name, lastName, email, password, city };
     dispatch(collabRegister(newCollab));
-    navigate('/sessionlogin');
   };
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
@@ -179,11 +190,31 @@ export default function RegistrationCollab() {
               <div></div>
             )}
 
-            <div className="topbot text-center">
-              <button type="submit" className="btn btn-outline-success">
+            <div className="mt-2 text-center">
+              <button
+                type="submit"
+                className="btn btn-outline-success"
+                onClick={handleShow}
+              >
                 Regístrate
               </button>
             </div>
+
+            <Modal show={show}>
+              <Modal.Header closeButton>
+                <Modal.Title>Tu registro fue exitoso</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Form.Group>
+                  Por favor verifica tu cuenta para poder continuar navegando
+                </Form.Group>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="success" onClick={handleClose}>
+                  Cerrar
+                </Button>
+              </Modal.Footer>
+            </Modal>
           </form>
           <div className="mt-2 text-center">
             <p className="text-center">

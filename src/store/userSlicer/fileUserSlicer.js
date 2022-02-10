@@ -30,10 +30,9 @@ const fileSlicer = createSlice({
           collab.image = action.payload.secure_url;
           window.localStorage.setItem('collaborator', JSON.stringify(collab));
           state.file = action.payload.secure_url;
-        } else {
-          console.log('Else User');
+        } else if (user) {
           user.image = action.payload.secure_url;
-          window.localStorage.setItem('user', JSON.stringify(user));
+          window.localStorage.setItem("user", JSON.stringify(user));
           state.file = action.payload.secure_url;
         }
       })

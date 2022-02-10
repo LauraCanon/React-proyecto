@@ -5,6 +5,7 @@ import {
   userRegister,
 } from "../store/userSlicer/userRegisterSlicer";
 import { useDispatch, useSelector } from "react-redux";
+import { Button, Form, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router";
 
 export default function RegistrationUser() {
@@ -15,6 +16,20 @@ export default function RegistrationUser() {
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const handleShow = () => {
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      setShow(false);
+    } else if (Object.keys(formErrors).length !== 0 && isSubmit) {
+      setShow(true);
+    }
+  };
+
+  const handleClose = () => {
+    setShow(false);
+    navigate("/sessionlogin");
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,7 +44,7 @@ export default function RegistrationUser() {
     const { name, lastName, email, password } = formValues;
     const newUser = { name, lastName, email, password };
     dispatch(userRegister(newUser));
-    navigate("/sessionlogin");
+    // navigate("/sessionlogin");
   };
   useEffect(() => {
     // console.log(formErrors);
@@ -126,11 +141,31 @@ export default function RegistrationUser() {
             </div>
             <p className="mt-1 text-danger">{formErrors.password}</p>
 
-            <div className="mt-3 text-center">
-              <button type="submit" className="btn btn-outline-success">
-                Registrarse
+            <div className="mt-2 text-center">
+              <button
+                type="submit"
+                className="btn btn-outline-success"
+                onClick={handleShow}
+              >
+                Regístrate
               </button>
             </div>
+
+            <Modal show={show}>
+              <Modal.Header closeButton>
+                <Modal.Title>Tu registro fue exitoso</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Form.Group>
+                  Por favor verifica tu cuenta para poder continuar navegando
+                </Form.Group>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="success" onClick={handleClose}>
+                  Cerrar
+                </Button>
+              </Modal.Footer>
+            </Modal>
           </form>
           <div className="mt-3 text-center">
             <p className="text-center">
