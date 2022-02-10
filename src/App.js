@@ -1,22 +1,22 @@
-import AdditionalInfo from "./views/AdditionalInfo";
-import Footer from "./Footer";
-import HomeCollabolator from "./views/HomeCollabolator";
-import HomeStandarUser from "./views/HomeStandardUser";
-import LandingPages from "./views/LandingPages";
-import Navbar from "./navbar";
-import Payment from "./views/Payment";
-import RequestService from "./views/RequestService";
-import SearchPage from "./views/SearchPage";
-import RegistrationUser from "./views/Registration";
-import RegistrationCollab from "./views/RegisCollab";
-import RegistrationPerfil from "./views/RegistrationPerfil";
-import SessionLogin from "./views/SessionLogin";
-import VerifiedEmail from "./views/VerifiedEmail";
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RequireAuth } from "./component/PrivateRoute";
-import { selectUser } from "./store/userSlicer/userSlice";
+import AdditionalInfo from './views/AdditionalInfo';
+import Footer from './Footer';
+import HomeCollaborator from './views/HomeCollaborator';
+import HomeStandarUser from './views/HomeStandardUser';
+import LandingPages from './views/LandingPages';
+import Navbar from './navbar';
+import Payment from './views/Payment';
+import RequestService from './views/RequestService';
+import SearchPage from './views/SearchPage';
+import RegistrationUser from './views/Registration';
+import RegistrationCollab from './views/RegisCollab';
+import RegistrationPerfil from './views/RegistrationPerfil';
+import SessionLogin from './views/SessionLogin';
+import VerifiedEmail from './views/VerifiedEmail';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RequireAuth } from './component/PrivateRoute';
+import { selectUser } from './store/userSlicer/userSlice';
 
 function App() {
   const user = useSelector(selectUser);
@@ -46,7 +46,7 @@ function App() {
           <Route path="user" element={<HomeStandarUser isAuth={user} />} />
           <Route
             path="collaborator"
-            element={<HomeCollabolator isAuth={user} />}
+            element={<HomeCollaborator isAuth={user} />}
           />
         </Route>
         <Route path="/addinfo" element={<AdditionalInfo isAuth={user} />} />

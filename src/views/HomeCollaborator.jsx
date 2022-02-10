@@ -1,17 +1,20 @@
-import "../App.css";
-import { Button, Form, Modal } from "react-bootstrap";
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import '../App.css';
+import { Button, Form, Modal } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   fileUser,
   selectFile,
   selectLoading,
-} from "../store/userSlicer/fileUserSlicer";
-import { Loading } from "../component/Loading";
+} from '../store/userSlicer/fileUserSlicer';
+import { Loading } from '../component/Loading';
+import { createService } from '../store/userSlicer/createServiceSlicer';
 
 export default function HomeCollaborator() {
-  const collaborator = JSON.parse(window.localStorage.getItem("collaborator"));
   const dispatch = useDispatch();
+  const initialValues = { description: '', price: '', services: '' };
+  const [formValues, setFormValues] = useState(initialValues);
+  const collaborator = JSON.parse(window.localStorage.getItem('collaborator'));
   const initialValue = { img: [] };
   const [show, setShow] = useState(false);
   const [upload, setUpload] = useState(initialValue);
@@ -22,10 +25,13 @@ export default function HomeCollaborator() {
   console.log(file);
 
   const loading = useSelector(selectLoading);
-
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
   const handleUpload = (e) => {
     const data = new FormData();
-    data.append("file", upload);
+    data.append('file', upload);
     for (let value of data.values()) {
       console.log(value);
     }
@@ -34,6 +40,10 @@ export default function HomeCollaborator() {
     setShow(false);
   };
 
+  const createServiceHandler = (e) => {
+    e.preventDefault();
+    dispatch(createService(formValues));
+  };
   return (
     <>
       <main className="container mt-5 pt-5">
@@ -41,7 +51,7 @@ export default function HomeCollaborator() {
           <div className="col-md-4 d-flex justify-content-center">
             <div
               className="card align-items-center border-0"
-              style={{ width: "18rem" }}
+              style={{ width: '18rem' }}
             >
               {loading ? (
                 <Loading />
@@ -94,7 +104,7 @@ export default function HomeCollaborator() {
                     aria-controls="profile"
                     aria-selected="false"
                   >
-                    Mis Tarifas
+                    Mis Servicios Ofrecidos
                   </button>
                 </li>
                 <li className="nav-item" role="presentation">
@@ -193,35 +203,50 @@ export default function HomeCollaborator() {
                    mb-3
                  "
                   >
-                    <form className="d-flex">
+                    <form className="d-flex" onSubmit={createServiceHandler}>
                       <select
                         className="form-select m-1"
                         id="floatingSelect"
+                        name="services"
                         aria-label="Floating label select example"
+                        onChange={handleChange}
                       >
                         <option selected disabled>
                           Categorias ...
                         </option>
-                        <option value="1">Instalar</option>
-                        <option value="2">Reparar</option>
-                        <option value="3">Mantenimiento</option>
-                        <option value="4">Pintar</option>
+                        <option value="Instalación TV">Instalación TV</option>
+                        <option value="Instalación Nevera">
+                          Instalación Nevera
+                        </option>
+                        <option value="Carpintería">Carpintería</option>
+                        <option value="Plomería">Plomería</option>
+                        <option value="Pintura de Interiores">
+                          Pintura de Interiores
+                        </option>
+                        <option value="Mantenimiento Lavadora">
+                          Mantenimiento Lavadora
+                        </option>
+                        <option value="Jardinería">Jardinería</option>
+                        <option value="Reparación de Tuberías">
+                          Reparación de Tuberías
+                        </option>
                       </select>
-                      <select
-                        className="form-select m-1"
-                        id="floatingSelect"
-                        aria-label="Floating label select example"
-                      >
-                        <option selected>Subcategorias ...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </select>
+                      <textarea
+                        className="form-control m-1"
+                        id="floatingInput"
+                        placeholder="Descripcion del servicio..."
+                        maxLength={255}
+                        name="description"
+                        minLength={25}
+                        onChange={handleChange}
+                      />
                       <input
                         type="number"
                         className="form-control m-1"
+                        name="price"
                         id="floatingInput"
                         placeholder="Tu tarifa $"
+                        onChange={handleChange}
                       />
                       <button
                         type="submit"
@@ -329,292 +354,6 @@ export default function HomeCollaborator() {
                                 type="checkbox"
                                 role="switch"
                                 id="flexSwitchCheckChecked"
-                              />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Instalar</td>
-                          <td>Base TV</td>
-                          <td>$ 45.000</td>
-                          <td>
-                            <div className="d-flex justify-content-center">
-                              <a className="link-dark" href="#">
-                                <i className="bi bi-pencil-fill"></i>
-                              </a>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="d-flex justify-content-center">
-                              <a
-                                className="link-danger"
-                                href="#"
-                                data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop"
-                              >
-                                <i className="bi bi-trash-fill"></i>
-                              </a>
-                            </div>
-                          </td>
-                          <td>
-                            <div
-                              className="
-                             d-flex
-                             form-check form-switch
-                             justify-content-center
-                           "
-                            >
-                              <input
-                                className="form-check-input"
-                                type="checkbox"
-                                role="switch"
-                                id="flexSwitchCheckChecked"
-                                checked
-                              />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Instalar</td>
-                          <td>Base TV</td>
-                          <td>$ 45.000</td>
-                          <td>
-                            <div className="d-flex justify-content-center">
-                              <a className="link-dark" href="#">
-                                <i className="bi bi-pencil-fill"></i>
-                              </a>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="d-flex justify-content-center">
-                              <a
-                                className="link-danger"
-                                href="#"
-                                data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop"
-                              >
-                                <i className="bi bi-trash-fill"></i>
-                              </a>
-                            </div>
-                          </td>
-                          <td>
-                            <div
-                              className="
-                             d-flex
-                             form-check form-switch
-                             justify-content-center
-                           "
-                            >
-                              <input
-                                className="form-check-input"
-                                type="checkbox"
-                                role="switch"
-                                id="flexSwitchCheckChecked"
-                                checked
-                              />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Instalar</td>
-                          <td>Base TV</td>
-                          <td>$ 45.000</td>
-                          <td>
-                            <div className="d-flex justify-content-center">
-                              <a className="link-dark" href="#">
-                                <i className="bi bi-pencil-fill"></i>
-                              </a>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="d-flex justify-content-center">
-                              <a
-                                className="link-danger"
-                                href="#"
-                                data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop"
-                              >
-                                <i className="bi bi-trash-fill"></i>
-                              </a>
-                            </div>
-                          </td>
-                          <td>
-                            <div
-                              className="
-                             d-flex
-                             form-check form-switch
-                             justify-content-center
-                           "
-                            >
-                              <input
-                                className="form-check-input"
-                                type="checkbox"
-                                role="switch"
-                                id="flexSwitchCheckChecked"
-                                checked
-                              />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Instalar</td>
-                          <td>Base TV</td>
-                          <td>$ 45.000</td>
-                          <td>
-                            <div className="d-flex justify-content-center">
-                              <a className="link-dark" href="#">
-                                <i className="bi bi-pencil-fill"></i>
-                              </a>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="d-flex justify-content-center">
-                              <a
-                                className="link-danger"
-                                href="#"
-                                data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop"
-                              >
-                                <i className="bi bi-trash-fill"></i>
-                              </a>
-                            </div>
-                          </td>
-                          <td>
-                            <div
-                              className="
-                             d-flex
-                             form-check form-switch
-                             justify-content-center
-                           "
-                            >
-                              <input
-                                className="form-check-input"
-                                type="checkbox"
-                                role="switch"
-                                id="flexSwitchCheckChecked"
-                                checked
-                              />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Instalar</td>
-                          <td>Base TV</td>
-                          <td>$ 45.000</td>
-                          <td>
-                            <div className="d-flex justify-content-center">
-                              <a className="link-dark" href="#">
-                                <i className="bi bi-pencil-fill"></i>
-                              </a>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="d-flex justify-content-center">
-                              <a
-                                className="link-danger"
-                                href="#"
-                                data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop"
-                              >
-                                <i className="bi bi-trash-fill"></i>
-                              </a>
-                            </div>
-                          </td>
-                          <td>
-                            <div
-                              className="
-                             d-flex
-                             form-check form-switch
-                             justify-content-center
-                           "
-                            >
-                              <input
-                                className="form-check-input"
-                                type="checkbox"
-                                role="switch"
-                                id="flexSwitchCheckChecked"
-                                checked
-                              />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Instalar</td>
-                          <td>Base TV</td>
-                          <td>$ 45.000</td>
-                          <td>
-                            <div className="d-flex justify-content-center">
-                              <a className="link-dark" href="#">
-                                <i className="bi bi-pencil-fill"></i>
-                              </a>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="d-flex justify-content-center">
-                              <a
-                                className="link-danger"
-                                href="#"
-                                data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop"
-                              >
-                                <i className="bi bi-trash-fill"></i>
-                              </a>
-                            </div>
-                          </td>
-                          <td>
-                            <div
-                              className="
-                             d-flex
-                             form-check form-switch
-                             justify-content-center
-                           "
-                            >
-                              <input
-                                className="form-check-input"
-                                type="checkbox"
-                                role="switch"
-                                id="flexSwitchCheckDefault"
-                              />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Instalar</td>
-                          <td>Base TV</td>
-                          <td>$ 45.000</td>
-                          <td>
-                            <div className="d-flex justify-content-center">
-                              <a className="link-dark" href="#">
-                                <i className="bi bi-pencil-fill"></i>
-                              </a>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="d-flex justify-content-center">
-                              <a
-                                className="link-danger"
-                                href="#"
-                                data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop"
-                              >
-                                <i className="bi bi-trash-fill"></i>
-                              </a>
-                            </div>
-                          </td>
-                          <td>
-                            <div
-                              className="
-                             d-flex
-                             form-check form-switch
-                             justify-content-center
-                           "
-                            >
-                              <input
-                                className="form-check-input"
-                                type="checkbox"
-                                role="switch"
-                                id="flexSwitchCheckChecked"
-                                checked
                               />
                             </div>
                           </td>
