@@ -48,7 +48,7 @@ export default function HomeCollaborator() {
               ) : (
                 <img
                   src={collaborator.image || file}
-                  className="card-img-top w-100"
+                  className="card-img-top w-100 rounded-circle"
                   alt="..."
                 />
               )}
