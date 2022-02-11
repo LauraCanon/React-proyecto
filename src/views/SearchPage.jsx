@@ -40,7 +40,7 @@ export default function SearchPage() {
     e.preventDefault();
     setShow(false);
     dispatch(requestService(schedule.collabId));
-    navigate("/payment");
+    navigate("/home/user");
   };
 
   return (
@@ -56,11 +56,11 @@ export default function SearchPage() {
             serviceCollabs.map((collab, index) => {
               return (
                 <div key={index} className="col-md-4 col-lg-4 col-xl-2 mb-5">
-                  <div className="card shadow">
+                  <div className="card shadow ">
                     <img
                       src={collab.createdBy.image}
-                      className="card-img-top"
-                      alt=""
+                      className="card-img-top img-fluid w-75 mx-auto"
+                      alt={collab.createdBy.name}
                     />
                     <div className="card-body d-flex justify-content-between">
                       <span className="fs-6">{collab.createdBy.name}</span>
@@ -83,13 +83,13 @@ export default function SearchPage() {
                         </span>
                       </div>
                     </div>
-                    <div className="col-6">
+                    <div className="col mx-auto">
                       <button
                         type="button"
-                        className="btn-sm btn-primary"
+                        className="btn-sm btn-success text-center"
                         onClick={() => handleShow(collab)}
                       >
-                        <small>Agendar</small>
+                        Seleccionar
                       </button>
                     </div>
                     <Modal show={show} onHide={handleClose}>
