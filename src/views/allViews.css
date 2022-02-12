@@ -22,13 +22,30 @@
   -o-background-size: cover;
   background-size: cover;
 }
+
 .my-custom-scrollbar {
+  position: relative;
+  height: 75px;
+  overflow: auto;
+  background-color: white;
+}
+.my-custom-scrollbar-service {
   position: relative;
   height: 200px;
   overflow: auto;
+  background-color: white;
 }
+
 .table-wrapper-scroll-y {
   display: block;
+}
+.suggestion {
+  border: black 1px;
+  box-shadow: black;
+  cursor: pointer;
+}
+.suggestion:hover {
+  background-color: rgb(130, 199, 147);
 }
 main > .container {
   padding: 60px 15px 0;

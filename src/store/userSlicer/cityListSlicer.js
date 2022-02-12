@@ -6,13 +6,9 @@ export const cityListLoad = createAsyncThunk('city/cityList', (service) =>
   fixHogarApi.citysCollabs(service)
 );
 
-const initialState = {
-  citys: [],
-};
-
 const cityList = createSlice({
   name: 'city',
-  initialState: initialState,
+  initialState: { citys: [] },
   extraReducers: (builder) => {
     builder
       .addCase(cityListLoad.pending, (state) => {})
