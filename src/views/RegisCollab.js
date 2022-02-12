@@ -1,5 +1,7 @@
 import './allViews.css';
 import React, { useState, useEffect, useLayoutEffect } from 'react';
+import { Button, Form, Modal } from 'react-bootstrap';
+
 import { collabRegister } from '../store/userSlicer/collabSlicer';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
@@ -7,6 +9,7 @@ import { listOfCity, selectCitys } from '../store/userSlicer/citysSlicer';
 import { useSelector } from 'react-redux';
 
 export default function RegistrationCollab() {
+  const ciudades = useSelector(selectCitys);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const initialValues = {
@@ -19,32 +22,24 @@ export default function RegistrationCollab() {
   const [formValues, setFormValues] = useState(initialValues);
   const [suggestions, setSuggestions] = useState(null);
   const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
-  const ciudades = Object.values(useSelector(selectCitys));
 
-  useLayoutEffect(() => {
-    dispatch(listOfCity());
-  }, []);
   const [show, setShow] = useState(false);
-
-  const handleShow = () => {
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      setShow(false);
-    } else if (Object.keys(formErrors).length !== 0 && isSubmit) {
-      setShow(true);
-    }
-  };
-
   const handleClose = () => {
     setShow(false);
     navigate('/sessionlogin');
   };
+  const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    dispatch(listOfCity());
+  }, []);
 
   const handleChange = (e) => {
+    setFormErrors([]);
     let matches = [];
     const { name, value } = e.target;
     if (name === 'city' && value.length > 0) {
-      matches = ciudades[0].filter((ciudad) => {
+      matches = ciudades.filter((ciudad) => {
         const regex = new RegExp(`${value}`, 'gi');
         return ciudad.match(regex);
       });
@@ -59,15 +54,12 @@ export default function RegistrationCollab() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormErrors(validate(formValues));
-    setIsSubmit(true);
     const { name, lastName, email, password, city } = formValues;
     const newCollab = { name, lastName, email, password, city };
     dispatch(collabRegister(newCollab));
+    handleShow();
   };
-  useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-    }
-  }, [formErrors]);
+
   const validate = (values) => {
     const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
@@ -76,6 +68,9 @@ export default function RegistrationCollab() {
     }
     if (!values.lastName) {
       errors.lastName = 'El apellido es requerido!';
+    }
+    if (!values.city) {
+      errors.city = 'La Ciudad es requerida';
     }
     if (!values.email) {
       errors.email = 'El email es requerido!';
@@ -91,6 +86,22 @@ export default function RegistrationCollab() {
   };
   return (
     <main className="mt-5 container pt-5">
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Registro Exitoso</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Group controlId="formFileSm" className="mb-3">
+            Fuiste registrado exitosamente, recuerda validar tu correo
+            electronico
+          </Form.Group>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="success" onClick={handleClose}>
+            Aceptar
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <div className="row display-flex mt-3 justify-content-center">
         <div className="col-md-6 col-lg-7">
           <h2 className="text-center mb-3">Únete a la comunidad FIXHOGAR!</h2>
@@ -171,7 +182,6 @@ export default function RegistrationCollab() {
                 placeholder="Selecciona tu ciudad"
                 onChange={handleChange}
               />
-              <p className="mt-1 text-danger">{formErrors.password}</p>
             </div>
             {suggestions ? (
               <div className={suggestions ? `my-custom-scrollbar` : ``}>
@@ -189,32 +199,13 @@ export default function RegistrationCollab() {
             ) : (
               <div></div>
             )}
+            <p className="mt-1 text-danger">{formErrors.city}</p>
 
             <div className="mt-2 text-center">
-              <button
-                type="submit"
-                className="btn btn-outline-success"
-                onClick={handleShow}
-              >
+              <button type="submit" className="btn btn-outline-success">
                 Regístrate
               </button>
             </div>
-
-            <Modal show={show}>
-              <Modal.Header closeButton>
-                <Modal.Title>Tu registro fue exitoso</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <Form.Group>
-                  Por favor verifica tu cuenta para poder continuar navegando
-                </Form.Group>
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="success" onClick={handleClose}>
-                  Cerrar
-                </Button>
-              </Modal.Footer>
-            </Modal>
           </form>
           <div className="mt-2 text-center">
             <p className="text-center">

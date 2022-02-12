@@ -1,6 +1,7 @@
 import '../App.css';
 import { Button, Form, Modal } from 'react-bootstrap';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   fileUser,
@@ -9,20 +10,35 @@ import {
 } from '../store/userSlicer/fileUserSlicer';
 import { Loading } from '../component/Loading';
 import { createService } from '../store/userSlicer/createServiceSlicer';
+import {
+  collabListService,
+  selectListService,
+} from '../store/userSlicer/listServiceCollab';
 
 export default function HomeCollaborator() {
   const dispatch = useDispatch();
-  const initialValues = { description: '', price: '', services: '' };
+  const myServices = useSelector(selectListService);
+  const initialValues = { description: '', price: '', services: 'none' };
   const [formValues, setFormValues] = useState(initialValues);
   const collaborator = JSON.parse(window.localStorage.getItem('collaborator'));
   const initialValue = { img: [] };
-  const [show, setShow] = useState(false);
   const [upload, setUpload] = useState(initialValue);
+  const file = useSelector(selectFile);
+  const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const file = useSelector(selectFile);
-  console.log(file);
+  const [show2, setShow2] = useState(false);
+  const handleClose2 = () => {
+    setShow2(false);
+    setFormValues(initialValues);
+  };
+  const handleShow2 = () => setShow2(true);
+
+  console.log(myServices);
+  useEffect(() => {
+    dispatch(collabListService());
+  }, []);
 
   const loading = useSelector(selectLoading);
   const handleChange = (e) => {
@@ -35,18 +51,33 @@ export default function HomeCollaborator() {
     for (let value of data.values()) {
       console.log(value);
     }
-
     dispatch(fileUser(data));
     setShow(false);
   };
 
   const createServiceHandler = (e) => {
     e.preventDefault();
+    handleShow2();
     dispatch(createService(formValues));
   };
   return (
     <>
       <main className="container mt-5 pt-5">
+        <Modal show={show2} onHide={handleClose2}>
+          <Modal.Header closeButton>
+            <Modal.Title>Servicio Registrado</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form.Group controlId="formFileSm" className="mb-3">
+              Tu servicio fue registrado con exito
+            </Form.Group>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="success" onClick={handleClose2}>
+              Aceptar
+            </Button>
+          </Modal.Footer>
+        </Modal>
         <div className="row mt-4">
           <div className="col-md-4 d-flex justify-content-center">
             <div
@@ -183,7 +214,7 @@ export default function HomeCollaborator() {
                         src="../img/job.jpg"
                         className="img-fluid"
                         alt="..."
-                        style={{ width: "90%" }}
+                        style={{ width: '90%' }}
                       />
                     </div>
                   </div>
@@ -211,8 +242,9 @@ export default function HomeCollaborator() {
                         name="services"
                         aria-label="Floating label select example"
                         onChange={handleChange}
+                        value={formValues.services}
                       >
-                        <option selected disabled>
+                        <option value={'none'} disabled selected>
                           Categorias ...
                         </option>
                         <option value="Instalación TV">Instalación TV</option>
@@ -236,6 +268,7 @@ export default function HomeCollaborator() {
                         className="form-control m-1"
                         id="floatingInput"
                         placeholder="Descripcion del servicio..."
+                        value={formValues.description}
                         maxLength={255}
                         name="description"
                         minLength={25}
@@ -246,6 +279,7 @@ export default function HomeCollaborator() {
                         className="form-control m-1"
                         name="price"
                         id="floatingInput"
+                        value={formValues.price}
                         placeholder="Tu tarifa $"
                         onChange={handleChange}
                       />
@@ -259,12 +293,11 @@ export default function HomeCollaborator() {
                     </form>
                   </div>
                   <h5>Mi Tarifario</h5>
-                  <div className="table-wrapper-scroll-y my-custom-scrollbar">
+                  <div className="my-custom-scrollbar-service">
                     <table className="table table-bordered table-sm table-striped mb-0">
                       <thead className="">
                         <tr>
                           <th scope="col">Categorias</th>
-                          <th scope="col">Subcategorias</th>
                           <th scope="col">Tarifa</th>
                           <th className="text-center" scope="col">
                             Editar
@@ -272,93 +305,35 @@ export default function HomeCollaborator() {
                           <th className="text-center" scope="col">
                             Eliminar
                           </th>
-                          <th className="text-center" scope="col">
-                            Activo
-                          </th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>Instalar</td>
-                          <td>Base TV</td>
-                          <td>$ 45.000</td>
-                          <td>
-                            <div className="d-flex justify-content-center">
-                              <a className="link-dark" href="#">
-                                <i className="bi bi-pencil-fill"></i>
-                              </a>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="d-flex justify-content-center">
-                              <a
-                                className="link-danger"
-                                href="#"
-                                data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop"
-                              >
-                                <i className="bi bi-trash-fill"></i>
-                              </a>
-                            </div>
-                          </td>
-                          <td>
-                            <div
-                              className="
-                             d-flex
-                             form-check form-switch
-                             justify-content-center
-                           "
-                            >
-                              <input
-                                className="form-check-input"
-                                type="checkbox"
-                                role="switch"
-                                id="flexSwitchCheckChecked"
-                                checked
-                              />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Instalar</td>
-                          <td>Base TV</td>
-                          <td>$ 45.000</td>
-                          <td>
-                            <div className="d-flex justify-content-center">
-                              <a className="link-dark" href="#">
-                                <i className="bi bi-pencil-fill"></i>
-                              </a>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="d-flex justify-content-center">
-                              <a
-                                className="link-danger"
-                                href="#"
-                                data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop"
-                              >
-                                <i className="bi bi-trash-fill"></i>
-                              </a>
-                            </div>
-                          </td>
-                          <td>
-                            <div
-                              className="
-                             d-flex
-                             form-check form-switch
-                             justify-content-center
-                           "
-                            >
-                              <input
-                                className="form-check-input"
-                                type="checkbox"
-                                role="switch"
-                                id="flexSwitchCheckChecked"
-                              />
-                            </div>
-                          </td>
-                        </tr>
+                        {myServices &&
+                          myServices.map((service) => (
+                            <tr>
+                              <td>{service.services}</td>
+                              <td>$ {service.price}</td>
+                              <td>
+                                <div className="d-flex justify-content-center">
+                                  <a className="link-dark" href="#">
+                                    <i className="bi bi-pencil-fill"></i>
+                                  </a>
+                                </div>
+                              </td>
+                              <td>
+                                <div className="d-flex justify-content-center">
+                                  <a
+                                    className="link-danger"
+                                    href="#"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop"
+                                  >
+                                    <i className="bi bi-trash-fill"></i>
+                                  </a>
+                                </div>
+                              </td>
+                            </tr>
+                          ))}
                       </tbody>
                     </table>
                   </div>

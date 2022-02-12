@@ -5,6 +5,8 @@ import cityList from './userSlicer/cityListSlicer';
 import serviceCollab from './userSlicer/searchServiceSlicer';
 import fileUserSlicer from './userSlicer/fileUserSlicer';
 import citys from './userSlicer/citysSlicer';
+import regisCollab from './userSlicer/collabSlicer';
+import listColServ from './userSlicer/listServiceCollab';
 
 const store = configureStore({
   reducer: {
@@ -13,7 +15,9 @@ const store = configureStore({
     city: cityList,
     collabService: serviceCollab,
     file: fileUserSlicer,
-    ciudades: citys,
+    ciudad: citys,
+    collab: regisCollab,
+    listCollabServ: listColServ,
   },
 });
 

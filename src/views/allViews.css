@@ -29,6 +29,12 @@
   overflow: auto;
   background-color: white;
 }
+.my-custom-scrollbar-service {
+  position: relative;
+  height: 200px;
+  overflow: auto;
+  background-color: white;
+}
 
 .table-wrapper-scroll-y {
   display: block;

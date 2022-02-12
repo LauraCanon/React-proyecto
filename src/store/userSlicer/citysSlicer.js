@@ -6,13 +6,9 @@ export const listOfCity = createAsyncThunk('citys/listOfCity', () =>
   fixHogarApi.listOfCity()
 );
 
-const initialState = {
-  ciudades: [],
-};
-
 const citys = createSlice({
   name: 'ciudad',
-  initialState: initialState,
+  initialState: { ciudades: [] },
   extraReducers: (builder) => {
     builder
       .addCase(listOfCity.pending, (state) => {})
@@ -23,6 +19,6 @@ const citys = createSlice({
   },
 });
 
-export const selectCitys = (state) => state.ciudades;
+export const selectCitys = (state) => state.ciudad.ciudades;
 
 export default citys.reducer;

@@ -5,7 +5,6 @@ import { serviceListLoad } from './../store/userSlicer/serviceListSlicer';
 import { selectService } from '../store/userSlicer/serviceListSlicer.js';
 import { selectCity } from '../store/userSlicer/cityListSlicer.js';
 import { cityListLoad } from '../store/userSlicer/cityListSlicer';
-import { useLayoutEffect } from 'react';
 
 export const SearchBar = () => {
   const navigate = useNavigate();
@@ -16,10 +15,9 @@ export const SearchBar = () => {
     city: 'none',
     price: '0',
   });
-  console.log(selectService);
   const dispatch = useDispatch();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     dispatch(serviceListLoad());
     dispatch(cityListLoad(values.service));
   }, [values.service]);

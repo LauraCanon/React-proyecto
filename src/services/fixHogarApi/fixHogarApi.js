@@ -127,4 +127,20 @@ export const fixHogarApi = {
       console.log(error);
     }
   },
+  async listServiceCollab() {
+    const token = JSON.parse(window.localStorage.getItem('token'));
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      const response = await axios.get('/collaborator/service', config);
+      // console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log(error.response);
+    }
+  },
 };
