@@ -9,8 +9,9 @@ import {
 } from "../store/userSlicer/searchServiceSlicer";
 import { Button, Form, Modal } from "react-bootstrap";
 import { requestService } from "../store/userSlicer/requestServiceSlicer";
+import Swal from 'sweetalert2';
 
-export default function SearchPage() {
+export default function SearchPage({ isAuth }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [query] = useSearchParams();
@@ -27,8 +28,20 @@ export default function SearchPage() {
   const [schedule, setSchedule] = useState(initialState);
   const handleClose = () => setShow(false);
   const handleShow = (collab) => {
+    if (isAuth){
     setShow(true);
     setSchedule({ ...schedule, collabId: collab.createdBy._id });
+     }
+     else{
+      //alert("Por favor inicie sesion para seleccionar un servicio ");
+      Swal.fire({
+        title: 'Apreciado usuario',
+        text: 'Por favor inicie sesion para seleccionar un servicio',
+        icon: 'warning',
+        confirmButtonText: 'Aceptar'
+      })
+       navigate("/sessionlogin");
+     }
   };
 
   const handleChange = (e) => {
