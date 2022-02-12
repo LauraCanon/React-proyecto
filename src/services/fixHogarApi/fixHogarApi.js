@@ -143,4 +143,10 @@ export const fixHogarApi = {
       console.log(error.response);
     }
   },
+  async requestService(id) {
+    const config = { header: { "Content-type": "application/json" } };
+    const response = await axios.post("/request/service", id, config);
+    console.log(response.data);
+    return response.data;
+  },
 };

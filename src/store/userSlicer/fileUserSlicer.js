@@ -34,6 +34,10 @@ const fileSlicer = createSlice({
           user.image = action.payload.secure_url;
           window.localStorage.setItem("user", JSON.stringify(user));
           state.file = action.payload.secure_url;
+        } else if (user) {
+          user.image = action.payload.secure_url;
+          window.localStorage.setItem("user", JSON.stringify(user));
+          state.file = action.payload.secure_url;
         }
       })
       .addCase(fileUser.rejected, (state) => {});

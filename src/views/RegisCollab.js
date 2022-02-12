@@ -33,7 +33,7 @@ export default function RegistrationCollab() {
   useEffect(() => {
     dispatch(listOfCity());
   }, []);
-
+  
   const handleChange = (e) => {
     setFormErrors([]);
     let matches = [];
@@ -202,10 +202,30 @@ export default function RegistrationCollab() {
             <p className="mt-1 text-danger">{formErrors.city}</p>
 
             <div className="mt-2 text-center">
-              <button type="submit" className="btn btn-outline-success">
+              <button
+                type="submit"
+                className="btn btn-outline-success"
+                onClick={handleShow}
+              >
                 Regístrate
               </button>
             </div>
+
+            <Modal show={show}>
+              <Modal.Header closeButton>
+                <Modal.Title>Tu registro fue exitoso</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Form.Group>
+                  Por favor verifica tu cuenta para poder continuar navegando
+                </Form.Group>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="success" onClick={handleClose}>
+                  Cerrar
+                </Button>
+              </Modal.Footer>
+            </Modal>
           </form>
           <div className="mt-2 text-center">
             <p className="text-center">
