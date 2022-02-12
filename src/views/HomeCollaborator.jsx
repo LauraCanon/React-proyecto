@@ -1,33 +1,32 @@
-import '../App.css';
-import { Button, Form, Modal } from 'react-bootstrap';
-import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
+import "../App.css";
+import { Button, Form, Modal } from "react-bootstrap";
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 import {
   fileUser,
   selectFile,
   selectLoading,
-} from '../store/userSlicer/fileUserSlicer';
-import { Loading } from '../component/Loading';
-import { createService } from '../store/userSlicer/createServiceSlicer';
+} from "../store/userSlicer/fileUserSlicer";
+import { Loading } from "../component/Loading";
+import { createService } from "../store/userSlicer/createServiceSlicer";
 import {
   collabListService,
   selectListService,
-} from '../store/userSlicer/listServiceCollab';
+} from "../store/userSlicer/listServiceCollab";
 
 export default function HomeCollaborator() {
   const dispatch = useDispatch();
   const myServices = useSelector(selectListService);
-  const initialValues = { description: '', price: '', services: 'none' };
+  const initialValues = { description: "", price: "", services: "none" };
   const [formValues, setFormValues] = useState(initialValues);
-  const collaborator = JSON.parse(window.localStorage.getItem('collaborator'));
+  const collaborator = JSON.parse(window.localStorage.getItem("collaborator"));
   const initialValue = { img: [] };
   const [upload, setUpload] = useState(initialValue);
   const file = useSelector(selectFile);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
   const [show2, setShow2] = useState(false);
   const handleClose2 = () => {
     setShow2(false);
@@ -35,7 +34,6 @@ export default function HomeCollaborator() {
   };
   const handleShow2 = () => setShow2(true);
 
-  console.log(myServices);
   useEffect(() => {
     dispatch(collabListService());
   }, []);
@@ -47,7 +45,7 @@ export default function HomeCollaborator() {
   };
   const handleUpload = (e) => {
     const data = new FormData();
-    data.append('file', upload);
+    data.append("file", upload);
     for (let value of data.values()) {
       console.log(value);
     }
@@ -79,10 +77,10 @@ export default function HomeCollaborator() {
           </Modal.Footer>
         </Modal>
         <div className="row mt-4">
-          <div className="col-md-4 d-flex justify-content-center">
+          <div className="col-md-4 d-flex justify-content-center rounded">
             <div
-              className="card align-items-center border-0"
-              style={{ width: '18rem' }}
+              className="card align-items-center border-0 rounded"
+              style={{ width: "18rem" }}
             >
               {loading ? (
                 <Loading />
@@ -107,7 +105,7 @@ export default function HomeCollaborator() {
               </div>
             </div>
           </div>
-          <div className="col-md-8 p-2">
+          <div className="col-md-8 ">
             <div>
               <ul className="nav nav-tabs" id="myTab" role="tablist">
                 <li className="nav-item" role="presentation">
@@ -214,7 +212,7 @@ export default function HomeCollaborator() {
                         src="../img/job.jpg"
                         className="img-fluid"
                         alt="..."
-                        style={{ width: '90%' }}
+                        style={{ width: "90%" }}
                       />
                     </div>
                   </div>
@@ -244,7 +242,7 @@ export default function HomeCollaborator() {
                         onChange={handleChange}
                         value={formValues.services}
                       >
-                        <option value={'none'} disabled selected>
+                        <option value={"none"} disabled selected>
                           Categorias ...
                         </option>
                         <option value="Instalación TV">Instalación TV</option>
@@ -339,85 +337,46 @@ export default function HomeCollaborator() {
                   </div>
                 </div>
                 <div
-                  className="tab-pane fade border border-5 border-top-0"
+                  className="tab-pane fade "
                   id="contact"
                   role="tabpanel"
                   aria-labelledby="contact-tab"
                 >
                   <div className="row">
-                    <div className="col-md-6 col-lg-4 mt-3">
-                      <div className="card border-light shadow text-dark bg-light">
-                        <div className="card-body">
-                          <small className="fs-6">Ubicacion:</small>
-                          <br></br>
-                          <small className="fs-6">Telefono:</small>
-                          <p className="fs-6">Servicio:</p>
-                          <p className="fs-6">$:</p>
-                          <div className="d-flex justify-content-around">
-                            <button className="btn-sm btn-danger" type="submit">
-                              Cancelar
-                            </button>
-                            <button
-                              className="btn-sm btn-success"
-                              data-bs-toggle="modal"
-                              data-bs-target="#staticBackdrop"
-                              type="button"
+                    {myServices &&
+                      myServices.map((services) => (
+                        <div className="col-md-6 col-lg-4 mt-3 d-flex flex-wrap">
+                          <div className="card border-light shadow text-dark bg-light rounded">
+                            <div
+                              className="card-body rounded"
+                              style={{ width: "15rem" }}
                             >
-                              Aceptar
-                            </button>
+                              <small className="fs-6">Usuario:{}</small>
+                              <br></br>
+                              <p className="fs-6">
+                                Servicio: {services.services}
+                              </p>
+                              <p className="fs-6">Precio: ${services.price}</p>
+                              <div className="d-flex justify-content-around">
+                                <button
+                                  className="btn-sm btn-danger"
+                                  type="submit"
+                                >
+                                  Cancelar
+                                </button>
+                                <button
+                                  className="btn-sm btn-success"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#staticBackdrop"
+                                  type="button"
+                                >
+                                  Aceptar
+                                </button>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-
-                    <div className="col-md-6 col-lg-4 mt-3">
-                      <div className="card border-light shadow text-dark bg-light">
-                        <div className="card-body">
-                          <small className="fs-6">Ubicacion:</small>
-                          <br></br>
-                          <small className="fs-6">Telefono:</small>
-                          <p className="fs-6">Servicio:</p>
-                          <p className="fs-6">$:</p>
-                          <div className="d-flex justify-content-around">
-                            <button className="btn-sm btn-danger" type="submit">
-                              Cancelar
-                            </button>
-                            <button
-                              className="btn-sm btn-success"
-                              data-bs-toggle="modal"
-                              data-bs-target="#staticBackdrop"
-                              type="button"
-                            >
-                              Aceptar
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-md-6 col-lg-4 mt-3">
-                      <div className="card border-light shadow text-dark bg-light">
-                        <div className="card-body">
-                          <small className="fs-6">Ubicacion:</small>
-                          <br></br>
-                          <small className="fs-6">Telefono:</small>
-                          <p className="fs-6">Servicio:</p>
-                          <p className="fs-6">$:</p>
-                          <div className="d-flex justify-content-around">
-                            <button className="btn-sm btn-danger" type="submit">
-                              Cancelar
-                            </button>
-                            <button
-                              className="btn-sm btn-success"
-                              data-bs-toggle="modal"
-                              data-bs-target="#staticBackdrop"
-                              type="button"
-                            >
-                              Aceptar
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                      ))}
                   </div>
                 </div>
                 <div
