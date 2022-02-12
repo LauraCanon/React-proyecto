@@ -9,7 +9,7 @@ import {
 } from "../store/userSlicer/searchServiceSlicer";
 import { Button, Form, Modal } from "react-bootstrap";
 import { requestService } from "../store/userSlicer/requestServiceSlicer";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 export default function SearchPage({ isAuth }) {
   const navigate = useNavigate();
@@ -28,20 +28,18 @@ export default function SearchPage({ isAuth }) {
   const [schedule, setSchedule] = useState(initialState);
   const handleClose = () => setShow(false);
   const handleShow = (collab) => {
-    if (isAuth){
-    setShow(true);
-    setSchedule({ ...schedule, collabId: collab.createdBy._id });
-     }
-     else{
-      //alert("Por favor inicie sesion para seleccionar un servicio ");
+    if (isAuth) {
+      setShow(true);
+      setSchedule({ ...schedule, idService: collab._id });
+    } else {
       Swal.fire({
-        title: 'Apreciado usuario',
-        text: 'Por favor inicie sesion para seleccionar un servicio',
-        icon: 'warning',
-        confirmButtonText: 'Aceptar'
-      })
-       navigate("/sessionlogin");
-     }
+        title: "Apreciado usuario",
+        text: "Por favor inicie sesion para agendar un servicio",
+        icon: "warning",
+        confirmButtonText: "Aceptar",
+      });
+      navigate("/sessionlogin");
+    }
   };
 
   const handleChange = (e) => {
@@ -52,7 +50,7 @@ export default function SearchPage({ isAuth }) {
   const handleConfirm = (e) => {
     e.preventDefault();
     setShow(false);
-    dispatch(requestService(schedule.collabId));
+    dispatch(requestService(schedule.idService));
     navigate("/home/user");
   };
 
@@ -68,7 +66,11 @@ export default function SearchPage({ isAuth }) {
           {serviceCollabs &&
             serviceCollabs.map((collab, index) => {
               return (
-                <div key={index} className="col-md-4 col-lg-4 col-xl-2 mb-5">
+                <div
+                  key={index}
+                  className="col-md-4 col-lg-4 col-xl-2 mb-5"
+                  style={{ width: "15rem" }}
+                >
                   <div className="card shadow ">
                     <img
                       src={collab.createdBy.image}
@@ -76,7 +78,7 @@ export default function SearchPage({ isAuth }) {
                       alt={collab.createdBy.name}
                     />
                     <div className="card-body d-flex justify-content-between">
-                      <span className="fs-6">{collab.createdBy.name}</span>
+                      <p className="h5">{collab.createdBy.name} </p>
                       <div>
                         <span>
                           <FaStar />
@@ -89,20 +91,18 @@ export default function SearchPage({ isAuth }) {
                         </span>
                       </div>
                     </div>
-                    <div className="row pb-3">
+                    <div className="row">
                       <div className="col-12 ">
-                        <span className="fs-6 mx-3">
-                          Price: ${collab.price}
-                        </span>
+                        <p className="h6 mx-3">Price: ${collab.price}</p>
                       </div>
                     </div>
-                    <div className="col mx-auto">
+                    <div className="col mx-auto pb-2">
                       <button
                         type="button"
-                        className="btn-sm btn-success text-center"
+                        className="btn-sm btn-success text-center "
                         onClick={() => handleShow(collab)}
                       >
-                        Seleccionar
+                        Agendar
                       </button>
                     </div>
                     <Modal show={show} onHide={handleClose}>

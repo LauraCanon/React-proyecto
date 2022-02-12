@@ -1,5 +1,5 @@
 import "../App.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -7,10 +7,16 @@ import {
   selectFile,
   selectLoading,
 } from "../store/userSlicer/fileUserSlicer";
+import {
+  getService,
+  selectUserService,
+} from "../store/userSlicer/getServiceSlicer";
 import { Loading } from "../component/Loading";
+import { selectServiceCollab } from "../store/userSlicer/searchServiceSlicer";
 
 export default function HomeStandardUser() {
   const dispatch = useDispatch();
+  const service = useSelector(selectUserService);
   const user = JSON.parse(window.localStorage.getItem("user"));
   const initialValue = { img: [] };
   const [show, setShow] = useState(false);
@@ -19,20 +25,19 @@ export default function HomeStandardUser() {
   const handleShow = () => setShow(true);
 
   const file = useSelector(selectFile);
-  console.log(file);
 
   const loading = useSelector(selectLoading);
 
   const handleUpload = (e) => {
     const data = new FormData();
     data.append("file", upload);
-    for (let value of data.values()) {
-      console.log(value);
-    }
-
     dispatch(fileUser(data));
     setShow(false);
   };
+
+  useEffect(() => {
+    dispatch(getService());
+  }, []);
 
   return (
     <>
@@ -133,87 +138,42 @@ export default function HomeStandardUser() {
                     aria-labelledby="home-tab"
                   >
                     <div className="row">
-                      <div className="col-md-6 col-lg-4 mt-3">
-                        <div className="card border-light shadow text-dark bg-light rounded">
-                          <div className="card-body border-success rounded">
-                            <small className="fs-6">Ubicacion:</small>
-                            <br></br>
-                            <small className="fs-6">Telefono:</small>
-                            <p className="fs-6">Servicio:</p>
-                            <p className="fs-6">$:</p>
-                            <div className="d-flex justify-content-around">
-                              <button
-                                className="btn-sm btn-danger"
-                                type="submit"
+                      {service &&
+                        service.map((service) => (
+                          <div className="col-md-6 col-lg-4 mt-3 d-flex flex-wrap ">
+                            <div className="card border-light shadow text-dark bg-light rounded ">
+                              <div
+                                className="card-body border-success rounded"
+                                style={{ width: "15rem" }}
                               >
-                                Cancelar
-                              </button>
-                              <button
-                                className="btn-sm btn-success"
-                                data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop"
-                                type="button"
-                              >
-                                Agendar
-                              </button>
+                                <small className="fs-6">Colaborador:{}</small>
+                                <br></br>
+
+                                <p className="fs-6 pt-2">
+                                  Servicio: {service.services} Precio: $
+                                  {service.price}
+                                </p>
+
+                                <div className="d-flex justify-content-around">
+                                  <button
+                                    className="btn-sm btn-danger"
+                                    type="submit"
+                                  >
+                                    Cancelar
+                                  </button>
+                                  <button
+                                    className="btn-sm btn-success px-3"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop"
+                                    type="button"
+                                  >
+                                    Pagar
+                                  </button>
+                                </div>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
-                      <div className="col-md-6 col-lg-4 mt-3">
-                        <div className="card border-light shadow text-dark bg-light">
-                          <div className="card-body">
-                            <small className="fs-6">Ubicacion:</small>
-                            <br></br>
-                            <small className="fs-6">Telefono:</small>
-                            <p className="fs-6">Servicio:</p>
-                            <p className="fs-6">$:</p>
-                            <div className="d-flex justify-content-around">
-                              <button
-                                className="btn-sm btn-danger"
-                                type="submit"
-                              >
-                                Cancelar
-                              </button>
-                              <button
-                                className="btn-sm btn-success"
-                                data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop"
-                                type="button"
-                              >
-                                Agendar
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-md-6 col-lg-4 mt-3">
-                        <div className="card border-light shadow text-dark bg-light">
-                          <div className="card-body">
-                            <small className="fs-6">Ubicacion:</small>
-                            <br></br>
-                            <small className="fs-6">Telefono:</small>
-                            <p className="fs-6">Servicio:</p>
-                            <p className="fs-6">$:</p>
-                            <div className="d-flex justify-content-around">
-                              <button
-                                className="btn-sm btn-danger"
-                                type="submit"
-                              >
-                                Cancelar
-                              </button>
-                              <button
-                                className="btn-sm btn-success"
-                                data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop"
-                                type="button"
-                              >
-                                Agendar
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                        ))}
                     </div>
                   </div>
                 </div>
@@ -232,28 +192,6 @@ export default function HomeStandardUser() {
                     aria-labelledby="home-tab"
                   >
                     <div className="row">
-                      <div className="col-md-6 col-lg-4 mt-3">
-                        <div className="card border-light shadow text-dark bg-light rounded">
-                          <div className="card-body">
-                            <small className="fs-6">Ubicacion:</small>
-                            <br></br>
-                            <small className="fs-6">Telefono:</small>
-                            <p className="fs-6">Servicio:</p>
-                            <p className="fs-6">$:</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-md-6 col-lg-4 mt-3">
-                        <div className="card border-light shadow text-dark bg-light rounded">
-                          <div className="card-body">
-                            <small className="fs-6">Ubicacion:</small>
-                            <br></br>
-                            <small className="fs-6">Telefono:</small>
-                            <p className="fs-6">Servicio:</p>
-                            <p className="fs-6">$:</p>
-                          </div>
-                        </div>
-                      </div>
                       <div className="col-md-6 col-lg-4 mt-3">
                         <div className="card border-light shadow text-dark bg-light rounded">
                           <div className="card-body">
@@ -285,7 +223,7 @@ export default function HomeStandardUser() {
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title" id="staticBackdropLabel">
-                    Agendar Servicio
+                    Pagar Servicio
                   </h5>
                   <button
                     type="button"
@@ -295,8 +233,8 @@ export default function HomeStandardUser() {
                   ></button>
                 </div>
                 <div className="modal-body">
-                  El Siguiente paso lo llevara a el pago del servicio. una vez
-                  pago no se puede cancelar el servicio
+                  El siguiente paso lo llevará al pago del servicio; una vez
+                  efectuado, no podrá ser cancelado
                 </div>
                 <div className="modal-footer">
                   <button

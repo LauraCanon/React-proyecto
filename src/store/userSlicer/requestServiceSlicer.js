@@ -2,21 +2,22 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fixHogarApi } from "../../services/fixHogarApi/fixHogarApi";
 
 //Thunk actions
-export const requestService = createAsyncThunk("users/userRegister", (id) =>
-  fixHogarApi.requestService(id)
+export const requestService = createAsyncThunk(
+  "schedule/requestService",
+  (id) => fixHogarApi.requestService(id)
 );
 
 const initialState = {
   request: [],
 };
 const requestSlicer = createSlice({
-  name: "request",
+  name: "schedule",
   initialState: initialState,
   extraReducers: (builder) => {
     builder
       .addCase(requestService.pending, (state) => {})
       .addCase(requestService.fulfilled, (state, action) => {
-        state.request = action.payload.data;
+        state.request = action.payload;
       })
       .addCase(requestService.rejected, (state) => {});
   },
