@@ -6,6 +6,9 @@ export const createService = createAsyncThunk(
   'collab/createService',
   (infoService) => fixHogarApi.createService(infoService)
 );
+export const deleteService = createAsyncThunk('collab/deleteService', (id) =>
+  fixHogarApi.deleteService(id)
+);
 
 const initialState = {
   collabs: [],

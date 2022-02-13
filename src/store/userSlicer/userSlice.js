@@ -9,9 +9,10 @@ export const loginUser = createAsyncThunk('user/loginUser', (user) =>
 //userSlice definition
 const initialState = {
   user:
-    JSON.parse(window.localStorage.getItem("user")) ||
-    JSON.parse(window.localStorage.getItem("collaborator")) ||
+    JSON.parse(window.localStorage.getItem('user')) ||
+    JSON.parse(window.localStorage.getItem('collaborator')) ||
     null,
+  stateLogin: null,
 };
 const userSlicer = createSlice({
   name: 'user',
@@ -26,27 +27,55 @@ const userSlicer = createSlice({
     builder
       .addCase(loginUser.pending, (state) => {})
       .addCase(loginUser.fulfilled, (state, action) => {
-        console.log(action.payload);
-        if (action.payload.hasOwnProperty("user")) {
+        if (action.payload.msg === 'Email y Contraseña son requeridos') {
+          state.user = null;
+          state.stateLogin = action.payload.msg;
+          return;
+        }
+
+        if (action.payload.msg === 'Email no esta registrado') {
+          state.user = null;
+          state.stateLogin = action.payload.msg;
+          return;
+        }
+        if (action.payload.msg === 'Email o Contraseña Invalidos') {
+          state.user = null;
+          state.stateLogin = action.payload.msg;
+          return;
+        }
+        if (
+          action.payload.msg ===
+          'Aun no has Activado tu cuenta. Revisa tu correo'
+        ) {
+          state.user = null;
+          state.stateLogin = action.payload.msg;
+          return;
+        }
+        if (action.payload.hasOwnProperty('user')) {
           window.localStorage.setItem(
-            "user",
+            'user',
             JSON.stringify(action.payload.user)
           );
           window.localStorage.setItem(
-            "token",
+            'token',
             JSON.stringify(action.payload.token)
           );
           state.user = action.payload.user;
-        } else {
+          state.stateLogin = null;
+          return;
+        }
+        if (action.payload.hasOwnProperty('collaborator')) {
           window.localStorage.setItem(
-            "collaborator",
+            'collaborator',
             JSON.stringify(action.payload.collaborator)
           );
           window.localStorage.setItem(
-            "token",
+            'token',
             JSON.stringify(action.payload.token)
           );
           state.user = action.payload.collaborator;
+          state.stateLogin = null;
+          return;
         }
       })
       .addCase(loginUser.rejected, (state) => {});
@@ -56,5 +85,6 @@ const userSlicer = createSlice({
 export const { logout } = userSlicer.actions;
 
 export const selectUser = (state) => state.user.user;
+export const selectStateLogin = (state) => state.user.stateLogin;
 
 export default userSlicer.reducer;

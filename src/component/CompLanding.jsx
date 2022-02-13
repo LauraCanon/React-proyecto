@@ -1,12 +1,12 @@
-import "../App.css";
-import React from "react";
+import '../App.css';
+import React from 'react';
 
 export const CompLanding = () => {
   return (
     <>
       <section className="bg-success text-light p-3 mt-3 rounded">
-        <div classNameName="container">
-          <div classNameName="d-md-flex justify-content-between">
+        <div className="container">
+          <div className="d-md-flex justify-content-between">
             <h3 className="mb-3 text-center">Recibir noticias</h3>
 
             <div className="input news-input mx-auto">
