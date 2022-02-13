@@ -1,11 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { logout, selectUser } from "./store/userSlicer/userSlice";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, selectUser } from './store/userSlicer/userSlice';
 
 export default function Navbar({ isAuth }) {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const rolUser = window.localStorage.getItem('user');
+  const rolCollab = window.localStorage.getItem('collaborator');
   const logoutHandler = () => {
     dispatch(logout());
   };
@@ -16,16 +18,16 @@ export default function Navbar({ isAuth }) {
         {isAuth ? (
           <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div className="container">
-              <a className="navbar-brand link-light" href="/">
+              <Link className="navbar-brand link-light" to="/">
                 <img
                   src="https://image.flaticon.com/icons/png/512/1207/1207155.png"
                   alt="fixhogar"
                   width="40"
                   height="40"
-                  style={{ marginRight: "8px" }}
+                  style={{ marginRight: '8px' }}
                 ></img>
                 FixHogar
-              </a>
+              </Link>
               <button
                 className="navbar-toggler"
                 type="button"
@@ -40,9 +42,16 @@ export default function Navbar({ isAuth }) {
               <div className="collapse navbar-collapse" id="navbarCollapse">
                 <ul className="navbar-nav ms-auto mb-2 mb-md-0">
                   <li className="nav-item">
-                    <Link className="nav-link active" to="/sessionlogin">
-                      {`Hola ${user.name}`}
-                    </Link>
+                    {rolUser && (
+                      <Link className="nav-link active" to="/home/user">
+                        {`Mi Perfil de Usuario`}
+                      </Link>
+                    )}
+                    {rolCollab && (
+                      <Link className="nav-link active" to="/home/collaborator">
+                        {`Mi Perfil de Colaborador`}
+                      </Link>
+                    )}
                   </li>
                   <Link to="/">
                     <li className="nav-item">
@@ -68,7 +77,7 @@ export default function Navbar({ isAuth }) {
                   alt="fixhogar"
                   width="40"
                   height="40"
-                  style={{ marginRight: "8px" }}
+                  style={{ marginRight: '8px' }}
                 ></img>
                 FixHogar
               </a>

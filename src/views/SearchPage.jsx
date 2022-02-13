@@ -1,62 +1,79 @@
-import React, { useEffect, useState, Fragment } from "react";
-import { FaStar } from "react-icons/fa";
-import { SearchBar } from "../component/SearchBar";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState, Fragment } from 'react';
+import { FaStar } from 'react-icons/fa';
+import { SearchBar } from '../component/SearchBar';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   selectServiceCollab,
   serviceCollabList,
-} from "../store/userSlicer/searchServiceSlicer";
-import { Button, Form, Modal } from "react-bootstrap";
-import { requestService } from "../store/userSlicer/requestServiceSlicer";
-import Swal from "sweetalert2";
+} from '../store/userSlicer/searchServiceSlicer';
+import { Button, Form, Modal } from 'react-bootstrap';
+import { requestService } from '../store/userSlicer/requestServiceSlicer';
+import Swal from 'sweetalert2';
+import Modals from '../component/Modals';
 
 export default function SearchPage({ isAuth }) {
+  const isCollab = window.localStorage.getItem('collaborator') || null;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [query] = useSearchParams();
-  const city = query.get("city");
-  const service = query.get("service");
+  const city = query.get('city');
+  const service = query.get('service');
   const search = { service, city };
+  const serviceCollabs = useSelector(selectServiceCollab);
+  const initialState = { address: '', date: '', phone: '', idService: '' };
+  const [showSchedule, setShowSchedule] = useState(false);
+  const [schedule, setSchedule] = useState(initialState);
+  const handleCloseSchedule = () => setShowSchedule(false);
   useEffect(() => {
     dispatch(serviceCollabList(search));
-  }, []);
-  const serviceCollabs = useSelector(selectServiceCollab);
-  console.log(serviceCollabs);
-  const initialState = { address: "", date: "", phone: "", collabId: "" };
-  const [show, setShow] = useState(false);
-  const [schedule, setSchedule] = useState(initialState);
-  const handleClose = () => setShow(false);
+  }, [showSchedule]);
   const handleShow = (collab) => {
+    if (isCollab) {
+      Swal.fire({
+        title: 'Apreciado usuario',
+        text: 'Eres un Colaborador no tienes Permitido Solicitar Servicios. Gracias',
+        icon: 'warning',
+        confirmButtonText: 'Aceptar',
+      });
+      navigate('/');
+    }
     if (isAuth) {
-      setShow(true);
+      setShowSchedule(true);
       setSchedule({ ...schedule, idService: collab._id });
     } else {
       Swal.fire({
-        title: "Apreciado usuario",
-        text: "Por favor inicie sesion para agendar un servicio",
-        icon: "warning",
-        confirmButtonText: "Aceptar",
+        title: 'Apreciado usuario',
+        text: 'Por favor inicie sesion para agendar un servicio',
+        icon: 'warning',
+        confirmButtonText: 'Aceptar',
       });
-      navigate("/sessionlogin");
+      navigate('/sessionlogin');
     }
   };
 
-  const handleChange = (e) => {
+  const handleScheduleChange = (e) => {
     const { name, value } = e.target;
     setSchedule({ ...schedule, [name]: value });
   };
 
   const handleConfirm = (e) => {
     e.preventDefault();
-    setShow(false);
-    dispatch(requestService(schedule.idService));
-    navigate("/home/user");
+    setShowSchedule(false);
+    dispatch(requestService(schedule));
+    // navigate('/home/user');
   };
 
   return (
     <Fragment>
       <main className="flex-shrink-0 container mt-4 mb-4">
+        <Modals
+          handleScheduleChange={handleScheduleChange}
+          handleCloseSchedule={handleCloseSchedule}
+          handleConfirm={handleConfirm}
+          showSchedule={showSchedule}
+        />
         <div className="row my-5">
           <div className="col-12">
             <SearchBar />
@@ -69,7 +86,7 @@ export default function SearchPage({ isAuth }) {
                 <div
                   key={index}
                   className="col-md-4 col-lg-4 col-xl-2 mb-5"
-                  style={{ width: "15rem" }}
+                  style={{ width: '15rem' }}
                 >
                   <div className="card shadow ">
                     <img
@@ -105,59 +122,6 @@ export default function SearchPage({ isAuth }) {
                         Agendar
                       </button>
                     </div>
-                    <Modal show={show} onHide={handleClose}>
-                      <Modal.Header closeButton>
-                        <Modal.Title>Agendar servicio</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                        <Form.Group className="mb-3">
-                          <label for="scheuleInput1" class="form-label">
-                            Dirección
-                          </label>
-                          <input
-                            name="address"
-                            type="text"
-                            class="form-control"
-                            id="scheuleInput1"
-                            placeholder="Dirección donde requiere servicio"
-                            onChange={handleChange}
-                          />
-                          <label for="scheuleInput2" class="form-label">
-                            Fecha
-                          </label>
-                          <input
-                            name="date"
-                            type="date"
-                            class="form-control"
-                            id="scheuleInput2"
-                            placeholder="Fecha tentativa servicio"
-                            onChange={handleChange}
-                          />
-                          <label for="scheuleInput3" class="form-label">
-                            Teléfono
-                          </label>
-                          <input
-                            name="phone"
-                            type="text"
-                            class="form-control"
-                            id="scheuleInput3"
-                            placeholder="Número de contacto"
-                            onChange={handleChange}
-                          />
-                          <input
-                            name="collabId"
-                            value={"scec ver"}
-                            type="hidden"
-                            id="scheuleInput4"
-                          />
-                        </Form.Group>
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button variant="success" onClick={handleConfirm}>
-                          Confirmar
-                        </Button>
-                      </Modal.Footer>
-                    </Modal>
                   </div>
                 </div>
               );

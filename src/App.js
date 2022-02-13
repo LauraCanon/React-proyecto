@@ -1,4 +1,3 @@
-import AdditionalInfo from './views/AdditionalInfo';
 import Footer from './Footer';
 import HomeCollaborator from './views/HomeCollaborator';
 import HomeStandarUser from './views/HomeStandardUser';
@@ -15,7 +14,6 @@ import VerifiedEmail from './views/VerifiedEmail';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RequireAuth } from './component/PrivateRoute';
 import { selectUser } from './store/userSlicer/userSlice';
 
 function App() {
@@ -24,9 +22,17 @@ function App() {
     <Router>
       <Navbar isAuth={user} />
       <Routes>
-        <Route path="*" element={<LandingPages isAuth={user} />} />
-        <Route path="/search" element={<SearchPage isAuth={user} />} />
+        <Route path="*" element={<LandingPages />} />
         <Route path="/request" element={<RequestService isAuth={user} />} />
+        <Route path="/payment" element={<Payment isAuth={user} />} />
+        <Route path="/home">
+          <Route path="user" element={<HomeStandarUser isAuth={user} />} />
+          <Route
+            path="collaborator"
+            element={<HomeCollaborator isAuth={user} />}
+          />
+        </Route>
+        <Route path="/search" element={<SearchPage isAuth={user} />} />
         <Route
           path="/registration-user"
           element={<RegistrationUser isAuth={user} />}
@@ -39,17 +45,8 @@ function App() {
           path="/regperfil"
           element={<RegistrationPerfil isAuth={user} />}
         />
-        <Route path="/activate/:hash/:id" element={<VerifiedEmail />}></Route>
-        <Route path="/payment" element={<Payment isAuth={user} />} />
         <Route path="/sessionlogin" element={<SessionLogin isAuth={user} />} />
-        <Route path="/home">
-          <Route path="user" element={<HomeStandarUser isAuth={user} />} />
-          <Route
-            path="collaborator"
-            element={<HomeCollaborator isAuth={user} />}
-          />
-        </Route>
-        <Route path="/addinfo" element={<AdditionalInfo isAuth={user} />} />
+        <Route path="/activate/:hash/:id" element={<VerifiedEmail />}></Route>
       </Routes>
       <Footer />
     </Router>

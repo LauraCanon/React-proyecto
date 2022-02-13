@@ -1,13 +1,14 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fixHogarApi } from "../../services/fixHogarApi/fixHogarApi";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { fixHogarApi } from '../../services/fixHogarApi/fixHogarApi';
 
 //Thunk actions
-export const getService = createAsyncThunk("listUserService/getService", () =>
-  fixHogarApi.getServiceUser()
+export const getService = createAsyncThunk(
+  'listRequestsService/getService',
+  () => fixHogarApi.getServiceRequests()
 );
 
-const listUserServ = createSlice({
-  name: "listUserService",
+const listRequestsService = createSlice({
+  name: 'listRequestsService',
   initialState: { services: null },
   extraReducers: (builder) => {
     builder
@@ -19,6 +20,7 @@ const listUserServ = createSlice({
   },
 });
 
-export const selectUserService = (state) => state.listUserService.services;
+export const selectRequestsService = (state) =>
+  state.listRequestsService.services;
 
-export default listUserServ.reducer;
+export default listRequestsService.reducer;

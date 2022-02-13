@@ -1,87 +1,75 @@
-import "./allViews.css";
-import React, { useState, useEffect } from "react";
+import './allViews.css';
+import React, { useState, useEffect } from 'react';
 import {
   selectUserRegis,
   userRegister,
-} from "../store/userSlicer/userRegisterSlicer";
-import { useDispatch, useSelector } from "react-redux";
-import { Button, Form, Modal } from "react-bootstrap";
-import { useNavigate } from "react-router";
+} from '../store/userSlicer/userRegisterSlicer';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, Form, Modal } from 'react-bootstrap';
+import { useNavigate } from 'react-router';
+import Modals from '../component/Modals';
 
 export default function RegistrationUser() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const regis = useSelector(selectUserRegis);
-  const initialValues = { name: "", lastName: "", email: "", password: "" };
+  const initialValues = { name: '', lastName: '', email: '', password: '' };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
-  const [show, setShow] = useState(false);
 
-  const handleShow = () => {
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      setShow(false);
-    } else if (Object.keys(formErrors).length !== 0 && isSubmit) {
-      setShow(true);
-    }
+  const [showsSuccess, setShowSuccess] = useState(false);
+  const handleCloseSuccess = () => {
+    setShowSuccess(false);
+    navigate('/sessionlogin');
   };
-
-  const handleClose = () => {
-    setShow(false);
-    navigate("/sessionlogin");
-  };
+  const handleShowSuccess = () => setShowSuccess(true);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
-    // console.log(formValues);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormErrors(validate(formValues));
-    setIsSubmit(true);
     const { name, lastName, email, password } = formValues;
     const newUser = { name, lastName, email, password };
     dispatch(userRegister(newUser));
-    // navigate("/sessionlogin");
   };
-  useEffect(() => {
-    // console.log(formErrors);
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      // console.log(formValues);
-    }
-  }, [formErrors]);
   const validate = (values) => {
     const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     if (!values.name) {
-      errors.name = "El nombre es requerido!";
+      errors.name = 'El nombre es requerido!';
     }
     if (!values.lastName) {
-      errors.lastName = "El apellido es requerido!";
+      errors.lastName = 'El apellido es requerido!';
     }
     if (!values.email) {
-      errors.email = "El email es requerido!";
+      errors.email = 'El email es requerido!';
     } else if (!regex.test(values.email)) {
-      errors.email = "Introduce una dirección de correo electrónico válida";
+      errors.email = 'Introduce una dirección de correo electrónico válida';
     }
     if (!values.password) {
-      errors.password = "La contraseña es requerida!";
+      errors.password = 'La contraseña es requerida!';
     } else if (values.password.length < 4) {
-      errors.password = "La contrasena debe tener más de 4 caracteres";
+      errors.password = 'La contrasena debe tener más de 4 caracteres';
     }
     return errors;
   };
   return (
     <main className="mt-5 container pt-5">
+      <Modals
+        showsSuccess={showsSuccess}
+        handleCloseSuccess={handleCloseSuccess}
+      />
       <div className="row display-flex mt-3 justify-content-center">
         <div className="col-md-6 col-lg-7">
           <h2 className="text-center mb-3">Únete a la comunidad FIXHOGAR!</h2>
           <div className="text-center mb-3">
             <img
               src="../img/Usuario-register.jpeg"
-              style={{ width: "80%" }}
+              style={{ width: '80%' }}
               alt="home-work"
             />
           </div>
@@ -145,33 +133,17 @@ export default function RegistrationUser() {
               <button
                 type="submit"
                 className="btn btn-outline-success"
-                onClick={handleShow}
+                onClick={handleShowSuccess}
               >
                 Regístrate
               </button>
             </div>
-
-            <Modal show={show}>
-              <Modal.Header closeButton>
-                <Modal.Title>Tu registro fue exitoso</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <Form.Group>
-                  Por favor verifica tu cuenta para poder continuar navegando
-                </Form.Group>
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="success" onClick={handleClose}>
-                  Cerrar
-                </Button>
-              </Modal.Footer>
-            </Modal>
           </form>
           <div className="mt-3 text-center">
             <p className="text-center">
-              Ya tienes una cuenta?{" "}
+              Ya tienes una cuenta?{' '}
               <a href="/sessionlogin" class="link-success">
-                {" "}
+                {' '}
                 Inicia Sesión
               </a>
             </p>
