@@ -25,6 +25,7 @@ export default function RegistrationUser() {
   const handleShowSuccess = () => setShowSuccess(true);
 
   const handleChange = (e) => {
+    setFormErrors([]);
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
@@ -34,7 +35,10 @@ export default function RegistrationUser() {
     setFormErrors(validate(formValues));
     const { name, lastName, email, password } = formValues;
     const newUser = { name, lastName, email, password };
-    dispatch(userRegister(newUser));
+    if (formErrors.length === 0) {
+      handleShowSuccess();
+      dispatch(userRegister(newUser));
+    }
   };
   const validate = (values) => {
     const errors = {};
@@ -130,11 +134,7 @@ export default function RegistrationUser() {
             <p className="mt-1 text-danger">{formErrors.password}</p>
 
             <div className="mt-2 text-center">
-              <button
-                type="submit"
-                className="btn btn-outline-success"
-                onClick={handleShowSuccess}
-              >
+              <button type="submit" className="btn btn-outline-success">
                 Regístrate
               </button>
             </div>

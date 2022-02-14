@@ -4,15 +4,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   customerPayment,
   infoPayment,
+  loadingCreateCreditCard,
   paymentProcess,
   paymentService,
+  registCreditCard,
+  selectPaymentSucess,
   selectRegisterPayment,
   selectStatusCreditCard,
 } from '../store/userSlicer/paymentSlicer';
 import Modals from '../component/Modals';
+import { Loading } from '../component/Loading';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export default function Payment() {
-  const { city, price, description } = useSelector(selectRegisterPayment);
+  const navigate = useNavigate;
+  const statePayment = useSelector(selectPaymentSucess);
+  const loading = useSelector(loadingCreateCreditCard);
+  const { city, price, description, service } = useSelector(
+    selectRegisterPayment
+  );
   const dispatch = useDispatch();
   const initialValues = {
     holder: '',
@@ -22,14 +33,13 @@ export default function Payment() {
     cvc: '',
   };
   const tax = (+price * 16) / 100;
-  const value = +price + tax;
   const initialPaymentValues = {
     city,
     description,
-    value: value.toString(),
-    tax: tax.toString(),
+    value: price,
+    tax: '0',
     tax_base: price,
-    doc_Type: 'none',
+    doc_type: 'none',
     docNumber: '',
     phone: '',
     cellPhone: '',
@@ -51,20 +61,28 @@ export default function Payment() {
     const { name, value } = e.target;
     setPaymentValues({ ...paymentValues, [name]: value });
   };
+  console.log('state payment afuera', statePayment);
+
   const paymentHandler = (e) => {
     e.preventDefault();
     const { holder, numberCard, expMonth, expYear, cvc } = formValues;
     const ccInfo = { holder, numberCard, expMonth, expYear, cvc };
     dispatch(paymentProcess(ccInfo));
     setTimeout(() => {
-      dispatch(customerPayment());
-    }, 5000);
-    handleShowPayment();
+      handleShowPayment();
+    }, 10000);
   };
+
   const paymentProcessHandler = () => {
-    dispatch(infoPayment(paymentValues));
-    dispatch(paymentService(paymentValues));
-    handleClosePayment();
+    setTimeout(() => {
+      Swal.fire({
+        title: 'Apreciado usuario',
+        text: `Se ha realizado el pago de su por valor de $ 50.000}`,
+        icon: 'success',
+        confirmButtonText: 'Aceptar',
+      });
+      navigate('/');
+    }, 5000);
   };
 
   return (
@@ -192,13 +210,19 @@ export default function Payment() {
               </div>
             </form>
             <div className="d-grid gap-2 col-5 mx-auto my-4">
-              <button
-                className="btn btn-success"
-                type="button"
-                onClick={paymentHandler}
-              >
-                Pagar
-              </button>
+              {!loading ? (
+                <button
+                  className="btn btn-success"
+                  type="button"
+                  onClick={paymentHandler}
+                >
+                  Registrar Tarjeta
+                </button>
+              ) : (
+                <button className="btn btn-success" type="button" disabled>
+                  <Loading />
+                </button>
+              )}
             </div>
           </div>
         </div>
