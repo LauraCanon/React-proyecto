@@ -14,7 +14,6 @@ export const fixHogarApi = {
     try {
       const config = { header: { 'Content-type': 'application/json' } };
       const response = await axios.post('/sessionlogin', user, config);
-      // token = response.data.token;
       console.log(response.data);
       return response.data;
     } catch (error) {
@@ -193,6 +192,61 @@ export const fixHogarApi = {
       const response = await axios.get('/requests/service', config);
       console.log(response.data);
       return response.data;
+    } catch (error) {
+      console.log(error.response);
+    }
+  },
+  async paymentProcess(ccInfo) {
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
+    };
+    const { holder, numberCard, expMonth, expYear, cvc } = ccInfo;
+    try {
+      const response = await axios.post(
+        '/card-token',
+        {
+          holder,
+          numberCard,
+          expMonth,
+          expYear,
+          cvc,
+        },
+        config
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log(error.response);
+    }
+  },
+  async customerPayment() {
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      const response = await axios.post('/create-customer', {}, config);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error.response);
+    }
+  },
+  async paymentService(payment) {
+    console.log(payment);
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      const response = await axios.post('/make-payment', { payment }, config);
+      console.log(response.data);
     } catch (error) {
       console.log(error.response);
     }

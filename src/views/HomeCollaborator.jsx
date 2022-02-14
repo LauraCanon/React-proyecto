@@ -360,7 +360,7 @@ export default function HomeCollaborator() {
                   >
                     <div className="row">
                       {serviceRequests &&
-                        serviceRequests.map((services) => (
+                        serviceRequests.map((services, index) => (
                           <div className="col-md-6 col-lg-4 mt-3 d-flex flex-wrap">
                             <div className="card border-light shadow text-dark bg-light rounded">
                               <div
@@ -372,26 +372,28 @@ export default function HomeCollaborator() {
                                 </small>
                                 <br></br>
                                 <p className="fs-6">
-                                  Direccion: {services.request.addressUser}
+                                  Direccion:{' '}
+                                  {services.request[index].addressUser}
                                 </p>
                                 <p className="fs-6">
-                                  Telefono: {services.request.phoneUser}
+                                  Telefono: {services.request[index].phoneUser}
                                 </p>
                                 <div className="d-flex justify-content-around">
-                                  <button
-                                    className="btn-sm btn-danger"
-                                    type="submit"
-                                  >
-                                    Cancelar
-                                  </button>
-                                  <button
-                                    className="btn-sm btn-success"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdrop"
-                                    type="button"
-                                  >
-                                    Aceptar
-                                  </button>
+                                  {services.request[index].payment ? (
+                                    <button
+                                      className="btn-sm btn-secondary"
+                                      disabled
+                                    >
+                                      Pago Efectuado
+                                    </button>
+                                  ) : (
+                                    <button
+                                      className="btn-sm btn-secondary"
+                                      disabled
+                                    >
+                                      Pago Pendiente
+                                    </button>
+                                  )}
                                 </div>
                               </div>
                             </div>

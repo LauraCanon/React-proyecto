@@ -8,6 +8,7 @@ import citys from './userSlicer/citysSlicer';
 import regisCollab from './userSlicer/collabSlicer';
 import listColServ from './userSlicer/listServiceCollab';
 import listRequestsService from './userSlicer/getServiceSlicer';
+import paymentSlicer from './userSlicer/paymentSlicer';
 
 const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ const store = configureStore({
     collab: regisCollab,
     listCollabServ: listColServ,
     listRequestsService: listRequestsService,
+    payment: paymentSlicer,
   },
 });
 
