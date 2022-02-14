@@ -360,7 +360,7 @@ export default function HomeCollaborator() {
                   >
                     <div className="row">
                       {serviceRequests &&
-                        serviceRequests.map((services, index) => (
+                        serviceRequests.map((servicio, index) => (
                           <div className="col-md-6 col-lg-4 mt-3 d-flex flex-wrap">
                             <div className="card border-light shadow text-dark bg-light rounded">
                               <div
@@ -368,18 +368,19 @@ export default function HomeCollaborator() {
                                 style={{ width: '15rem' }}
                               >
                                 <small className="fs-6">
-                                  Usuario:{services.name} {services.lastName}
+                                  Usuario:{servicio.name} {servicio.lastName}
                                 </small>
                                 <br></br>
                                 <p className="fs-6">
-                                  Direccion:{' '}
-                                  {services.request[index].addressUser}
+                                  {servicio.request &&
+                                    `Direccion: ${servicio.request[0].addressUser}`}
                                 </p>
                                 <p className="fs-6">
-                                  Telefono: {services.request[index].phoneUser}
+                                  {servicio.request &&
+                                    `Telefono: ${servicio.request[0].phoneUser}`}
                                 </p>
                                 <div className="d-flex justify-content-around">
-                                  {services.request[index].payment ? (
+                                  {servicio.request[index].payment ? (
                                     <button
                                       className="btn-sm btn-secondary"
                                       disabled

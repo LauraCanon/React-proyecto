@@ -181,8 +181,8 @@ export default function Modals({
 
             {paymentValues && (
               <select
-                name="doc_Type"
-                value={paymentValues.doc_Type}
+                name="doc_type"
+                value={paymentValues.doc_type}
                 type="text"
                 class="form-control"
                 id="scheuleInput1"

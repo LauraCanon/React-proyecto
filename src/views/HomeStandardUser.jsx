@@ -136,7 +136,7 @@ export default function HomeStandardUser() {
                     >
                       <div className="row">
                         {service &&
-                          service.map((service) => (
+                          service.map((servicio) => (
                             <div className="col-md-6 col-lg-4 mt-3 d-flex flex-wrap ">
                               <div className="card border-light shadow text-dark bg-light rounded ">
                                 <div
@@ -144,8 +144,14 @@ export default function HomeStandardUser() {
                                   style={{ width: '15rem' }}
                                 >
                                   <p className="fs-6 pt-2">
-                                    Servicio: {service.services} Precio: $
-                                    {service.price}
+                                    {service &&
+                                      `Servicio: ${servicio.services}
+                                    `}
+                                  </p>
+                                  <p className="fs-6 pt-2">
+                                    {service &&
+                                      `Precio: $ ${servicio.price}
+                                    `}
                                   </p>
 
                                   <div className="d-flex justify-content-around">

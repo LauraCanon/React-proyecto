@@ -4,8 +4,12 @@ axios.defaults.baseURL = 'http://localhost:3001';
 const token = JSON.parse(window.localStorage.getItem('token')) || null;
 console.log('Linea 5', token);
 
+const headerGet = {
+  authorization: `Bearer ${token}`,
+  'Content-Type': 'application/json',
+};
 const headerDelete = {
-  Authorization: `Bearer ${token}`,
+  authorization: `Bearer ${token}`,
   'Content-Type': 'application/json',
 };
 
@@ -51,7 +55,7 @@ export const fixHogarApi = {
   async servicesCollabs() {
     try {
       const response = await axios.get('/services');
-      // console.log(response)
+      // console.log(response);
       return response.data;
     } catch (error) {
       console.log(error.response);
@@ -79,14 +83,13 @@ export const fixHogarApi = {
     }
   },
   async fileUser(file) {
-    const config = {
-      headers: {
-        'Content-type': 'application/json',
-        authorization: `Bearer ${token}`,
-      },
-    };
     try {
-      const response = await axios.post('/file/user', file, config);
+      const response = await axios.post('/file/user', file, {
+        headers: {
+          'Content-type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
+      });
       console.log(response);
       return response.data.result;
     } catch (error) {
@@ -95,12 +98,6 @@ export const fixHogarApi = {
   },
   async createService(infoService) {
     const { description, price, services } = infoService;
-    const config = {
-      headers: {
-        'Content-type': 'application/json',
-        authorization: `Bearer ${token}`,
-      },
-    };
     try {
       const response = await axios.post(
         '/services',
@@ -109,7 +106,12 @@ export const fixHogarApi = {
           price,
           services,
         },
-        config
+        {
+          headers: {
+            'Content-type': 'application/json',
+            authorization: `Bearer ${token}`,
+          },
+        }
       );
       console.log(response);
     } catch (error) {}
@@ -146,33 +148,30 @@ export const fixHogarApi = {
     }
   },
   async listServiceCollab() {
-    const config = {
-      headers: {
-        'Content-type': 'application/json',
-        authorization: `Bearer ${token}`,
-      },
-    };
     try {
-      const response = await axios.get('/collaborator/service', config);
-      // console.log(response.data);
+      const response = await axios.get('/collaborator/service', {
+        headers: {
+          'Content-type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response.data);
       return response.data;
     } catch (error) {
       console.log(error.response);
     }
   },
   async requestService(schedule) {
-    console.log(token);
-    const config = {
-      headers: {
-        'Content-type': 'application/json',
-        authorization: `Bearer ${token}`,
-      },
-    };
     try {
       const response = await axios.post(
         '/schedule/service',
         { schedule },
-        config
+        {
+          headers: {
+            'Content-type': 'application/json',
+            authorization: `Bearer ${token}`,
+          },
+        }
       );
       // console.log(response.data);
       return response.data;
@@ -181,15 +180,13 @@ export const fixHogarApi = {
     }
   },
   async getServiceRequests() {
-    console.log(token);
-    const config = {
-      headers: {
-        'Content-type': 'application/json',
-        authorization: `Bearer ${token}`,
-      },
-    };
     try {
-      const response = await axios.get('/requests/service', config);
+      const response = await axios.get('/requests/service', {
+        headers: {
+          'Content-type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
+      });
       console.log(response.data);
       return response.data;
     } catch (error) {
@@ -197,12 +194,6 @@ export const fixHogarApi = {
     }
   },
   async paymentProcess(ccInfo) {
-    const config = {
-      headers: {
-        'Content-type': 'application/json',
-        authorization: `Bearer ${token}`,
-      },
-    };
     const { holder, numberCard, expMonth, expYear, cvc } = ccInfo;
     try {
       const response = await axios.post(
@@ -214,7 +205,12 @@ export const fixHogarApi = {
           expYear,
           cvc,
         },
-        config
+        {
+          headers: {
+            'Content-type': 'application/json',
+            authorization: `Bearer ${token}`,
+          },
+        }
       );
       console.log(response.data);
       return response.data;
@@ -223,29 +219,34 @@ export const fixHogarApi = {
     }
   },
   async customerPayment() {
-    const config = {
-      headers: {
-        'Content-type': 'application/json',
-        authorization: `Bearer ${token}`,
-      },
-    };
     try {
-      const response = await axios.post('/create-customer', {}, config);
+      const response = await axios.post(
+        '/create-customer',
+        {},
+        {
+          headers: {
+            'Content-type': 'application/json',
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
       console.log(response.data);
     } catch (error) {
       console.log(error.response);
     }
   },
   async paymentService(payment) {
-    console.log(payment);
-    const config = {
-      headers: {
-        'Content-type': 'application/json',
-        authorization: `Bearer ${token}`,
-      },
-    };
     try {
-      const response = await axios.post('/make-payment', { payment }, config);
+      const response = await axios.post(
+        '/make-payment',
+        { payment },
+        {
+          headers: {
+            'Content-type': 'application/json',
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
       console.log(response.data);
     } catch (error) {
       console.log(error.response);

@@ -23,25 +23,32 @@ const paymentSlicer = createSlice({
     paymentSucess: false,
     statusCreditCard: false,
     infoPayment: {},
+    loading: false,
   },
   reducers: {
     infoPayment(state, action) {
       state.infoPayment = { ...state.infoPayment, ...action.payload };
+    },
+    registCreditCard(state, action) {
+      state.loading = !state.loading;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(paymentProcess.pending, (state) => {})
       .addCase(paymentProcess.fulfilled, (state, action) => {
+        state.paymentSucess = true;
         state.statusCreditCard = action.payload;
       })
       .addCase(customerPayment.fulfilled, (state, action) => {})
       .addCase(paymentProcess.rejected, (state) => {});
   },
 });
-export const { infoPayment } = paymentSlicer.actions;
+export const { infoPayment, registCreditCard } = paymentSlicer.actions;
 
 export const selectStatusCreditCard = (state) => state.payment.statusCreditCard;
+export const selectPaymentSucess = (state) => state.payment.paymentSucess;
 export const selectRegisterPayment = (state) => state.payment.infoPayment;
+export const loadingCreateCreditCard = (state) => state.payment.loading;
 
 export default paymentSlicer.reducer;

@@ -57,8 +57,10 @@ export default function RegistrationCollab({ isAuth }) {
     setFormErrors(validate(formValues));
     const { name, lastName, email, password, city } = formValues;
     const newCollab = { name, lastName, email, password, city };
-    dispatch(collabRegister(newCollab));
-    handleShowSuccess();
+    if (formErrors.length === 0) {
+      dispatch(collabRegister(newCollab));
+      handleShowSuccess();
+    }
   };
 
   const validate = (values) => {
