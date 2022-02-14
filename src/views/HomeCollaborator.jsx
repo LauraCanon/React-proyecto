@@ -371,14 +371,6 @@ export default function HomeCollaborator() {
                                   Usuario:{servicio.name} {servicio.lastName}
                                 </small>
                                 <br></br>
-                                <p className="fs-6">
-                                  {servicio.request &&
-                                    `Direccion: ${servicio.request[0].addressUser}`}
-                                </p>
-                                <p className="fs-6">
-                                  {servicio.request &&
-                                    `Telefono: ${servicio.request[0].phoneUser}`}
-                                </p>
                                 <div className="d-flex justify-content-around">
                                   {servicio.request[index].payment ? (
                                     <button
