@@ -60,7 +60,7 @@ export default function RegistrationPerfil() {
                   >
                     <div className="d-grid gap-2 mb-2">
                       <button className="btn btn-outline-success" type="submit">
-                        Regístrate aquí
+                        Regístrate aquí.
                       </button>
                     </div>
                   </Link>

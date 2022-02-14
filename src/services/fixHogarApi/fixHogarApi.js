@@ -1,5 +1,5 @@
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "https://fixhogar.herokuapp.com";
 
 // const token = localStorage.getItem("token") || null;
 
