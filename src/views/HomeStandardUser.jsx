@@ -13,10 +13,13 @@ import {
 } from '../store/userSlicer/getServiceSlicer';
 import { Loading } from '../component/Loading';
 import { selectServiceCollab } from '../store/userSlicer/searchServiceSlicer';
+import { useNavigate } from 'react-router';
 import { Navigate } from 'react-router-dom';
 import Modals from '../component/Modals';
+import { infoPayment } from '../store/userSlicer/paymentSlicer';
 
 export default function HomeStandardUser() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const service = useSelector(selectRequestsService);
   const user = JSON.parse(window.localStorage.getItem('user'));
@@ -29,6 +32,11 @@ export default function HomeStandardUser() {
   const file = useSelector(selectFile);
 
   const loading = useSelector(selectLoading);
+
+  const paymentProcessHandler = (service) => {
+    dispatch(infoPayment(service));
+    navigate('/payment');
+  };
 
   const handleUpload = (e) => {
     const data = new FormData();
@@ -135,9 +143,6 @@ export default function HomeStandardUser() {
                                   className="card-body border-success rounded"
                                   style={{ width: '15rem' }}
                                 >
-                                  <small className="fs-6">Colaborador:{}</small>
-                                  <br></br>
-
                                   <p className="fs-6 pt-2">
                                     Servicio: {service.services} Precio: $
                                     {service.price}
@@ -155,6 +160,9 @@ export default function HomeStandardUser() {
                                       data-bs-toggle="modal"
                                       data-bs-target="#staticBackdrop"
                                       type="button"
+                                      onClick={() =>
+                                        paymentProcessHandler(service)
+                                      }
                                     >
                                       Pagar
                                     </button>
@@ -194,48 +202,6 @@ export default function HomeStandardUser() {
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div
-              className="modal fade"
-              id="staticBackdrop"
-              data-bs-backdrop="static"
-              data-bs-keyboard="false"
-              tabindex="-1"
-              aria-labelledby="staticBackdropLabel"
-              aria-hidden="true"
-            >
-              <div className="modal-dialog">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <h5 className="modal-title" id="staticBackdropLabel">
-                      Pagar Servicio
-                    </h5>
-                    <button
-                      type="button"
-                      className="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div className="modal-body">
-                    El siguiente paso lo llevará al pago del servicio; una vez
-                    efectuado, no podrá ser cancelado
-                  </div>
-                  <div className="modal-footer">
-                    <button
-                      type="button"
-                      className="btn btn-danger"
-                      data-bs-dismiss="modal"
-                    >
-                      Cancelar
-                    </button>
-                    <button type="button" className="btn btn-success">
-                      Acepto
-                    </button>
                   </div>
                 </div>
               </div>

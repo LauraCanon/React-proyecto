@@ -18,6 +18,11 @@ export default function Modals({
   handleCloseSchedule,
   handleScheduleChange,
   handleConfirm,
+  showProcessPayment,
+  setShowProcessPayment,
+  paymentProcessHandler,
+  handleChangePayment,
+  paymentValues,
 }) {
   const dispatch = useDispatch();
 
@@ -153,6 +158,81 @@ export default function Modals({
         <Modal.Footer>
           <Button variant="success" onClick={handleConfirm}>
             Confirmar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal
+        show={showProcessPayment}
+        backdrop="static"
+        keyboard={false}
+        onHide={setShowProcessPayment}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Confirmar Pago</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <small>
+            Una vez realizado el pago el servicio no puede ser cancelado.
+          </small>
+          <Form.Group className="mb-3">
+            <label for="scheuleInput1" class="form-label">
+              Tipo de Documento
+            </label>
+
+            {paymentValues && (
+              <select
+                name="doc_Type"
+                value={paymentValues.doc_Type}
+                type="text"
+                class="form-control"
+                id="scheuleInput1"
+                onChange={handleChangePayment}
+              >
+                <option defaultValue="none" value={'none'} disabled>
+                  Selecciona tu tipo de Documento
+                </option>
+                <option value="CC">Cedula de Ciudadania</option>
+                <option value="CE">Cedula de Extranjeria</option>
+              </select>
+            )}
+            <label for="scheuleInput2" class="form-label">
+              Numero de Documento:
+            </label>
+            <input
+              name="docNumber"
+              type="number"
+              class="form-control"
+              id="scheuleInput2"
+              placeholder="Digita tu Documento de Identidad"
+              onChange={handleChangePayment}
+            />
+            <label for="scheuleInput3" class="form-label">
+              Teléfono
+            </label>
+            <input
+              name="phone"
+              type="text"
+              class="form-control"
+              id="scheuleInput3"
+              placeholder="Número de contacto"
+              onChange={handleChangePayment}
+            />
+            <label for="scheuleInput3" class="form-label">
+              Celular
+            </label>
+            <input
+              name="cellPhone"
+              type="text"
+              class="form-control"
+              id="scheuleInput3"
+              placeholder="Número de contacto"
+              onChange={handleChangePayment}
+            />
+          </Form.Group>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={paymentProcessHandler}>
+            PAGAR
           </Button>
         </Modal.Footer>
       </Modal>

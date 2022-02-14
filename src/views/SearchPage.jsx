@@ -62,7 +62,7 @@ export default function SearchPage({ isAuth }) {
     e.preventDefault();
     setShowSchedule(false);
     dispatch(requestService(schedule));
-    // navigate('/home/user');
+    navigate('/home/user');
   };
 
   return (
