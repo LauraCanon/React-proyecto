@@ -22,6 +22,7 @@ export default function HomeStandardUser() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const service = useSelector(selectRequestsService);
+  console.log(service);
   const user = JSON.parse(window.localStorage.getItem('user'));
   const initialValue = { img: [] };
   const [showFile, setShowFile] = useState(false);
