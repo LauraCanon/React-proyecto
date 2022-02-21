@@ -2,17 +2,20 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fixHogarApi } from '../../services/fixHogarApi/fixHogarApi';
 
 //Thunk actions
-export const paymentProcess = createAsyncThunk(
-  'payment/paymentProcess',
-  (ccInfo) => fixHogarApi.paymentProcess(ccInfo)
+export const getCreditCards = createAsyncThunk('payment/getCreditCards', () =>
+  fixHogarApi.getCreditCards()
+);
+export const createTokenCreditCard = createAsyncThunk(
+  'payment/createTokenCreditCard',
+  (ccInfo) => fixHogarApi.createTokenCreditCard(ccInfo)
 );
 
 export const customerPayment = createAsyncThunk('payment/customerPayment', () =>
   fixHogarApi.customerPayment()
 );
-export const paymentService = createAsyncThunk(
-  'payment/paymentService',
-  (paymentValues) => fixHogarApi.paymentService(paymentValues)
+export const makePayment = createAsyncThunk(
+  'payment/makePayment',
+  (paymentValues) => fixHogarApi.makePayment(paymentValues)
 );
 
 //userSlice definition
@@ -20,35 +23,51 @@ export const paymentService = createAsyncThunk(
 const paymentSlicer = createSlice({
   name: 'payment',
   initialState: {
-    paymentSucess: false,
-    statusCreditCard: false,
-    infoPayment: {},
-    loading: false,
+    paymentHandler: {
+      statusCreditCard: false,
+      statusCustomerId: false,
+      infoPayment: 'sin Info',
+      loading: false,
+      paymentSuccess: false,
+    },
+    creditCards: null,
   },
   reducers: {
     infoPayment(state, action) {
-      state.infoPayment = { ...state.infoPayment, ...action.payload };
+      state.paymentHandler.infoPayment = action.payload;
     },
-    registCreditCard(state, action) {
-      state.loading = !state.loading;
+    clearPaymentSuccess(state) {
+      state.paymentHandler.paymentSuccess = false;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(paymentProcess.pending, (state) => {})
-      .addCase(paymentProcess.fulfilled, (state, action) => {
-        state.paymentSucess = true;
-        state.statusCreditCard = action.payload;
+      .addCase(createTokenCreditCard.pending, (state) => {
+        state.paymentHandler.loading = true;
       })
-      .addCase(customerPayment.fulfilled, (state, action) => {})
-      .addCase(paymentProcess.rejected, (state) => {});
+      .addCase(createTokenCreditCard.fulfilled, (state, action) => {
+        state.paymentHandler.statusCreditCard = action.payload;
+      })
+      .addCase(createTokenCreditCard.rejected, (state) => {})
+      .addCase(customerPayment.fulfilled, (state, action) => {
+        state.paymentHandler.loading = false;
+        state.paymentHandler.statusCustomerId = true;
+      })
+      .addCase(getCreditCards.fulfilled, (state, action) => {
+        state.creditCards = action.payload;
+      })
+      .addCase(makePayment.pending, (state, action) => {
+        state.paymentHandler.loading = true;
+      })
+      .addCase(makePayment.fulfilled, (state, action) => {
+        state.paymentHandler.loading = false;
+        state.paymentHandler.paymentSuccess = true;
+      });
   },
 });
-export const { infoPayment, registCreditCard } = paymentSlicer.actions;
+export const { infoPayment, clearPaymentSuccess } = paymentSlicer.actions;
 
-export const selectStatusCreditCard = (state) => state.payment.statusCreditCard;
-export const selectPaymentSucess = (state) => state.payment.paymentSucess;
-export const selectRegisterPayment = (state) => state.payment.infoPayment;
-export const loadingCreateCreditCard = (state) => state.payment.loading;
+export const selectPaymentHandler = (state) => state.payment.paymentHandler;
+export const selectCreditCards = (state) => state.payment.creditCards;
 
 export default paymentSlicer.reducer;

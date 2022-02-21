@@ -1,13 +1,12 @@
 import './allViews.css';
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
 
 import { collabRegister } from '../store/userSlicer/collabSlicer';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { listOfCity, selectCitys } from '../store/userSlicer/citysSlicer';
 import { useSelector } from 'react-redux';
-import Modals from '../component/Modals';
+import { Modals } from '../component/Modals';
 
 export default function RegistrationCollab({ isAuth }) {
   const ciudades = useSelector(selectCitys);
@@ -202,10 +201,10 @@ export default function RegistrationCollab({ isAuth }) {
             <div className="mt-2 text-center">
               <p className="text-center">
                 Ya tienes una cuenta?{' '}
-                <a href="/sessionlogin" class="link-success">
+                <Link to="/sessionlogin" className="link-success">
                   {' '}
                   Inicia Sesión
-                </a>
+                </Link>
               </p>
             </div>
           </div>

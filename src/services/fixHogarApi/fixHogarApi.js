@@ -1,17 +1,5 @@
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost:3001';
-
-const token = JSON.parse(window.localStorage.getItem('token')) || null;
-console.log('Linea 5', token);
-
-const headerGet = {
-  authorization: `Bearer ${token}`,
-  'Content-Type': 'application/json',
-};
-const headerDelete = {
-  authorization: `Bearer ${token}`,
-  'Content-Type': 'application/json',
-};
+axios.defaults.baseURL = 'https://fixhogar.herokuapp.com';
 
 export const fixHogarApi = {
   async loginUser(user) {
@@ -83,6 +71,7 @@ export const fixHogarApi = {
     }
   },
   async fileUser(file) {
+    const token = JSON.parse(window.localStorage.getItem('token'));
     try {
       const response = await axios.post('/file/user', file, {
         headers: {
@@ -98,6 +87,7 @@ export const fixHogarApi = {
   },
   async createService(infoService) {
     const { description, price, services } = infoService;
+    const token = JSON.parse(window.localStorage.getItem('token'));
     try {
       const response = await axios.post(
         '/services',
@@ -113,21 +103,28 @@ export const fixHogarApi = {
           },
         }
       );
-      console.log(response);
-    } catch (error) {}
+      return response.data;
+    } catch (error) {
+      return error.response.data;
+    }
   },
   async deleteService(id) {
+    const token = JSON.parse(window.localStorage.getItem('token'));
+
     console.log(id);
     try {
       const response = await axios.delete(`/services`, {
-        headers: headerDelete,
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
         data: {
           id: id,
         },
       });
-      console.log(response.data);
+      return response.data;
     } catch (error) {
-      console.log(error.response);
+      return error.response;
     }
   },
   async listOfCity() {
@@ -148,6 +145,7 @@ export const fixHogarApi = {
     }
   },
   async listServiceCollab() {
+    const token = JSON.parse(window.localStorage.getItem('token'));
     try {
       const response = await axios.get('/collaborator/service', {
         headers: {
@@ -155,13 +153,14 @@ export const fixHogarApi = {
           authorization: `Bearer ${token}`,
         },
       });
-      console.log(response.data);
+      // console.log(response.data);
       return response.data;
     } catch (error) {
       console.log(error.response);
     }
   },
-  async requestService(schedule) {
+  async scheduleService(schedule) {
+    const token = JSON.parse(window.localStorage.getItem('token'));
     try {
       const response = await axios.post(
         '/schedule/service',
@@ -176,12 +175,29 @@ export const fixHogarApi = {
       // console.log(response.data);
       return response.data;
     } catch (error) {
-      console.log(error);
+      return error.response.data;
     }
   },
   async getServiceRequests() {
+    const token = JSON.parse(window.localStorage.getItem('token'));
+
     try {
       const response = await axios.get('/requests/service', {
+        headers: {
+          'Content-type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
+      });
+      // console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log(error.response);
+    }
+  },
+  async getCreditCards() {
+    const token = JSON.parse(window.localStorage.getItem('token'));
+    try {
+      const response = await axios.get('/cards-customer', {
         headers: {
           'Content-type': 'application/json',
           authorization: `Bearer ${token}`,
@@ -193,8 +209,9 @@ export const fixHogarApi = {
       console.log(error.response);
     }
   },
-  async paymentProcess(ccInfo) {
+  async createTokenCreditCard(ccInfo) {
     const { holder, numberCard, expMonth, expYear, cvc } = ccInfo;
+    const token = JSON.parse(window.localStorage.getItem('token'));
     try {
       const response = await axios.post(
         '/card-token',
@@ -212,13 +229,18 @@ export const fixHogarApi = {
           },
         }
       );
-      console.log(response.data);
-      return response.data;
+      console.log(
+        `🤖 ~ file: fixHogarApi.js ~ line 217 ~ createTokenCreditCard ~ response`,
+        response
+      );
+
+      return { status: 'ok' };
     } catch (error) {
       console.log(error.response);
     }
   },
   async customerPayment() {
+    const token = JSON.parse(window.localStorage.getItem('token'));
     try {
       const response = await axios.post(
         '/create-customer',
@@ -230,12 +252,20 @@ export const fixHogarApi = {
           },
         }
       );
-      console.log(response.data);
+      console.log(response);
+      return response.data;
     } catch (error) {
       console.log(error.response);
+      return error.response.data;
     }
   },
-  async paymentService(payment) {
+  async makePayment(payment) {
+    console.log(
+      `🤖 ~ file: fixHogarApi.js ~ line 263 ~ makePayment ~ payment`,
+      payment
+    );
+    const token = JSON.parse(window.localStorage.getItem('token'));
+
     try {
       const response = await axios.post(
         '/make-payment',

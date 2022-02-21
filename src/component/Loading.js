@@ -1,12 +1,11 @@
-import React from "react";
-import { Spinner } from "react-bootstrap";
+import React from 'react';
+import { Spinner } from 'react-bootstrap';
 
-export const Loading = () => {
+export const Loading = ({ text }) => {
   return (
     <div>
-      <Spinner animation="grow" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
+      <Spinner animation="grow" role="status"></Spinner>
+      <span>{`     ${text}...`}</span>
     </div>
   );
 };

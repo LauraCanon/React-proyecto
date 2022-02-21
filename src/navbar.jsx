@@ -53,16 +53,12 @@ export default function Navbar({ isAuth }) {
                       </Link>
                     )}
                   </li>
-                  <Link to="/">
-                    <li className="nav-item">
-                      <a
-                        class="nav-link active"
-                        href="#"
-                        onClick={logoutHandler}
-                      >
-                        Salir
-                      </a>
-                    </li>
+                  <Link
+                    to="/"
+                    className="nav-link active"
+                    onClick={logoutHandler}
+                  >
+                    <li className="nav-item">Salir</li>
                   </Link>
                 </ul>
               </div>
@@ -71,7 +67,7 @@ export default function Navbar({ isAuth }) {
         ) : (
           <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div className="container">
-              <a className="navbar-brand link-light" href="/">
+              <Link className="navbar-brand link-light" to="/">
                 <img
                   src="https://image.flaticon.com/icons/png/512/1207/1207155.png"
                   alt="fixhogar"
@@ -80,7 +76,7 @@ export default function Navbar({ isAuth }) {
                   style={{ marginRight: '8px' }}
                 ></img>
                 FixHogar
-              </a>
+              </Link>
               <button
                 className="navbar-toggler"
                 type="button"
