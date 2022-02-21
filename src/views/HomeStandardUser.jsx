@@ -15,7 +15,7 @@ import { Loading } from '../component/Loading';
 import { selectServiceCollab } from '../store/userSlicer/searchServiceSlicer';
 import { useNavigate } from 'react-router';
 import { Navigate } from 'react-router-dom';
-import Modals from '../component/Modals';
+import { Modals } from '../component/Modals';
 import { infoPayment } from '../store/userSlicer/paymentSlicer';
 
 export default function HomeStandardUser() {
@@ -34,8 +34,8 @@ export default function HomeStandardUser() {
 
   const loading = useSelector(selectLoading);
 
-  const paymentProcessHandler = (service) => {
-    dispatch(infoPayment(service));
+  const paymentProcessHandler = (servicio) => {
+    dispatch(infoPayment(servicio));
     navigate('/payment');
   };
 
@@ -137,43 +137,58 @@ export default function HomeStandardUser() {
                     >
                       <div className="row">
                         {service &&
-                          service.map((servicio) => (
-                            <div className="col-md-6 col-lg-4 mt-3 d-flex flex-wrap ">
+                          service.map((servicio, index) => (
+                            <div
+                              key={index}
+                              className="col-md-6 col-lg-4 mt-3 d-flex flex-wrap "
+                            >
                               <div className="card border-light shadow text-dark bg-light rounded ">
                                 <div
                                   className="card-body border-success rounded"
                                   style={{ width: '15rem' }}
                                 >
                                   <p className="fs-6 pt-2">
-                                    {service &&
-                                      `Servicio: ${servicio.services}
-                                    `}
+                                    Colaborador: {servicio.name}{' '}
+                                    {servicio.lastName}
+                                    <br />
+                                    Servicio: {servicio.service}
+                                    <br />
+                                    Precio: $ {servicio.price}
+                                    <br />
+                                    Direccion: {servicio.address}
+                                    <br />
+                                    Fecha: {servicio.date}
                                   </p>
-                                  <p className="fs-6 pt-2">
-                                    {service &&
-                                      `Precio: $ ${servicio.price}
-                                    `}
-                                  </p>
-
-                                  <div className="d-flex justify-content-around">
-                                    <button
-                                      className="btn-sm btn-danger"
-                                      type="submit"
-                                    >
-                                      Cancelar
-                                    </button>
-                                    <button
-                                      className="btn-sm btn-success px-3"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#staticBackdrop"
-                                      type="button"
-                                      onClick={() =>
-                                        paymentProcessHandler(service)
-                                      }
-                                    >
-                                      Pagar
-                                    </button>
-                                  </div>
+                                  {servicio.payment ? (
+                                    <div className="d-flex justify-content-around">
+                                      <button
+                                        className="btn-sm btn-success"
+                                        disabled
+                                      >
+                                        Pago Efectuado
+                                      </button>
+                                    </div>
+                                  ) : (
+                                    <div className="d-flex justify-content-around">
+                                      <button
+                                        className="btn-sm btn-danger"
+                                        type="submit"
+                                      >
+                                        Cancelar
+                                      </button>
+                                      <button
+                                        className="btn-sm btn-success px-3"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#staticBackdrop"
+                                        type="button"
+                                        onClick={() =>
+                                          paymentProcessHandler(servicio)
+                                        }
+                                      >
+                                        Pagar
+                                      </button>
+                                    </div>
+                                  )}
                                 </div>
                               </div>
                             </div>
@@ -224,7 +239,7 @@ export default function HomeStandardUser() {
       >
         <path
           fill="#273036"
-          fill-opacity="1"
+          fillOpacity="1"
           d="M0,160L48,181.3C96,203,192,245,288,245.3C384,245,480,203,576,208C672,213,768,267,864,282.7C960,299,1056,277,1152,229.3C1248,181,1344,107,1392,69.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
         ></path>
       </svg>

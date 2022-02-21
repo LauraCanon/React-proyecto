@@ -5,7 +5,7 @@ import LandingPages from './views/LandingPages';
 import Navbar from './navbar';
 import Payment from './views/Payment';
 import RequestService from './views/RequestService';
-import SearchPage from './views/SearchPage';
+import { SearchPage } from './views/SearchPage';
 import RegistrationUser from './views/Registration';
 import RegistrationCollab from './views/RegisCollab';
 import RegistrationPerfil from './views/RegistrationPerfil';

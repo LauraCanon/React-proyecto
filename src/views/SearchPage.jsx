@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, useState, Fragment, memo } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { SearchBar } from '../component/SearchBar';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -7,14 +7,19 @@ import {
   selectServiceCollab,
   serviceCollabList,
 } from '../store/userSlicer/searchServiceSlicer';
-import { Button, Form, Modal } from 'react-bootstrap';
-import { requestService } from '../store/userSlicer/requestServiceSlicer';
+import {
+  clearStatus,
+  scheduleService,
+  selectScheduleService,
+} from '../store/userSlicer/scheduleServiceSlicer';
+
 import Swal from 'sweetalert2';
-import Modals from '../component/Modals';
+import { Modals } from '../component/Modals';
 
-export default function SearchPage({ isAuth }) {
+export const SearchPage = memo(({ isAuth }) => {
   const isCollab = window.localStorage.getItem('collaborator') || null;
-
+  const { status } = useSelector(selectScheduleService);
+  console.log(status);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [query] = useSearchParams();
@@ -25,34 +30,62 @@ export default function SearchPage({ isAuth }) {
   const initialState = { address: '', date: '', phone: '', idService: '' };
   const [showSchedule, setShowSchedule] = useState(false);
   const [schedule, setSchedule] = useState(initialState);
-  const handleCloseSchedule = () => setShowSchedule(false);
+  const handleCloseSchedule = () => {
+    setShowSchedule(false);
+    setSchedule(initialState);
+  };
   useEffect(() => {
     dispatch(serviceCollabList(search));
-  }, [showSchedule]);
-  const handleShow = (collab) => {
+  }, []);
+  const handleShow = (service) => {
     if (isCollab) {
       Swal.fire({
         title: 'Apreciado usuario',
         text: 'Eres un Colaborador no tienes Permitido Solicitar Servicios. Gracias',
         icon: 'warning',
         confirmButtonText: 'Aceptar',
+      }).then(() => {
+        navigate('/');
       });
-      navigate('/');
+      return;
     }
-    if (isAuth) {
-      setShowSchedule(true);
-      setSchedule({ ...schedule, idService: collab._id });
-    } else {
+    if (!isAuth) {
       Swal.fire({
         title: 'Apreciado usuario',
         text: 'Por favor inicie sesion para agendar un servicio',
         icon: 'warning',
         confirmButtonText: 'Aceptar',
-      });
-      navigate('/sessionlogin');
+      }).then(() => navigate('/sessionlogin'));
+    } else if (isAuth && !schedule.idService) {
+      setShowSchedule(true);
+      setSchedule({ ...schedule, idService: service._id });
     }
   };
+  const showStatus = () => {
+    const icon =
+      (status === 'El Servicio fue Agendado Correctamente' && 'success') ||
+      (status === 'El Servicio ya se encuentra Agendado' && 'warning');
+    Swal.fire({
+      title: 'Apreciado usuario',
+      text: status,
+      allowOutsideClick: true,
+      backdrop: true,
+      icon,
+      confirmButtonText: 'Aceptar',
+    }).then(() => {
+      if (status === 'El Servicio fue Agendado Correctamente') {
+        setSchedule(initialState);
+        navigate('/home/user');
+      } else {
+        setSchedule(initialState);
+      }
+    });
 
+    dispatch(clearStatus());
+  };
+  {
+    status && showStatus();
+  }
   const handleScheduleChange = (e) => {
     const { name, value } = e.target;
     setSchedule({ ...schedule, [name]: value });
@@ -61,8 +94,7 @@ export default function SearchPage({ isAuth }) {
   const handleConfirm = (e) => {
     e.preventDefault();
     setShowSchedule(false);
-    dispatch(requestService(schedule));
-    navigate('/home/user');
+    dispatch(scheduleService(schedule));
   };
 
   return (
@@ -81,7 +113,7 @@ export default function SearchPage({ isAuth }) {
         </div>
         <div className="row">
           {serviceCollabs &&
-            serviceCollabs.map((collab, index) => {
+            serviceCollabs.map((service, index) => {
               return (
                 <div
                   key={index}
@@ -90,12 +122,12 @@ export default function SearchPage({ isAuth }) {
                 >
                   <div className="card shadow ">
                     <img
-                      src={collab.createdBy.image}
+                      src={service.createdBy.image}
                       className="card-img-top img-fluid w-75 mx-auto"
-                      alt={collab.createdBy.name}
+                      alt={service.createdBy.name}
                     />
                     <div className="card-body d-flex justify-content-between">
-                      <p className="h5">{collab.createdBy.name} </p>
+                      <p className="h5">{service.createdBy.name} </p>
                       <div>
                         <span>
                           <FaStar />
@@ -110,14 +142,14 @@ export default function SearchPage({ isAuth }) {
                     </div>
                     <div className="row">
                       <div className="col-12 ">
-                        <p className="h6 mx-3">Price: ${collab.price}</p>
+                        <p className="h6 mx-3">Price: ${service.price}</p>
                       </div>
                     </div>
                     <div className="col mx-auto pb-2">
                       <button
                         type="button"
                         className="btn-sm btn-success text-center "
-                        onClick={() => handleShow(collab)}
+                        onClick={() => handleShow(service)}
                       >
                         Agendar
                       </button>
@@ -130,4 +162,4 @@ export default function SearchPage({ isAuth }) {
       </main>
     </Fragment>
   );
-}
+});

@@ -5,9 +5,8 @@ import {
   userRegister,
 } from '../store/userSlicer/userRegisterSlicer';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Form, Modal } from 'react-bootstrap';
-import { useNavigate } from 'react-router';
-import Modals from '../component/Modals';
+import { useNavigate, Link } from 'react-router-dom';
+import { Modals } from '../component/Modals';
 
 export default function RegistrationUser() {
   const dispatch = useDispatch();
@@ -142,10 +141,10 @@ export default function RegistrationUser() {
           <div className="mt-3 text-center">
             <p className="text-center">
               Ya tienes una cuenta?{' '}
-              <a href="/sessionlogin" class="link-success">
+              <Link to="/sessionlogin" className="link-success">
                 {' '}
                 Inicia Sesión
-              </a>
+              </Link>
             </p>
           </div>
         </div>
